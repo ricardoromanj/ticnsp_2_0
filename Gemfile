@@ -44,6 +44,9 @@ group :development, :test do
 end
 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 gem 'puma'
 gem 'haml'
 gem 'gravtastic'
