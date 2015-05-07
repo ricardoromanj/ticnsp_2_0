@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Heading:</strong>
+  <%= @notice.heading %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @notice.text %>
+</p>
+
+<p>
+  <strong>Audience:</strong>
+  <%= @notice.audience %>
+</p>
+
+<p>
+  <strong>Notice type:</strong>
+  <%= @notice.notice_type %>
+</p>
+
+<%= link_to 'Edit', edit_notice_path(@notice) %> |
+<%= link_to 'Back', notices_path %>

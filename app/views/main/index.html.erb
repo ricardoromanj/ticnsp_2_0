@@ -1,0 +1,40 @@
+<% content_for :title, 'TIC' %>
+<section class='section-cover'>
+	<nav class='navbar navbar-ticnsp navbar-static-top'>
+		<div class='container'>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ticnsp-collapse-navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<%= link_to (image_tag 'tic_logo_nobg.png', height: 70), root_path, class: 'navbar-brand' %>
+		    </div>
+		    <div class='collapse navbar-collapse' id='ticnsp-collapse-navbar'>
+		    	<%= link_to 'INICIAR SESIÓN', '#', class: 'btn btn-ticnsp-navbar-btn navbar-btn navbar-right' %>
+		    	<ul class='nav navbar-nav navbar-right'>
+		    		<li><%= link_to 'INFORMACION', '#' %></li>
+		    		<li><%= link_to 'COORDINADORES', '#' %></li>
+		    		<li><%= link_to 'AYUDA', '#' %></li>
+		    	</ul>
+		    </div>
+		</div>
+	</nav>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-sm-6'>
+				<div class='ticnsp-title'>
+					<h1>Talleres Infantiles Católicos</h1>
+					<blockquote>
+						<p>Enséñale al niño el camino que ha de seguir y se mantendrá en él aun en la vejez</p>
+						<footer>Proverbios 22 : 6</footer>
+					</blockquote>
+				</div>
+			</div>
+			<div class='col-sm-6'>
+				<%= image_tag 'front_export.png', height: 400 %>
+			</div>
+		</div>
+	</div>
+</section>

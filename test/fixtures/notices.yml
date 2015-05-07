@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  heading: MyString
+  text: MyString
+  audience: MyString
+  notice_type: MyString
+
+two:
+  heading: MyString
+  text: MyString
+  audience: MyString
+  notice_type: MyString

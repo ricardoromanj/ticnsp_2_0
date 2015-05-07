@@ -1,0 +1,84 @@
+/* Sections */
+.section-cover {
+	background-color: #fff;
+	
+	padding-bottom: 20px;
+}
+
+/* Title section */
+.ticnsp-title {
+	padding-top: 50px;
+	max-width: 500px;
+}
+
+.ticnsp-title h1 {
+	font-weight: 200;
+	font-size: 60px;
+}
+
+/* Navbar */
+.navbar-ticnsp {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background: none;
+}
+
+.navbar-ticnsp a {
+	color: #222;
+}
+
+.navbar-ticnsp .navbar-toggle {
+	border-color: #222;
+	color: #222;
+}
+
+.navbar-ticnsp .navbar-toggle:hover {
+	background-color: #222;
+	color: #222;
+}
+
+.navbar-ticnsp .navbar-toggle .icon-bar {
+	background-color: #222;
+}
+
+.navbar-ticnsp .navbar-toggle:hover .icon-bar {
+	background-color: #fff;
+}
+
+.nav > li > a {
+	margin-top: 1px;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+	color: #222;
+	background-color: #ecf0f1;
+	height: 42px;
+	margin-top: 5px;
+	padding-top: 11px;
+	border-radius: 5px;
+}
+
+.navbar-ticnsp a:active {
+	color: #fff;
+	background: none;
+}
+
+.btn-ticnsp-navbar-btn {
+	border: 1px solid #222;
+	background: none;
+	padding: 10px;
+	margin-top: 5px;
+	margin-left: 5px;
+	border-radius: 0px;
+}
+
+.btn-ticnsp-navbar-btn:hover {
+	background-color: #222;
+	color: #fff;
+}
+
+@media(max-width: 768px) {
+	#ticnsp-collapse-navbar {
+		margin-top: 40px;
+	}
+}

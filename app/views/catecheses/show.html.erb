@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @catechese.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @catechese.description %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @catechese.image_id %>
+</p>
+
+<%= link_to 'Edit', edit_catechese_path(@catechese) %> |
+<%= link_to 'Back', catecheses_path %>

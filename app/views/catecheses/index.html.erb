@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Catecheses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @catecheses.each do |catechese| %>
+      <tr>
+        <td><%= catechese.name %></td>
+        <td><%= catechese.description %></td>
+        <td><%= catechese.image_id %></td>
+        <td><%= link_to 'Show', catechese %></td>
+        <td><%= link_to 'Edit', edit_catechese_path(catechese) %></td>
+        <td><%= link_to 'Destroy', catechese, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Catechesis', new_catechese_path %>

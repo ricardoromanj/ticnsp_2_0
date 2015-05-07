@@ -33,6 +33,15 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Custom for TICNSP
       t.string :usertype,       null: false, default: ""
       t.string :username,       null: false, default: ""
+      t.string :image_id
+      t.boolean :use_gravatar,  null: false, default: true
+
+      t.string :name
+      t.string :lastname
+      t.string :birthdate
+      t.string :gender
+      t.string :role
+      t.string :notes
 
       t.timestamps
     end

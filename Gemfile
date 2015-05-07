@@ -51,4 +51,4 @@ gem 'puma'
 gem 'haml'
 gem 'gravtastic'
 gem 'mini_magick'
-gem 'refile'
+gem 'refile', require: ["refile/rails", "refile/image_processing"]
