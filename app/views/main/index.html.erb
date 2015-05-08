@@ -37,4 +37,28 @@
 			</div>
 		</div>
 	</div>
+	<div class='container-fluid ticnsp-page-banner'>
+		<p class='lead text-center'>¡Uh oh! Se acabaron las inscripciones para este semestre</p>
+	</div>
+</section>
+<section class='section-aboutus'>
+	<div class='container'>
+		<h1 class='ticnsp-section-title'>¡Ven a conocer más a <strong>Jesús</strong> divirtiéndote con nosotros!</h1>
+	</div>
+</section>
+<section class='section-team'>
+	<div class='container'>
+		<h1 class='ticnsp-section-title'>Conoce a una genial <strong>comunidad</strong> de coordinadores</h1>
+		<% ['ana','dan','hil','ils','isa','jor','lau','med','ola','pao'].each_slice(4) do |coord_set| %>
+			<div class='row'>
+				<% coord_set.each do |coord| %>
+					<div class='col-md-3 col-sm-3'>
+						<div class='ticnsp-team-member'>
+							<%= image_tag "coord_#{coord}.jpg", class: 'ticnsp-team-member-image' %>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
 </section>

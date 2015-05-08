@@ -1,21 +1,3 @@
-/* Sections */
-.section-cover {
-	background-color: #fff;
-	
-	padding-bottom: 20px;
-}
-
-/* Title section */
-.ticnsp-title {
-	padding-top: 50px;
-	max-width: 500px;
-}
-
-.ticnsp-title h1 {
-	font-weight: 200;
-	font-size: 60px;
-}
-
 /* Navbar */
 .navbar-ticnsp {
 	padding-top: 20px;
@@ -55,7 +37,7 @@
 	height: 42px;
 	margin-top: 5px;
 	padding-top: 11px;
-	border-radius: 5px;
+	border-radius: 0px;
 }
 
 .navbar-ticnsp a:active {
@@ -81,4 +63,61 @@
 	#ticnsp-collapse-navbar {
 		margin-top: 40px;
 	}
+}
+
+/* Sections */
+.ticnsp-section-title {
+	font-weight: 200;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.section-cover {
+	background-color: #fff;
+}
+
+.section-aboutus {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	background-color: #3498db;
+	color: #fff;
+}
+
+.section-team {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	color: #343434;
+}
+
+/* Title section */
+.ticnsp-title {
+	padding-top: 50px;
+	padding-bottom: 20px;
+	max-width: 500px;
+}
+
+.ticnsp-title h1 {
+	font-weight: 200;
+	font-size: 60px;
+}
+.ticnsp-page-banner {
+	background-color: #ecf0f1;
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+/* About us section */
+
+/* Team section */
+.ticnsp-team-member {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.ticnsp-team-member-image {
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+	border: 5px solid #e6e9eb;
+	margin: auto;
 }
