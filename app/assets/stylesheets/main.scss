@@ -69,7 +69,7 @@
 .ticnsp-section-title {
 	font-weight: 200;
 	text-align: center;
-	padding-bottom: 20px;
+	padding-bottom: 50px;
 }
 
 .section-cover {
@@ -87,6 +87,21 @@
 	padding-top: 50px;
 	padding-bottom: 50px;
 	color: #343434;
+}
+
+.section-contact {
+	padding-top: 50px;
+	color: #fff;
+	background: asset-url("section_contact.jpg") no-repeat center center fixed; 
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+}
+
+.section-footer {
+	height: 400px;
+	background-color: #333;
 }
 
 /* Title section */
@@ -111,13 +126,58 @@
 /* Team section */
 .ticnsp-team-member {
 	text-align: center;
-	padding-bottom: 20px;
+	padding-bottom: 45px;
+}
+
+.ticnsp-team-member-name {
+	font-size: 25px;
+	padding-bottom: 10px;
+}
+
+.ticnsp-team-member-position {
+	font-size: 18px;
+	font-weight: 200;
 }
 
 .ticnsp-team-member-image {
 	width: 150px;
 	height: 150px;
 	border-radius: 75px;
-	border: 5px solid #e6e9eb;
+	border: 5px solid #fff;
 	margin: auto;
+	margin-bottom: 20px;
+	-webkit-box-shadow: 0px 6px 17px -9px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 6px 17px -9px rgba(0,0,0,0.75);
+	box-shadow: 0px 6px 17px -9px rgba(0,0,0,0.75);
+}
+
+/* Contact section  */
+.ticnsp-form {
+	padding-bottom: 50px;
+}
+
+.ticnsp-form-control {
+	border-radius: 0px;
+	box-shadow: none;
+	border: none;
+	height: 52px;
+    font-size: 18px;
+    font-weight: 200;
+    padding: 10px 16px;
+}
+
+.btn-ticnsp-form-btn {
+	border-radius: 0px;
+	background-color: #34495e;
+	border: medium none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    padding: 12px 24px;
+}
+
+.btn-ticnsp-form-btn:hover, .btn-ticnsp-form-btn:active {
+	background-color: #2c3e50;
+	color: #e2e2e2;
 }

@@ -14,9 +14,9 @@
 		    <div class='collapse navbar-collapse' id='ticnsp-collapse-navbar'>
 		    	<%= link_to 'INICIAR SESIÓN', '#', class: 'btn btn-ticnsp-navbar-btn navbar-btn navbar-right' %>
 		    	<ul class='nav navbar-nav navbar-right'>
-		    		<li><%= link_to 'INFORMACION', '#' %></li>
+		    		<li><%= link_to 'QUIENES SOMOS', '#' %></li>
 		    		<li><%= link_to 'COORDINADORES', '#' %></li>
-		    		<li><%= link_to 'AYUDA', '#' %></li>
+		    		<li><%= link_to 'CONTACTO', '#' %></li>
 		    	</ul>
 		    </div>
 		</div>
@@ -49,16 +49,48 @@
 <section class='section-team'>
 	<div class='container'>
 		<h1 class='ticnsp-section-title'>Conoce a una genial <strong>comunidad</strong> de coordinadores</h1>
-		<% ['ana','dan','hil','ils','isa','jor','lau','med','ola','pao'].each_slice(4) do |coord_set| %>
+		<% ['ana','med','hil','ils','isa','jor','lau','dan','ola','pao','ric','gab'].each_slice(4) do |coord_set| %>
 			<div class='row'>
 				<% coord_set.each do |coord| %>
-					<div class='col-md-3 col-sm-3'>
+					<div class='col-md-3 col-sm-6'>
 						<div class='ticnsp-team-member'>
-							<%= image_tag "coord_#{coord}.jpg", class: 'ticnsp-team-member-image' %>
+							<%= image_tag "coord_#{coord}.jpg", class: 'ticnsp-team-member-image' %><br/>
+							<span class='ticnsp-team-member-name'><%= @coord_info[coord][:name] %></span><br/>
+							<span class='ticnsp-team-member-position'><%= @coord_info[coord][:position] %></span>
 						</div>
 					</div>
 				<% end %>
 			</div>
 		<% end %>
 	</div>
+</section>
+<section class='section-contact'>
+	<div class='container'>
+		<h1 class='ticnsp-section-title'>Si necesitas información, déjanos tus datos:</h1>
+		<form class='form-horizontal ticnsp-form'>
+			<div class='form-group'>
+				<div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6'>
+					<%= text_field_tag :name, nil, placeholder: 'Nombre', class: 'form-control ticnsp-form-control', required: true%>
+				</div>
+			</div>
+			<div class='form-group'>
+				<div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6'>
+					<%= email_field_tag :email, nil, placeholder: 'E - mail', class: 'form-control ticnsp-form-control', required: true%>
+				</div>
+			</div>
+			<div class='form-group'>
+				<div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6'>
+					<%= text_area_tag :text, nil, placeholder: 'Mensaje', class: 'form-control ticnsp-form-control', style: 'resize: none;', required: true%>
+				</div>
+			</div>
+			<div class='form-group'>
+				<div class='col-xs-offset-1 col-sm-offset-3 col-xs-10 col-sm-6'>
+					<%= submit_tag 'Enviar', class: 'btn btn-ticnsp-form-btn btn-block' %>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+<section class='section-footer'>
+
 </section>
