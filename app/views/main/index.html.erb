@@ -1,6 +1,6 @@
 <% content_for :title, 'TIC' %>
 <section class='section-cover'>
-	<nav class='navbar navbar-ticnsp navbar-static-top'>
+	<nav class='navbar navbar-ticnsp navbar-fixed-top'>
 		<div class='container'>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ticnsp-collapse-navbar">
@@ -12,7 +12,7 @@
 				<%= link_to (image_tag 'tic_logo_nobg.png', height: 70), root_path, class: 'navbar-brand' %>
 		    </div>
 		    <div class='collapse navbar-collapse' id='ticnsp-collapse-navbar'>
-		    	<%= link_to 'INICIAR SESIÓN', '#', class: 'btn btn-ticnsp-navbar-btn navbar-btn navbar-right' %>
+		    	<%= link_to 'INICIAR SESIÓN', new_user_session_path, class: 'btn btn-ticnsp-navbar-btn navbar-btn navbar-right' %>
 		    	<ul class='nav navbar-nav navbar-right'>
 		    		<li><%= link_to 'QUIENES SOMOS', '#' %></li>
 		    		<li><%= link_to 'COORDINADORES', '#' %></li>
@@ -30,25 +30,60 @@
 						<p>Enséñale al niño el camino que ha de seguir y se mantendrá en él aun en la vejez</p>
 						<footer>Proverbios 22 : 6</footer>
 					</blockquote>
+					<%= link_to '<span class="fa fa-facebook"></span>'.html_safe, '#', class: 'btn btn-ticnsp-social' %>
+		Síguenos en Facebook
 				</div>
 			</div>
 			<div class='col-sm-6'>
-				<%= image_tag 'front_export.png', height: 400 %>
+				<%= image_tag 'front_export_bordered.png', height: 400 %>
 			</div>
 		</div>
 	</div>
-	<div class='container-fluid ticnsp-page-banner'>
-		<p class='lead text-center'>¡Uh oh! Se acabaron las inscripciones para este semestre</p>
-	</div>
 </section>
 <section class='section-aboutus'>
-	<div class='container'>
+	<div class='container-fluid ticnsp-section-title-container' id='ticnsp-section-aboutus-title-container'>
 		<h1 class='ticnsp-section-title'>¡Ven a conocer más a <strong>Jesús</strong> divirtiéndote con nosotros!</h1>
+	</div>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
+				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-talleres-card'>
+					<div class='panel-body text-center'>
+						<%= image_tag "talleres.jpg", class: 'ticnsp-activity-image' %>
+						<p class='lead'>Talleres</p>
+					</div>
+				</div>				
+			</div>
+			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
+				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-catequesis-card'>
+					<div class='panel-body text-center'>
+						<%= image_tag "catequesis.jpg", class: 'ticnsp-activity-image' %>
+						<p class='lead'>Catequesis</p>
+					</div>
+				</div>
+			</div>
+			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
+				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-retiro-card'>
+					<div class='panel-body text-center'>
+						<%= image_tag "retiro.jpg", class: 'ticnsp-activity-image' %>
+						<p class='lead'>Retiro</p>
+					</div>
+				</div>				
+			</div>
+			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
+				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-diadejuego-card'>
+					<div class='panel-body text-center'>
+						<%= image_tag "dias_de_juego.jpg", class: 'ticnsp-activity-image' %>
+						<p class='lead'>Días de juego</p>
+					</div>
+				</div>				
+			</div>
+		</div>
 	</div>
 </section>
 <section class='section-team'>
 	<div class='container'>
-		<h1 class='ticnsp-section-title'>Conoce a una genial <strong>comunidad</strong> de coordinadores</h1>
+		<h1 class='ticnsp-section-title'>Conoce a nuestra <strong>comunidad</strong> de coordinadores</h1>
 		<% ['ana','med','hil','ils','isa','jor','lau','dan','ola','pao','ric','gab'].each_slice(4) do |coord_set| %>
 			<div class='row'>
 				<% coord_set.each do |coord| %>
