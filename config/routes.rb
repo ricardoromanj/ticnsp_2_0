@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'main_webapp/index'
+
   root 'main#index'
 
   get 'main_webapp/dashboard'

@@ -1,5 +1,6 @@
 <% content_for :title, 'TIC' %>
-<section class='section-cover'>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9MOcTCLm8iLB5zi6YH7MtVgnNoBc5rw"></script>
+<section class='section-cover' id='main'>
 	<nav class='navbar navbar-ticnsp navbar-fixed-top'>
 		<div class='container'>
 			<div class="navbar-header">
@@ -9,14 +10,14 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<%= link_to (image_tag 'tic_logo_nobg.png', height: 70), root_path, class: 'navbar-brand' %>
+				<%= link_to (image_tag 'tic_logo_nobg.png', height: 70), '#main', class: 'navbar-brand' %>
 		    </div>
 		    <div class='collapse navbar-collapse' id='ticnsp-collapse-navbar'>
 		    	<%= link_to 'INICIAR SESIÓN', new_user_session_path, class: 'btn btn-ticnsp-navbar-btn navbar-btn navbar-right' %>
 		    	<ul class='nav navbar-nav navbar-right'>
-		    		<li><%= link_to 'QUIENES SOMOS', '#' %></li>
-		    		<li><%= link_to 'COORDINADORES', '#' %></li>
-		    		<li><%= link_to 'CONTACTO', '#' %></li>
+		    		<li><%= link_to 'NOSOTROS', '#aboutus' %></li>
+		    		<li><%= link_to 'COORDINADORES', '#team' %></li>
+		    		<li><%= link_to 'CONTACTO', '#contact' %></li>
 		    	</ul>
 		    </div>
 		</div>
@@ -30,7 +31,7 @@
 						<p>Enséñale al niño el camino que ha de seguir y se mantendrá en él aun en la vejez</p>
 						<footer>Proverbios 22 : 6</footer>
 					</blockquote>
-					<%= link_to '<span class="fa fa-facebook"></span>'.html_safe, '#', class: 'btn btn-ticnsp-social' %>
+					<%= link_to '<span class="fa fa-facebook"></span>'.html_safe, 'https://www.facebook.com/tic.nsp?fref=ts', class: 'btn btn-ticnsp-social', target: '_blank' %>
 		Síguenos en Facebook
 				</div>
 			</div>
@@ -40,7 +41,7 @@
 		</div>
 	</div>
 </section>
-<section class='section-aboutus'>
+<section class='section-aboutus' id='aboutus'>
 	<div class='container-fluid ticnsp-section-title-container' id='ticnsp-section-aboutus-title-container'>
 		<h1 class='ticnsp-section-title'>¡Ven a conocer más a <strong>Jesús</strong> divirtiéndote con nosotros!</h1>
 	</div>
@@ -81,7 +82,7 @@
 		</div>
 	</div>
 </section>
-<section class='section-team'>
+<section class='section-team' id='team'>
 	<div class='container'>
 		<h1 class='ticnsp-section-title'>Conoce a nuestra <strong>comunidad</strong> de coordinadores</h1>
 		<% ['ana','med','hil','ils','isa','jor','lau','dan','ola','pao','ric','gab'].each_slice(4) do |coord_set| %>
@@ -99,7 +100,7 @@
 		<% end %>
 	</div>
 </section>
-<section class='section-contact'>
+<section class='section-contact' id='contact'>
 	<div class='container'>
 		<h1 class='ticnsp-section-title'>Si necesitas información, déjanos tus datos:</h1>
 		<form class='form-horizontal ticnsp-form'>
@@ -146,7 +147,7 @@
 							<i class='glyphicon glyphicon-earphone'></i>
 						</td>
 						<td>
-							+52 656 618 2471
+							<a href='tel:+52 656 618 2471'>+52 656 618 2471</a>
 						</td>
 					</tr>
 					<tr>
@@ -160,19 +161,65 @@
 				</table>
 			</div>
 			<div class='col-sm-4'>
-				<h2>Redes Sociales</h2>
-				<%= link_to '<span class="fa fa-facebook"></span>'.html_safe, '#', class: 'btn btn-ticnsp-social' %>
-				Síguenos en Facebook
+				<h2>Conócenos</h2>
+				<%= link_to '<span class="fa fa-facebook"></span>'.html_safe, 'https://www.facebook.com/tic.nsp?fref=ts', class: 'btn btn-ticnsp-social', target: '_blank' %>
+				<%= link_to '<span class="fa fa-twitter"></span>'.html_safe, 'https://twitter.com/ticnsp', class: 'btn btn-ticnsp-social', target: '_blank' %>
+				
 			</div>
 			<div class='col-sm-4'>
 				<h2>Sitios de interés</h2>
-				<p><%= link_to 'Parroquia NSP', 'http://parroquiansp.org' %></p>
-				<p><%= link_to 'Quiero ir a misa', 'http://quieroiramisa.com/' %></p>
+				<div class='list-group'>
+					<%= link_to 'Parroquia NSP', 'http://parroquiansp.org', class: 'list-group-item' %>
+					<%= link_to 'Quiero ir a misa', 'http://quieroiramisa.com/', class: 'list-group-item' %>
+				</div>
 			</div>
 		</div>
 	</div>
-	<section class='section-map'>
+	<section class='section-map' id='map-location'>
 	</section>
+	<script>
+		// Smooth scroll
+		$(document).ready(function() {
+			$('a[href=#main], a[href=#aboutus], a[href=#team], a[href=#contact]').bind('click', function(e) {
+				var anchor = $(this);
+				$('html, body').stop().animate({
+					scrollTop: $(anchor.attr('href')).offset().top - 80
+				}, 1000);
+				e.preventDefault();
+			});
+			return false;
+		});
+
+		// Maps setup
+		function initialize() {
+			var center = new google.maps.LatLng(31.696608, -106.417541); 
+			var mapOptions = {
+				center: center,
+				zoom: 15,
+				scrollwheel: false,
+				disableDefaultUI: true,
+				draggable: false
+			};
+			var map = new google.maps.Map(document.getElementById("map-location"),mapOptions);
+
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(31.696423, -106.417474),
+				map: map,
+				title: 'Parroquia Nuestra Señora de la Paz'
+			});
+
+			var infowindow = new google.maps.InfoWindow({
+				content: '<strong>Rancho El Retiro #3517, Fracc. Pradera Dorada</strong><br>Ciudad Juárez, Chih. MX 32618'
+			});
+
+			google.maps.event.addDomListener(window, 'resize', function() {
+			    map.setCenter(center);
+			});
+			
+			infowindow.open(map,marker);
+		}
+		initialize();
+	</script>
 	<div class='container-fluid footer-footer'>
 		2015 © Talleres Infantiles Católicos - El plagio es pecado
 		<a href='#' class='btn btn-to-top pull-right'><i class='glyphicon glyphicon-menu-up'></i></a>
