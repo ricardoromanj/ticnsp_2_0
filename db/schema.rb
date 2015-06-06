@@ -11,15 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507053816) do
-
-  create_table "catecheses", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "image_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
+ActiveRecord::Schema.define(version: 20150604041549) do
 
   create_table "children", force: :cascade do |t|
     t.string   "name"
@@ -63,6 +55,14 @@ ActiveRecord::Schema.define(version: 20150507053816) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id"
+
+  create_table "lectures", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "image_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "notices", force: :cascade do |t|
     t.string   "heading"

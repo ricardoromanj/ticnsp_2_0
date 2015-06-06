@@ -1,6 +1,6 @@
-class CreateCatecheses < ActiveRecord::Migration
+class CreateLectures < ActiveRecord::Migration
   def change
-    create_table :catecheses do |t|
+    create_table :lectures do |t|
       t.string :name
       t.string :description
       t.string :image_id

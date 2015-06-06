@@ -1,10 +1,10 @@
-<%= form_for(@catechese) do |f| %>
-  <% if @catechese.errors.any? %>
+<%= form_for(@lecture) do |f| %>
+  <% if @lecture.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@catechese.errors.count, "error") %> prohibited this catechese from being saved:</h2>
+      <h2><%= pluralize(@lecture.errors.count, "error") %> prohibited this lecture from being saved:</h2>
 
       <ul>
-      <% @catechese.errors.full_messages.each do |message| %>
+      <% @lecture.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
