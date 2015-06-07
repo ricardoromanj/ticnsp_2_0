@@ -1,9 +1,9 @@
-<nav class='navbar navbar-default navbar-static-top'>
+<nav class='navbar navbar-default navbar-static-top' id='navbar-webapp'>
 	<div class='container-fluid'>
 		
 		<button onclick='toggleNavBar()' type='button' class='btn btn-info navbar-btn'><i class='fa fa-bars'></i></button>
 		
-		<ul class='nav navbar-nav navbar-right'>
+		<ul class='nav navbar-top-links navbar-right'>
 			<li><%= link_to '<i class="fa fa-lg fa-sign-out"></i> Cerrar sesión'.html_safe, destroy_user_session_path, method: :delete %></li>
 		</ul>
 	</div>

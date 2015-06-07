@@ -1,4 +1,5 @@
 class ChildrenController < ApplicationController
+  layout 'webapp'
   before_action :set_child, only: [:show, :edit, :update, :destroy]
 
   # GET /children
