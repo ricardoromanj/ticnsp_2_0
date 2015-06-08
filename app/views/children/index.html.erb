@@ -4,38 +4,74 @@
 
 <p id="notice"><%= notice %></p>
 
-<table class='table table-condensed table-striped'>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Lastname</th>
-      <th>Gender</th>
-      <th>Birthdate</th>
-      <th>Image</th>
-      <th>Allergies</th>
-      <th>Notes</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class='row'>
+  <div class='col-xs-12 col-sm-8'>
+    <div class='panel panel-ticnsp panel-ticnsp-content-panel'>
+      <div class='panel-heading'>
+        <small class='pull-right'><%= Child.count %> niños inscritos</small>
+      </div>
+      <div class='panel-body'>
+        <div class='row'>
+          <div class='col-xs-8 col-sm-8 col-md-9 col-lg-9'>
+            <%= form_tag '#', method: :post do %>
+              <div class='input-group'>
+                <%= text_field_tag :search, nil, placeholder: 'Buscar', class: 'form-control form-control-ticnsp' %>
+                <span class='input-group-btn'>
+                  <%= submit_tag 'Buscar', class: 'btn btn-ticnsp' %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <div class='col-xs-4 col-sm-4 col-md-3 col-lg-3'>
+            <%= link_to 'Inscribir niño', new_child_path, class: 'btn btn-ticnsp' %>
+          </div>
+        </div>
+      </div>
+      <div class='panel-body'>
+        <div class='table-responsive'>
+          <table class='table table-striped table-ticnsp'>
+            <!-- <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Gender</th>
+                <th>Birthdate</th> 
+                <th>Allergies</th>
+                <th>Notes</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead> -->
 
-  <tbody>
-    <% @children.each do |child| %>
-      <tr>
-        <td><%= child.name %></td>
-        <td><%= child.lastname %></td>
-        <td><%= child.gender %></td>
-        <td><%= child.birthdate %></td>
-        <td><%= child.image_id %></td>
-        <td><%= child.allergies %></td>
-        <td><%= child.notes %></td>
-        <td><%= link_to 'Show', child %></td>
-        <td><%= link_to 'Edit', edit_child_path(child) %></td>
-        <td><%= link_to 'Destroy', child, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <tbody>
+              <% @children.each do |child| %>
+                <tr>
+                  <td><%= child.image_id %></td>
+                  <td><%= child.name %></td>
+                  <td><%= child.lastname %></td>
+                  <td><%= child.gender %></td>
+                  <td><%= child.birthdate %></td>
+                  <td><%= child.allergies %></td>
+                  <td><%= child.notes %></td>
+                  <td><%= link_to 'Show', child %></td>
+                  <td><%= link_to 'Edit', edit_child_path(child) %></td>
+                  <td><%= link_to 'Destroy', child, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='col-xs-12 col-sm-4 detail-column-ticnsp'>
+    <div class='panel panel-ticnsp'>
+      <div class='panel-heading'>
+        <h1 class='panel-title'>Detalle</h1>
+      </div>
+      <div class='panel-body'>
 
-<br>
-
-<%= link_to 'New Child', new_child_path %>
+      </div>
+    </div>
+  </div>
+</div>

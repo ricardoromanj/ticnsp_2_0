@@ -6,7 +6,7 @@
         </a>
     </li>
     <li>
-        <%= link_to "<i class='fa fa-dashboard fa-lg'></i> Dashboard".html_safe, root_path %>
+        <%= link_to "<i class='fa fa-dashboard fa-lg'></i> Dashboard".html_safe, root_path, class: (params['action'] =~ /dashboard/ ? 'active' : '') %>
     </li>
     <li>
         <%= link_to "<i class='fa fa-lg fa-comment'></i> Avisos".html_safe, '#' %>
@@ -15,7 +15,7 @@
         <%= link_to "<i class='fa fa-lg fa-tasks'></i> Actividades".html_safe, '#' %>
     </li>
     <li>
-        <%= link_to "<i class='fa fa-lg fa-child'></i> Niños".html_safe, children_path %>
+        <%= link_to "<i class='fa fa-lg fa-child'></i> Niños".html_safe, children_path, class: (params['controller'] =~ /children/ ? 'active' : '') %>
     </li>
     <li>
         <a href="#"><i class='fa fa-lg fa-users'></i> Coordinadores</a>
@@ -24,13 +24,19 @@
         <a href="#"><i class='fa fa-lg fa-users'></i> Tutores</a>
     </li>
     <li>
-        <a href="#"><i class='fa fa-lg fa-institution'></i> Catequesis</a>
+        <%= link_to "<i class='fa fa-lg fa-institution'></i> Catequesis".html_safe, lectures_path, class: (params['controller'] =~ /lectures/ ? 'active' : '') %>
     </li>
     <li>
-        <a href="#"><i class='fa fa-lg fa-graduation-cap'></i> Talleres</a>
+        <%= link_to "<i class='fa fa-lg fa-graduation-cap'></i> Talleres".html_safe, workshops_path, class: (params['controller'] =~ /workshops/ ? 'active' : '') %>
     </li>
     <li>
-        <a href="#"><i class='fa fa-lg fa-calendar'></i> Eventos</a>
+        <%= link_to "<i class='fa fa-lg fa-flag'></i> Acompañamientos".html_safe, shepperdings_path, class: (params['controller'] =~ /sheperdings/ ? 'active' : '') %>
+    </li>
+    <li>
+        <%= link_to "<i class='fa fa-lg fa-flag'></i> Comisiones".html_safe, commissions_path, class: (params['controller'] =~ /commissions/ ? 'active' : '') %>
+    </li>
+    <li>
+        <%= link_to "<i class='fa fa-lg fa-calendar'></i> Eventos".html_safe, events_path, class: (params['controller'] =~ /events/ ? 'active' : '') %>
     </li>
     <li>
         <a href="#"><i class='fa fa-lg fa-gears'></i> Configuración</a>

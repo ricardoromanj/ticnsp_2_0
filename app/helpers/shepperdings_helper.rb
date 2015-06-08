@@ -1,0 +1,2 @@
+module ShepperdingsHelper
+end

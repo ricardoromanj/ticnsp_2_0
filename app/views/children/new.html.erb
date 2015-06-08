@@ -1,5 +1,16 @@
-<h1>New Child</h1>
+<% content_for :title, 'Niños - TIC' %>
+<% content_for :page_title, 'Inscribir Niño' %>
+<% content_for :breadcrumb, "<li>#{link_to 'Niños', children_path}</li><li>Inscribir niño</li>".html_safe %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', children_path %>
+<div class='row'>
+	<div class='col-sm-12 col-md-8'>
+		<div class='panel panel-ticnsp'>
+			<div class='panel-body'>
+				<%= link_to 'Back', children_path, class: 'btn btn-default pull-right' %>
+			</div>
+			<div class='panel-body'>
+				<%= render 'form' %>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :shepperdings
+  resources :commissions
   get 'main_webapp/index'
 
   root 'main#index'

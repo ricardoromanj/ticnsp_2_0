@@ -1,7 +1,7 @@
-<%= form_for(@child) do |f| %>
+<%= form_for(@child, html: { class: 'form-horizontal' } ) do |f| %>
   <% if @child.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@child.errors.count, "error") %> prohibited this child from being saved:</h2>
+    <div id="error_explanation" class='alert alert-danger'>
+      <strong><%= pluralize(@child.errors.count, "error") %> prohibited this child from being saved:</strong>
 
       <ul>
       <% @child.errors.full_messages.each do |message| %>
@@ -11,35 +11,57 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label 'Nombre(s)', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-7'>
+      <%= f.text_field :name, class: 'form-control form-control-ticnsp' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :lastname %><br>
-    <%= f.text_field :lastname %>
+  <div class="form-group">
+    <%= f.label 'Apellidos', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-7'>
+      <%= f.text_field :lastname, class: 'form-control form-control-ticnsp' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.text_field :gender %>
+  <div class="form-group">
+    <%= f.label 'Género', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-3'>
+      <%= f.select :gender, options_for_select([['H','h'],['M','m']], @child.gender), {}, { class: 'form-control form-control-ticnsp' } %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :birthdate %><br>
-    <%= f.text_field :birthdate %>
+  <div class="form-group">
+    <%= f.label 'Fecha de nacimiento', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-3'>
+      <%= f.text_field :birthdate, class: 'form-control form-control-ticnsp datepicker' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :image_id %><br>
-    <%= f.text_field :image_id %>
+  <div class="form-group">
+    <%= f.label 'Imagen', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-7'>
+      <%= f.text_field :image_id, class: 'form-control form-control-ticnsp' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :allergies %><br>
-    <%= f.text_field :allergies %>
+  <div class="form-group">
+    <%= f.label 'Alergias', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-7'>
+      <%= f.text_area :allergies, class: 'form-control form-control-ticnsp' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_field :notes %>
+  <div class="form-group">
+    <%= f.label 'Notas', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-7'>
+      <%= f.text_area :notes, class: 'form-control form-control-ticnsp' %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class='col-sm-offset-2 col-sm-2'>
+      <%= f.submit 'Inscribir niño', class: 'btn btn-ticnsp' %>
+    </div>
   </div>
 <% end %>
+<script>
+  $('.datepicker').datepicker({
+      format: 'mm/dd/yyyy',
+      startDate: '-3d'
+  })
+</script>

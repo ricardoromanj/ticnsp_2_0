@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @shepperding.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @shepperding.description %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @shepperding.image_id %>
+</p>
+
+<%= link_to 'Edit', edit_shepperding_path(@shepperding) %> |
+<%= link_to 'Back', shepperdings_path %>
