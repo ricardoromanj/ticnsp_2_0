@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  message_text: MyString
+  read: false
+  read_at: 2015-06-08 22:06:48
+  replied: false
+  replied_at: 2015-06-08 22:06:48
+  replied_by_user_id: 1
+
+two:
+  name: MyString
+  email: MyString
+  message_text: MyString
+  read: false
+  read_at: 2015-06-08 22:06:48
+  replied: false
+  replied_at: 2015-06-08 22:06:48
+  replied_by_user_id: 1

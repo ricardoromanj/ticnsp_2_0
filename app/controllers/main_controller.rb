@@ -54,4 +54,8 @@ class MainController < ApplicationController
 			}
 		}
   end
+
+  def leave_message
+
+  end
 end

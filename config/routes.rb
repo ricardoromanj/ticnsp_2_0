@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  resources :shepperdings
-  resources :commissions
+  
   get 'main_webapp/index'
-
+  post 'main_webapp/leave_message' => 'main_webapp#leave_message'
   root 'main#index'
-
   get 'dashboard' => 'main_webapp#dashboard'
 
   resources :notices
@@ -14,6 +12,9 @@ Rails.application.routes.draw do
   resources :workshops
   resources :lectures
   resources :children
+  resources :visitor_messages
+  resources :shepperdings
+  resources :commissions
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

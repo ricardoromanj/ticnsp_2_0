@@ -12,6 +12,9 @@
         <%= link_to "<i class='fa fa-lg fa-comment'></i> Avisos".html_safe, '#' %>
     </li>
     <li>
+        <%= link_to "<i class='fa fa-lg fa-inbox'></i> Mensajes".html_safe, visitor_messages_path, class: (params['controller'] =~ /visitor_messages/ ? 'active' : '') %>
+    </li>
+    <li>
         <%= link_to "<i class='fa fa-lg fa-tasks'></i> Actividades".html_safe, '#' %>
     </li>
     <li>

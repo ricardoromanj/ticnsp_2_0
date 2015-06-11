@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608010602) do
+ActiveRecord::Schema.define(version: 20150609040647) do
 
   create_table "children", force: :cascade do |t|
     t.string   "name"
@@ -128,6 +128,19 @@ ActiveRecord::Schema.define(version: 20150608010602) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "visitor_messages", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "message_text"
+    t.boolean  "read"
+    t.datetime "read_at"
+    t.boolean  "replied"
+    t.datetime "replied_at"
+    t.integer  "replied_by_user_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
   create_table "workshops", force: :cascade do |t|
     t.string   "name"

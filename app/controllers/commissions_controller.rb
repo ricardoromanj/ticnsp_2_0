@@ -1,4 +1,4 @@
-class CommissionsController < ApplicationController
+class CommissionsController < WebApplicationController
   before_action :set_commission, only: [:show, :edit, :update, :destroy]
 
   # GET /commissions

@@ -13,19 +13,13 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
         <div class="form-group">
           <div class='col-sm-12'>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1"><i class='glyphicon glyphicon-user'></i></span>
-              <%= f.email_field :email, autofocus: true, placeholder: 'Usuario', class: 'form-control' %>
-            </div>
+            <%= f.email_field :email, autofocus: true, placeholder: 'Usuario', class: 'form-control form-control-ticnsp' %>
           </div>
         </div>
 
         <div class="form-group">
           <div class='col-sm-12'>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1"><i class='glyphicon glyphicon-asterisk'></i></span>
-              <%= f.password_field :password, autocomplete: "off", placeholder: 'Contraseña', class: 'form-control' %>
-            </div>
+            <%= f.password_field :password, autocomplete: "off", placeholder: 'Contraseña', class: 'form-control form-control-ticnsp' %>
           </div>
         </div>
 

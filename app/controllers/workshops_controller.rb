@@ -1,4 +1,4 @@
-class WorkshopsController < ApplicationController
+class WorkshopsController < WebApplicationController
   before_action :set_workshop, only: [:show, :edit, :update, :destroy]
 
   # GET /workshops

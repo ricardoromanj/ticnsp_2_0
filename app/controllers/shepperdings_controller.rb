@@ -1,4 +1,4 @@
-class ShepperdingsController < ApplicationController
+class ShepperdingsController < WebApplicationController
   before_action :set_shepperding, only: [:show, :edit, :update, :destroy]
 
   # GET /shepperdings
