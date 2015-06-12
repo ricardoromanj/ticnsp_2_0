@@ -1,0 +1,3 @@
+<% if notice or alert %>
+		<div class='alert alert-<%= notice ? 'info' : 'warning' %> alert-dismissable'><button class="close" aria-hidden="true" data-dismiss="alert" type="button">&times;</button><%= notice ? notice : alert %></div>
+<% end %>

@@ -103,7 +103,12 @@
 <section class='section-contact' id='contact'>
 	<div class='container'>
 		<h1 class='ticnsp-section-title'>Si necesitas información, déjanos tus datos:</h1>
-		<form class='form-horizontal ticnsp-form'>
+		<div class='row'>
+			<div class='col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3'>
+				<%= render 'layouts/partials/alerts' %>
+			</div>
+		</div>
+		<%= form_tag leave_message_path, class: 'form-horizontal ticnsp-form', method: :post do %>
 			<div class='form-group'>
 				<div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6'>
 					<%= text_field_tag :name, nil, placeholder: 'Nombre', class: 'form-control ticnsp-form-control', required: true%>
@@ -116,7 +121,7 @@
 			</div>
 			<div class='form-group'>
 				<div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6'>
-					<%= text_area_tag :text, nil, placeholder: 'Mensaje', class: 'form-control ticnsp-form-control', style: 'resize: none;', required: true%>
+					<%= text_area_tag :message_text, nil, placeholder: 'Mensaje', class: 'form-control ticnsp-form-control', style: 'resize: none;', required: true%>
 				</div>
 			</div>
 			<div class='form-group'>
@@ -124,7 +129,7 @@
 					<%= submit_tag 'Enviar', class: 'btn btn-ticnsp-form-btn btn-block' %>
 				</div>
 			</div>
-		</form>
+		<% end %>
 	</div>
 </section>
 

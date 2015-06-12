@@ -10,6 +10,8 @@
     <div class='col-sm-offset-6 col-sm-6 col-md-offset-8 col-md-4 col-xs-12 login-form-panel'>
       <p class='lead'><%= image_tag 'tic_logo_nobg.png', height: 70, class: 'text-center' %>Iniciar sesión</p>
 
+      <%= render 'layouts/partials/alerts' %>
+      
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
         <div class="form-group">
           <div class='col-sm-12'>

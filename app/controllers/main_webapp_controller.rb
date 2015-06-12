@@ -1,6 +1,4 @@
-class MainWebappController < ApplicationController
-  layout 'webapp'
-  
+class MainWebappController < WebApplicationController
   def dashboard
   	@hide_breadcrumb = true
   end

@@ -2,44 +2,35 @@
 <html>
 	<head>
 	  <title><%= yield :title %></title>
-	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	  <%= stylesheet_link_tag    'application-all', media: 'all', 'data-turbolinks-track' => true %>
+	  <%= stylesheet_link_tag    'application-webapp', media: 'all', 'data-turbolinks-track' => true %>
+	  <%= javascript_include_tag 'application' %>
 	  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,200,100' rel='stylesheet' type='text/css'>
 	  <%= csrf_meta_tags %>
 	</head>
-	<body id='webapp-body'>
-
-		<div id='wrapper' class='toggled'>
-			<%
-				# Sidebar
-			%>
-			<div id='sidebar-wrapper'>
-				<%= render 'layouts/sidebar' %>
+	<body class="skin-blue sidebar-mini">
+		<div class='wrapper'>
+			<%= render 'layouts/partials/header' %>
+			<%= render 'layouts/partials/main_sidebar' %>
+			<div class='content-wrapper'>
+				<section class='content-header'>
+					<%= render 'layouts/partials/alerts' %>
+					<h1><%= yield :page_title %><small><%= yield :page_description %></small></h1>
+					<ol class='breadcrumb'>
+						<%= yield :page_breadcrumb %>
+					</ol>
+				</section>
+				<section class='content'>
+					<%= yield %>
+				</section>
 			</div>
-
-			<%
-				# Content
-			%>
-			<div id='page-content-wrapper'>
-				<%= render 'layouts/navbar' %>
-				<div class='container-fluid'>
-					<div class='row page-header'>
-						<div class='col-xs-12'>
-							<h1><%= yield :page_title %></h1>
-							<% unless @hide_breadcrumb %>
-								<ol class='breadcrumb ticnsp-breadcrumb'>
-									<%= yield :breadcrumb %>
-								</ol>
-							<% end %>
-						</div>
-					</div>
-					<div class='row'>
-						<div class='col-xs-12'>
-							<%= yield %>
-						</div>
-					</div>
+			<footer class='main-footer'>
+				<div class='pull-right hidden-xs'>
+					El plagio es pecado
 				</div>
-			</div>
+				<strong>Copyright &copy; <%= Date.today.year %> <a href="<%= root_path %>">TICNSP.org</a>,</strong> All rights reserved.
+			</footer>
+			<%= render 'layouts/partials/control_sidebar' %>
 		</div>
 	</body>
 </html>

@@ -1,0 +1,69 @@
+<aside class="main-sidebar">
+  <section class="sidebar">
+
+    <%
+      # Sidebar user panel (optional)
+    %>
+    <div class="user-panel">
+      <div class="pull-left image">
+        <%= image_tag 'coord_ric.jpg', class: 'img-circle', alt: 'User Image' %>
+      </div>
+      <div class="pull-left info">
+        <p>Ricardo Roman</p>
+        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+      </div>
+    </div>
+
+    <%
+      # search form (Optional)
+    %>
+    <form action="#" method="get" class="sidebar-form">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Buscar..."/>
+        <span class="input-group-btn">
+          <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+    </form>
+
+    <%
+      # Sidebar Menu
+    %>
+    <ul class="sidebar-menu">
+      <li class="header">MENU</li>
+      
+      <li class='<%= params['action'] =~ /dashboard/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-dashboard'></i> <span>Dashboard</span>".html_safe, root_path %></li>
+
+      <li class='<%= params['controller'] =~ /notices/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-comment'></i> <span>Avisos</span>".html_safe, notices_path %></li>
+
+      <li class='<%= params['controller'] =~ /visitor_messages/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-inbox'></i> <span>Mensajes</span>".html_safe, visitor_messages_path %></li>
+
+      <li class='<%= params['controller'] =~ /tasks/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-tasks'></i> <span>Actividades</span>".html_safe, '#' %></li>
+
+      <li class='<%= params['controller'] =~ /events/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-calendar'></i> <span>Eventos</span>".html_safe, events_path %></li>
+
+      <li class="header">ADMINISTRACIÓN DE CURSO</li>
+
+      <li class="treeview">
+        <a href="#"><i class='fa fa-book'></i> <span>Curso</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li class='<%= params['controller'] =~ /children/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-child'></i> <span>Niños inscritos</span>".html_safe, children_path %></li>
+
+          <li class='<%= params['controller'] =~ /coordinators/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Coordinadores</span>".html_safe, '#' %></li>
+
+          <li class='<%= params['controller'] =~ /tutors/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Tutores</span>".html_safe, '#' %></li>
+
+          <li class='<%= params['controller'] =~ /lectures/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-institution'></i> <span>Catequesis</span>".html_safe, lectures_path %></li>
+
+          <li class='<%= params['controller'] =~ /workshops/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-graduation-cap'></i> <span>Talleres</span>".html_safe, workshops_path %></li>
+
+          <li class='<%= params['controller'] =~ /shepperdings/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-flag'></i> <span>Acompañamientos</span>".html_safe, shepperdings_path %></li>
+
+          <li class='<%= params['controller'] =~ /commissions/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-flag'></i> <span>Comisiones</span>".html_safe, commissions_path %></li>
+        </ul>
+      </li>
+    </ul>
+    
+  </section>
+
+</aside>

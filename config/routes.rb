@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   
-  get 'main_webapp/index'
-  post 'main_webapp/leave_message' => 'main_webapp#leave_message'
   root 'main#index'
+  
+  post '/leave_message' => 'main#leave_message'
+  
+  get 'main_webapp/index'
   get 'dashboard' => 'main_webapp#dashboard'
 
   resources :notices
