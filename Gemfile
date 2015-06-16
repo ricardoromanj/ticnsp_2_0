@@ -48,7 +48,6 @@ group :production do
 	gem 'mysql2'
 end
 
-gem 'cequel'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'

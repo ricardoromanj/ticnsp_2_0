@@ -43,6 +43,11 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :role
       t.string :notes
 
+      # Serialized objects
+      t.string :recents
+      t.string :favorites
+      t.string :settings
+
       t.timestamps
     end
 

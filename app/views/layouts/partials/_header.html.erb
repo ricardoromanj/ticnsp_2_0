@@ -48,7 +48,7 @@
 				%>
 				<li class='dropdown user user-menu'>
 					<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-						<%= image_tag 'coord_ric.jpg', class: 'user-image', alt: 'User Image' %>
+						<%= image_tag current_user.current_image, class: 'user-image', alt: 'User Image' %>
 						<span class='hidden-xs'>Ricardo Roman</span>
 					</a>
 					<ul class='dropdown-menu'>
@@ -56,7 +56,7 @@
 							# User menu
 						%>
 						<li class='user-header'>
-							<%= image_tag 'coord_ric.jpg', class: 'img-circle', alt:'User Image' %>
+							<%= image_tag current_user.current_image, class: 'img-circle', alt:'User Image' %>
 							<p>
 								Ricardo Roman - Coordinador
 								<small>Miembro desde 2010</small>

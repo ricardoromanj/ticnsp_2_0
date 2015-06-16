@@ -1,44 +1,54 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, 'Mensajes - TIC' %>
+<% content_for :page_title, "Mensaje de #{@visitor_message.name}" %>
+<% content_for :page_description, "#{@visitor_message.created_at}" %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @visitor_message.name %>
-</p>
+<div class='box box-primary'>
+  <div class='box-header with-border'> 
+    <h3 class='box-title'>Message detail</h3>
+    <div class='box-tools pull-right'>
+      <%= link_to 'Edit', edit_visitor_message_path(@visitor_message), class: 'btn btn-default btn-xs' %>
+      <%= link_to 'Back', visitor_messages_path, class: 'btn btn-default btn-xs' %>
+    </div>
+  </div>
+  <div class='box-body'>
+    <p>
+      <strong>Name:</strong>
+      <%= @visitor_message.name %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @visitor_message.email %>
-</p>
+    <p>
+      <strong>Email:</strong>
+      <%= @visitor_message.email %>
+    </p>
 
-<p>
-  <strong>Message text:</strong>
-  <%= @visitor_message.message_text %>
-</p>
+    <p>
+      <strong>Message text:</strong>
+      <%= @visitor_message.message_text %>
+    </p>
 
-<p>
-  <strong>Read:</strong>
-  <%= @visitor_message.read %>
-</p>
+    <p>
+      <strong>Read:</strong>
+      <%= @visitor_message.read %>
+    </p>
 
-<p>
-  <strong>Read at:</strong>
-  <%= @visitor_message.read_at %>
-</p>
+    <p>
+      <strong>Read at:</strong>
+      <%= @visitor_message.read_at %>
+    </p>
 
-<p>
-  <strong>Replied:</strong>
-  <%= @visitor_message.replied %>
-</p>
+    <p>
+      <strong>Replied:</strong>
+      <%= @visitor_message.replied %>
+    </p>
 
-<p>
-  <strong>Replied at:</strong>
-  <%= @visitor_message.replied_at %>
-</p>
+    <p>
+      <strong>Replied at:</strong>
+      <%= @visitor_message.replied_at %>
+    </p>
 
-<p>
-  <strong>Replied by user:</strong>
-  <%= @visitor_message.replied_by_user_id %>
-</p>
-
-<%= link_to 'Edit', edit_visitor_message_path(@visitor_message) %> |
-<%= link_to 'Back', visitor_messages_path %>
+    <p>
+      <strong>Replied by user:</strong>
+      <%= @visitor_message.replied_by_user_id %>
+    </p>
+  </div>
+</div>

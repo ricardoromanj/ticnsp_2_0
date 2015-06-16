@@ -122,6 +122,9 @@ ActiveRecord::Schema.define(version: 20150609040647) do
     t.string   "gender"
     t.string   "role"
     t.string   "notes"
+    t.string   "recents"
+    t.string   "favorites"
+    t.string   "settings"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
