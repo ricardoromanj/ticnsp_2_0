@@ -1,20 +1,29 @@
 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	<i class="fa fa-bell-o"></i>
-	<span class="label label-warning">10</span>
+	<span id='notifications-badge' class="label label-warning"></span>
 </a>
 <ul class="dropdown-menu">
-	<li class="header">You have 10 notifications</li>
+	<li id='notifications-header' class="header"></li>
 	<li>
-    	<ul class="menu">
+    	<ul id='notifications-menu' class="menu">
     		<%
       			# List of notifications
       		%>
-     		<li>
-        		<a href="#">
-          			<i class="fa fa-users text-aqua"></i> 5 new members joined today
-        		</a>
-      		</li>
     	</ul>
   	</li>
   	<li class="footer"><a href="#">View all</a></li>
 </ul>
+
+<script>
+  $.getJSON("<%= notices_path %>", function (data) {
+    $('#notifications-header').append('Hay '+ data.length + ' avisos este mes');
+    $('#notifications-badge').append(data.length);
+    $.each(data, function (key, val) {
+      $('#notifications-menu').append('\
+        <li>\
+          <a href="/notices/view#' + val.id + '">\
+            <i class="fa fa-circle-o text-' + val.notice_type + '"></i> ' + val.text_stripped + '\
+        ');
+    });
+  });
+</script>

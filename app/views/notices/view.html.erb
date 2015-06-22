@@ -1,0 +1,29 @@
+<% content_for :title, 'Avisos - TIC' %>
+<% content_for :page_title, 'Avisos' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<i class="fa fa-dashboard"></i>Dashboard'.html_safe, dashboard_path }</li><li>Avisos</li>".html_safe %>
+
+<div class='row'>
+	<div class='col-xs-12'>
+		<div class='pull-right'>
+			<%= link_to 'Administrar avisos', notices_path, class: 'btn btn-primary' %>
+		</div>
+	</div>
+</div>
+<br />
+<div class='row'>
+	<div class='col-xs-12'>
+		<% @notices.each do |notice| %>
+			<div id='<%= notice.id %>' class='box box-<%= notice.notice_type%>'>
+				<div class='box-header with-border'>
+					<h3 class='box-title'><%= notice.heading %></h3>
+					<div class='box-tools pull-right'>
+						Publicado <%= notice.created_at.strftime(' %b %d, %Y %H:%M') %>
+					</div>
+				</div>
+				<div class='box-body'>
+					<p><%= notice.text.html_safe %></p>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

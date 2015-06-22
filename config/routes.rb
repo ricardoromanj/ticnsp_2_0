@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   get 'main_webapp/index'
   get 'dashboard' => 'main_webapp#dashboard'
 
-  resources :notices
+  resources :notices do
+    collection do
+      get 'view'
+    end
+  end
   resources :emails
   resources :phones
   resources :events

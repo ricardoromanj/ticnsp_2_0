@@ -1,24 +1,33 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, 'Avisos - TIC' %>
+<% content_for :page_title, 'Detalle de aviso' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to 'Avisos', notices_path }</li><li>Detalles de aviso</li>".html_safe %>
 
-<p>
-  <strong>Heading:</strong>
-  <%= @notice.heading %>
-</p>
+<div class='box box-primary'>
+	<div class='box-header with-border'>
+		<h3 class='box-title'>Público: <%= @notice.audience %></h3>
+		<div class='box-tools pull-right'>
+			<%= link_to 'Editar', edit_notice_path(@notice), class: 'btn btn-default btn-sm' %>
+			<%= link_to 'Atrás', notices_path, class: 'btn btn-default btn-sm' %>
+		</div>
+	</div>
+	<div class='box-body'>
+		<div class='box box-<%= @notice.notice_type%>'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'><%= @notice.heading %></h3>
+				<div class='box-tools pull-right'>
+					Publicado <%= @notice.created_at.strftime(' %b %d, %Y %H:%M') %>
+				</div>
+			</div>
+			<div class='box-body'>
+				<p><%= @notice.text.html_safe %></p>
+			</div>
+		</div>
+	</div>
+	<div class='box-footer'>
+		<div class='box-tools pull-right'>
+			<%= link_to 'Editar', edit_notice_path(@notice), class: 'btn btn-default btn-sm' %>
+			<%= link_to 'Atrás', notices_path, class: 'btn btn-default btn-sm' %>
+		</div>
+	</div>
+</div>
 
-<p>
-  <strong>Text:</strong>
-  <%= @notice.text %>
-</p>
-
-<p>
-  <strong>Audience:</strong>
-  <%= @notice.audience %>
-</p>
-
-<p>
-  <strong>Notice type:</strong>
-  <%= @notice.notice_type %>
-</p>
-
-<%= link_to 'Edit', edit_notice_path(@notice) %> |
-<%= link_to 'Back', notices_path %>

@@ -1,5 +1,22 @@
-<h1>New Notice</h1>
+<% content_for :title, 'Avisos - TIC' %>
+<% content_for :page_title, 'Nuevo avisos' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to 'Avisos', notices_path }</li><li>Nuevo aviso</li>".html_safe %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', notices_path %>
+<div class='row'>
+	<div class='col-xs-12'>
+		<div class='box box-primary'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Editor de texto</h3>
+				<div class='box-tools pull-right'>
+					<%= link_to 'Atrás', notices_path, class: 'btn btn-default btn-sm' %>
+				</div>
+			</div>
+			<div class='box-body'>
+				<%= render 'form' %>
+			</div>
+			<div class='box-footer'>
+				<%= link_to 'Atrás', notices_path, class: 'btn btn-default btn-sm pull-right' %>
+			</div>
+		</div>
+	</div>
+</div>
