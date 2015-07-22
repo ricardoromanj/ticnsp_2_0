@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609040647) do
+ActiveRecord::Schema.define(version: 20150722060057) do
 
   create_table "children", force: :cascade do |t|
     t.string   "name"
@@ -72,6 +72,18 @@ ActiveRecord::Schema.define(version: 20150609040647) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "marks", id: false, force: :cascade do |t|
+    t.integer  "marker_id"
+    t.string   "marker_type"
+    t.integer  "markable_id"
+    t.string   "markable_type"
+    t.string   "mark",          limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "marks", ["markable_id", "markable_type", "mark"], name: "index_marks_on_markable_id_and_markable_type_and_mark"
+  add_index "marks", ["marker_id", "marker_type", "mark"], name: "index_marks_on_marker_id_and_marker_type_and_mark"
+
   create_table "notices", force: :cascade do |t|
     t.string   "heading"
     t.string   "text"
@@ -89,10 +101,27 @@ ActiveRecord::Schema.define(version: 20150609040647) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.datetime "end_date"
+    t.boolean  "completed"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "shepperdings", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "image_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.datetime "end_date"
+    t.boolean  "completed"
+    t.text     "description"
+    t.integer  "project_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

@@ -15,13 +15,13 @@
 			<%= render 'layouts/partials/main_sidebar' %>
 			<div class='content-wrapper'>
 				<section class='content-header'>
-					<%= render 'layouts/partials/alerts' %>
 					<h1><%= yield :page_title %><small><%= yield :page_description %></small></h1>
 					<ol class='breadcrumb'>
 						<%= yield :page_breadcrumb %>
 					</ol>
 				</section>
 				<section class='content'>
+					<%= render 'layouts/partials/alerts' %>
 					<%= yield %>
 				</section>
 			</div>

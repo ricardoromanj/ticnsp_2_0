@@ -1,5 +1,5 @@
 class LecturesController < WebApplicationController
-  before_action :set_lecture, only: [:show, :edit, :update, :destroy]
+  before_action :set_lecture, only: [:show, :edit, :update, :destroy, :assign_coordinator, :unassign_coordinator, :enroll_child, :unenroll_child]
 
   # GET /lectures
   # GET /lectures.json
@@ -10,6 +10,42 @@ class LecturesController < WebApplicationController
   # GET /lectures/1
   # GET /lectures/1.json
   def show
+  end
+
+  # POST /lectures/1/assign_coordinator
+  def assign_coordinator
+    if @lecture.set_mark :coordinator_lecture, User.find(params[:id])
+      redirect_to @lecture, notice: 'Coordinator successfully assigned'
+    else
+      redirect_to @lecture, alert: 'Could not assign coordinator'
+    end
+  end
+
+  # DELETE /lectures/1/unassign_coordinator
+  def unassign_coordinator
+    if @lecture.remove_mark :coordinator_lecture, User.find(params[:id])
+      redirect_to @lecture, notice: 'Coordinator successfully unassigned'
+    else
+      redirect_to @lecture, alert: 'Could not unassign coordinator'
+    end
+  end
+
+  # POST /lectures/1/enroll_child
+  def enroll_child
+    if @lecture.set_mark :enrolled_lecture, Child.find(params[:id])
+      redirect_to @lecture, notice: 'Child successfully enrolled'
+    else
+      redirect_to @lecture, alert: 'Could not enroll child'
+    end
+  end
+
+  # DELETE /lectures/1/unenroll_child
+  def unenroll_child
+    if @lecture.remove_mark :enrolled_lecture, Child.find(params[:id])
+      redirect_to @lecture, notice: 'Child successfully unenrolled'
+    else
+      redirect_to @lecture, alert: 'Could not unenroll child'
+    end
   end
 
   # GET /lectures/new

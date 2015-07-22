@@ -1,5 +1,5 @@
 class CommissionsController < WebApplicationController
-  before_action :set_commission, only: [:show, :edit, :update, :destroy]
+  before_action :set_commission, only: [:show, :edit, :update, :destroy, :assign_coordinator, :unassign_coordinator]
 
   # GET /commissions
   # GET /commissions.json
@@ -10,6 +10,24 @@ class CommissionsController < WebApplicationController
   # GET /commissions/1
   # GET /commissions/1.json
   def show
+  end
+
+  # POST /commissions/1/assign_coordinator
+  def assign_coordinator
+    if @commission.set_mark :coordinator_commission, User.find(params[:id])
+      redirect_to @commission, notice: 'Coordinator successfully assigned'
+    else
+      redirect_to @commission, alert: 'Could not assign coordinator'
+    end
+  end
+
+  # DELETE /commissions/1/unassign_coordinator
+  def unassign_coordinator
+    if @commission.remove_mark :coordinator_commission, User.find(params[:id])
+      redirect_to @commission, notice: 'Coordinator successfully unassigned'
+    else
+      redirect_to @commission, alert: 'Could not unassign coordinator'
+    end
   end
 
   # GET /commissions/new

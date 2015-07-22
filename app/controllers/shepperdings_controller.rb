@@ -1,5 +1,5 @@
 class ShepperdingsController < WebApplicationController
-  before_action :set_shepperding, only: [:show, :edit, :update, :destroy]
+  before_action :set_shepperding, only: [:show, :edit, :update, :destroy, :assign_coordinator, :unassign_coordinator, :enroll_child, :unenroll_child]
 
   # GET /shepperdings
   # GET /shepperdings.json
@@ -10,6 +10,42 @@ class ShepperdingsController < WebApplicationController
   # GET /shepperdings/1
   # GET /shepperdings/1.json
   def show
+  end
+
+  # POST /shepperdings/1/assign_coordinator
+  def assign_coordinator
+    if @shepperding.set_mark :coordinator_shepperding, User.find(params[:id])
+      redirect_to @shepperding, notice: 'Coordinator successfully assigned'
+    else
+      redirect_to @shepperding, alert: 'Could not assign coordinator'
+    end
+  end
+
+  # DELETE /shepperdings/1/unassign_coordinator
+  def unassign_coordinator
+    if @shepperding.remove_mark :coordinator_shepperding, User.find(params[:id])
+      redirect_to @shepperding, notice: 'Coordinator successfully unassigned'
+    else
+      redirect_to @shepperding, alert: 'Could not unassign coordinator'
+    end
+  end
+
+  # POST /shepperdings/1/enroll_child
+  def enroll_child
+    if @shepperding.set_mark :enrolled_shepperding, Child.find(params[:id])
+      redirect_to @shepperding, notice: 'Child successfully enrolled'
+    else
+      redirect_to @shepperding, alert: 'Could not enroll child'
+    end
+  end
+
+  # DELETE /shepperdings/1/unenroll_child
+  def unenroll_child
+    if @shepperding.remove_mark :enrolled_shepperding, Child.find(params[:id])
+      redirect_to @shepperding, notice: 'Child successfully unenrolled'
+    else
+      redirect_to @shepperding, alert: 'Could not unenroll child'
+    end
   end
 
   # GET /shepperdings/new
