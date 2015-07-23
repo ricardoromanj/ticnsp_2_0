@@ -10,49 +10,56 @@
       </ul>
     </div>
   <% end %>
-
+  <hr>
   <div class="form-group">
     <%= f.label 'Nombre(s)', class: 'col-sm-2 control-label' %>
     <div class='col-sm-7'>
       <%= f.text_field :name, class: 'form-control form-control-ticnsp' %>
     </div>
   </div>
+  <hr>
   <div class="form-group">
     <%= f.label 'Apellidos', class: 'col-sm-2 control-label' %>
     <div class='col-sm-7'>
       <%= f.text_field :lastname, class: 'form-control form-control-ticnsp' %>
     </div>
   </div>
+  <hr>
   <div class="form-group">
     <%= f.label 'Género', class: 'col-sm-2 control-label' %>
     <div class='col-sm-3'>
       <%= f.select :gender, options_for_select([['H','h'],['M','m']], @child.gender), {}, { class: 'form-control form-control-ticnsp' } %>
     </div>
   </div>
+  <hr>
   <div class="form-group">
     <%= f.label 'Fecha de nacimiento', class: 'col-sm-2 control-label' %>
     <div class='col-sm-3'>
       <%= f.text_field :birthdate, class: 'form-control form-control-ticnsp datepicker' %>
     </div>
   </div>
+  <hr>
   <div class="form-group">
     <%= f.label 'Imagen', class: 'col-sm-2 control-label' %>
     <div class='col-sm-7'>
       <%= f.text_field :image_id, class: 'form-control form-control-ticnsp' %>
     </div>
   </div>
+  <hr>
   <div class="form-group">
     <%= f.label 'Alergias', class: 'col-sm-2 control-label' %>
     <div class='col-sm-7'>
       <%= f.text_area :allergies, class: 'form-control form-control-ticnsp' %>
     </div>
   </div>
+  <hr>
   <div class="form-group">
     <%= f.label 'Notas', class: 'col-sm-2 control-label' %>
     <div class='col-sm-7'>
       <%= f.text_area :notes, class: 'form-control form-control-ticnsp' %>
     </div>
   </div>
+  <hr>
   <div class="form-group">
     <div class='col-sm-offset-2 col-sm-2'>
       <%= f.submit 'Inscribir niño', class: 'btn btn-ticnsp' %>
@@ -61,7 +68,6 @@
 <% end %>
 <script>
   $('.datepicker').datepicker({
-      format: 'mm/dd/yyyy',
-      startDate: '-3d'
+      format: 'mm/dd/yyyy'
   })
 </script>

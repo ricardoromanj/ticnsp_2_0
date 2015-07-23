@@ -4,7 +4,11 @@ class ChildrenController < WebApplicationController
   # GET /children
   # GET /children.json
   def index
-    @children = Child.all
+    # @children = Child.all
+    respond_to do |format|
+      format.html
+      format.json { render json: ChildDatatable.new(view_context) }
+    end
   end
 
   # GET /children/1

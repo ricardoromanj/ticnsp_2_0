@@ -4,7 +4,11 @@ class VisitorMessagesController < WebApplicationController
   # GET /visitor_messages
   # GET /visitor_messages.json
   def index
-    @visitor_messages = VisitorMessage.all
+    # @visitor_messages = VisitorMessage.all
+    respond_to do |format|
+      format.html
+      format.json { render json: VisitorMessageDatatable.new(view_context) }
+    end
   end
 
   # GET /visitor_messages/1

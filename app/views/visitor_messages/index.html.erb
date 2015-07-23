@@ -1,29 +1,20 @@
 <% content_for :title, 'Mensajes - TIC' %>
-<% content_for :page_title, 'Mensajes de visitas' %>
+<% content_for :page_title, 'Mensajes' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>Mensajes</li>".html_safe %>
 
-<div class='box box-primary'>
-  <div class='box-header with-border'>
-    <h3 class='box-title'>Inbox</h3>
-    <div class='box-tools pull-right'>
-
-    </div>
-  </div>
-  <div class='box-body no-padding'>
+<div class='box box-solid'>
+  <div class='box-body'>
     <div class='table-responsive'>
-      <table class='table table-hover table-striped'>
-        <tbody>
-          <% @visitor_messages.each do |visitor_message| %>
-            <tr>
-              <td><%= 'Read' %></td>
-              <td><%= visitor_message.name %></td>
-              <td><%= visitor_message.email %></td>
-              <td><%= visitor_message.message_text %></td>
-              <td><%= visitor_message.created_at %></td>
-              <td><%= link_to 'Show', visitor_message %></td>
-              <td><%= link_to 'Destroy', visitor_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-          <% end %>
-        </tbody>
+      <table class='table table-hover table-striped table-bordered responsive dataTable no-wrap' id='visitor-messages-table', data-source="<%= visitor_messages_path(format: :json) %>">
+        <br>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>When</th>
+          </tr>
+        </thead>
       </table>
     </div>
   </div>

@@ -1,6 +1,15 @@
-<h1>Editing Child</h1>
+<% content_for :title, 'Niños - TIC' %>
+<% content_for :page_title, 'Editar niño' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Niños', children_path }</li><li>Editar niño</li>".html_safe %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @child %> |
-<%= link_to 'Back', children_path %>
+<div class='box box-solid'>
+	<div class='box-header with-border'>
+		<h3 class='box-title'>Fill in the required fields</h3>
+	</div>
+	<div class='box-body'>
+		<%= link_to '<i class="fa fa-mail-reply"></i> Back'.html_safe, children_path, class: 'btn btn-app' %>
+		<%= link_to '<i class="fa fa-search-plus"></i> Show'.html_safe, @child, class: 'btn btn-app' %>
+	
+		<%= render 'form' %>
+	</div>
+</div>
