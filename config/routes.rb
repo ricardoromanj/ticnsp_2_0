@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       post 'assign_child'
       delete 'unassign_child'
       delete 'unshare_task'
+      post 'toggle_sidebar'
     end
   end
   resources :emails

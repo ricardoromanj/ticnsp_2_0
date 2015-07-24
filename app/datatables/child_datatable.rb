@@ -1,5 +1,5 @@
 class ChildDatatable < AjaxDatatablesRails::Base
-
+  def_delegators :@view, :link_to, :h, :mailto, :edit_resource_path
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
     @sortable_columns ||= %w(Child.name Child.lastname Child.gender Child.birthdate Child.allergies Child.notes)

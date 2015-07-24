@@ -43,11 +43,16 @@ class User < ActiveRecord::Base
   	end
   end
 
+  def set_setting(key, value)
+    self.settings[key] = value
+    self.save
+  end
+
   private
     def set_defaults
-      recents = []
-      favorites = []
-      settings = {
+      self.recents = Array.new(20)
+      self.favorites = Array.new(20)
+      self.settings = {
         sidebar_toggled: false,
         preferred_color: 'blue_dark'
       }

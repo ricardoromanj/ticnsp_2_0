@@ -4,7 +4,7 @@ $ ->
     autoWidth: false
     responsive: true
     serverSide: true
-    ajaxSource: $('#children-table').data('source')
+    ajax: $('#children-table').data('source')
     pagingType: 'full_numbers'
 
 $ ->
@@ -13,5 +13,5 @@ $ ->
     autoWidth: false
     responsive: true
     serverSide: true
-    ajaxSource: $('#visitor-messages-table').data('source')
+    ajax: $('#visitor-messages-table').data('source')
     pagingType: 'full_numbers'

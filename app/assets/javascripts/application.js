@@ -19,3 +19,13 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require_tree .
+
+function toggleUserSidebar (id) {
+	$.post('/users/' + id + '/toggle_sidebar', function (data) {
+		if (data) {
+			console.log('Sidebar setting was toggled');
+		} else {
+			console.log('Could not toggle sidebar');
+		}
+	});
+}

@@ -3,22 +3,17 @@
 <% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>Mensajes</li>".html_safe %>
 
 <div class='box box-solid'>
-  <div class='box-body'>
-    <div class='table-responsive'>
-      <table class='table table-hover table-striped table-bordered responsive dataTable no-wrap' id='visitor-messages-table', data-source="<%= visitor_messages_path(format: :json) %>">
-        <br>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Message</th>
-            <th>When</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-  </div>
-  <div class='box-footer'>
-
+  <div class='container-fluid table-responsive'>
+    <table class='table table-hover table-striped table-bordered responsive dataTable no-wrap' id='visitor-messages-table', data-source="<%= visitor_messages_path(format: :json) %>">
+      <br>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Message</th>
+          <th>When</th>
+        </tr>
+      </thead>
+    </table>
   </div>
 </div>
