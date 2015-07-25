@@ -1,6 +1,15 @@
-<h1>Editing Shepperding</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @shepperding %> |
-<%= link_to 'Back', shepperdings_path %>
+<% content_for :title, 'Acompañamiento - TIC' %>
+<% content_for :page_title, 'Editar acompañamientos' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Acompañamientos', shepperdings_path }</li><li>Editar acompañamiento</li>".html_safe %>
+<div class='box box-solid'>
+	<div class='box-header with-border'>
+		<h3 class='box-title'>Favor de llenar la información</h3>
+	</div>
+	<div class='box-body'>
+		<%= link_to '<i class="fa fa-mail-reply"></i> Back'.html_safe, shepperdings_path, class: 'btn btn-app' %>
+		<%= link_to '<i class="fa fa-search-plus"></i> Show'.html_safe, @shepperding, class: 'btn btn-app' %>
+	</div>
+	<div class='box-body'>
+		<%= render 'form' %>
+	</div>
+</div>

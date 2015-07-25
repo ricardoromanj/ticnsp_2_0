@@ -4,7 +4,10 @@ class ShepperdingsController < WebApplicationController
   # GET /shepperdings
   # GET /shepperdings.json
   def index
-    @shepperdings = Shepperding.all
+    respond_to do |format|
+      format.html
+      format.json { render json: ShepperdingDatatable.new(view_context) }
+    end
   end
 
   # GET /shepperdings/1
@@ -105,6 +108,6 @@ class ShepperdingsController < WebApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shepperding_params
-      params.require(:shepperding).permit(:name, :description, :image_id)
+      params.require(:shepperding).permit(:name, :description, :image)
     end
 end

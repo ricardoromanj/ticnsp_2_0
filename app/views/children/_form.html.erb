@@ -13,14 +13,14 @@
   <hr>
   <div class="form-group">
     <%= f.label 'Nombre(s)', class: 'col-sm-2 control-label' %>
-    <div class='col-sm-7'>
+    <div class='col-sm-9'>
       <%= f.text_field :name, class: 'form-control form-control-ticnsp' %>
     </div>
   </div>
   <hr>
   <div class="form-group">
     <%= f.label 'Apellidos', class: 'col-sm-2 control-label' %>
-    <div class='col-sm-7'>
+    <div class='col-sm-9'>
       <%= f.text_field :lastname, class: 'form-control form-control-ticnsp' %>
     </div>
   </div>
@@ -41,28 +41,31 @@
   <hr>
   <div class="form-group">
     <%= f.label 'Imagen', class: 'col-sm-2 control-label' %>
-    <div class='col-sm-7'>
-      <%= f.text_field :image_id, class: 'form-control form-control-ticnsp' %>
+    <div class='col-sm-9'>
+      <span class='file-input'>
+        Browse<%= f.attachment_field :image, class: '' %>
+      </span>
+      <span class="filename"></span>
     </div>
   </div>
   <hr>
   <div class="form-group">
     <%= f.label 'Alergias', class: 'col-sm-2 control-label' %>
-    <div class='col-sm-7'>
+    <div class='col-sm-9'>
       <%= f.text_area :allergies, class: 'form-control form-control-ticnsp' %>
     </div>
   </div>
   <hr>
   <div class="form-group">
     <%= f.label 'Notas', class: 'col-sm-2 control-label' %>
-    <div class='col-sm-7'>
+    <div class='col-sm-9'>
       <%= f.text_area :notes, class: 'form-control form-control-ticnsp' %>
     </div>
   </div>
   <hr>
   <div class="form-group">
     <div class='col-sm-offset-2 col-sm-2'>
-      <%= f.submit 'Inscribir niño', class: 'btn btn-ticnsp' %>
+      <%= f.submit 'Guardar', class: 'btn btn-ticnsp' %>
     </div>
   </div>
 <% end %>

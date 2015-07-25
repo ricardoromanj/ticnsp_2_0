@@ -29,3 +29,10 @@ function toggleUserSidebar (id) {
 		}
 	});
 }
+
+$(document).ready( function() {
+  $('.file-input input[type="file"]').change( function() {
+    var filename = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+    $('.filename').html( filename );
+  });
+});

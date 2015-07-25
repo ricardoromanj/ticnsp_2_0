@@ -9,3 +9,35 @@
 .box hr {
 	border-style: dashed;
 }
+
+.file-input {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #1f7c57;
+    border-radius: 3px;
+    background: linear-gradient(#43c692, #39b885);
+    color: white;
+    padding: 5px 10px;
+    display: inline-block;
+    font-weight: ligher;
+}
+.file-input input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    display: block;
+    cursor: pointer;
+}
+
+.filename {    
+    padding: 5px 10px;
+    display: inline-block;
+    vertical-align: top;
+    font-style: italic;
+}

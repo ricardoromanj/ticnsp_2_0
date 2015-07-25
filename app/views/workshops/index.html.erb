@@ -1,31 +1,27 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, 'Talleres - TIC' %>
+<% content_for :page_title, 'Talleres' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>Talleres</li>".html_safe %>
 
-<h1>Listing Workshops</h1>
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Acciones</h3>
+  </div>
+  <div class='box-body'>
+    <%= link_to '<i class="fa fa-plus"></i> Crear'.html_safe, new_workshop_path, class: 'btn btn-app' %>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Image</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @workshops.each do |workshop| %>
-      <tr>
-        <td><%= workshop.name %></td>
-        <td><%= workshop.description %></td>
-        <td><%= workshop.image_id %></td>
-        <td><%= link_to 'Show', workshop %></td>
-        <td><%= link_to 'Edit', edit_workshop_path(workshop) %></td>
-        <td><%= link_to 'Destroy', workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Workshop', new_workshop_path %>
+<div class='box box-solid'>
+  <div class='container-fluid table-responsive'>
+    <table class='table table-bordered table-hover dataTable responsive no-wrap' id='workshops-table', data-source="<%= workshops_path(format: :json) %>">
+      <br>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>

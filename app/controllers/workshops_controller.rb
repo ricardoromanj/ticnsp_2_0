@@ -4,7 +4,10 @@ class WorkshopsController < WebApplicationController
   # GET /workshops
   # GET /workshops.json
   def index
-    @workshops = Workshop.all
+    respond_to do |format|
+      format.html
+      format.json { render json: WorkshopDatatable.new(view_context) }
+    end
   end
 
   # GET /workshops/1
@@ -105,6 +108,6 @@ class WorkshopsController < WebApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :image_id)
+      params.require(:workshop).permit(:name, :description, :image)
     end
 end

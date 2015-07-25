@@ -1,7 +1,7 @@
-<%= form_for(@workshop) do |f| %>
+<%= form_for(@workshop, html: { class: 'form-horizontal' }) do |f| %>
   <% if @workshop.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@workshop.errors.count, "error") %> prohibited this workshop from being saved:</h2>
+    <div id="error_explanation" class='alert alert-danger'>
+      <strong><%= pluralize(@workshop.errors.count, "error") %> prohibited this workshop from being saved:</strong>
 
       <ul>
       <% @workshop.errors.full_messages.each do |message| %>
@@ -10,20 +10,35 @@
       </ul>
     </div>
   <% end %>
+  <hr>
+  <div class="form-group">
+    <%= f.label 'Nombre', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-9'>
+      <%= f.text_field :name, class: 'form-control form-control-ticnsp' %>
+    </div>
+  </div>
+  <hr>
+  <div class="form-group">
+    <%= f.label 'Descripción', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-9'>
+      <%= f.text_field :description, class: 'form-control form-control-ticnsp' %>
+    </div>
+  </div>
+  <hr>
+  <div class="form-group">
+    <%= f.label 'Imagen', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-9'>
+      <span class='file-input'>
+        Browse<%= f.attachment_field :image, class: '' %>
+      </span>
+      <span class="filename"></span>
+    </div>
+  </div>
+  <hr>
+  <div class="form-group">
+    <div class='col-sm-offset-2 col-sm-2'>
+      <%= f.submit 'Guardar', class: 'btn btn-ticnsp' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :image_id %><br>
-    <%= f.text_field :image_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

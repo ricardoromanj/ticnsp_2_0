@@ -4,7 +4,10 @@ class CommissionsController < WebApplicationController
   # GET /commissions
   # GET /commissions.json
   def index
-    @commissions = Commission.all
+    respond_to do |format|
+      format.html
+      format.json { render json: CommissionDatatable.new(view_context) }
+    end
   end
 
   # GET /commissions/1
@@ -87,6 +90,6 @@ class CommissionsController < WebApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def commission_params
-      params.require(:commission).permit(:name, :description, :image_id)
+      params.require(:commission).permit(:name, :description, :image)
     end
 end

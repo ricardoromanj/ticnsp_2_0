@@ -4,7 +4,10 @@ class LecturesController < WebApplicationController
   # GET /lectures
   # GET /lectures.json
   def index
-    @lectures = Lecture.all
+    respond_to do |format|
+      format.html
+      format.json { render json: LectureDatatable.new(view_context) }
+    end
   end
 
   # GET /lectures/1
@@ -105,6 +108,6 @@ class LecturesController < WebApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lecture_params
-      params.require(:lecture).permit(:name, :description, :image_id)
+      params.require(:lecture).permit(:name, :description, :image)
     end
 end

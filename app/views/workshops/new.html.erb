@@ -1,5 +1,14 @@
-<h1>New Workshop</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', workshops_path %>
+<% content_for :title, 'Taller - TIC' %>
+<% content_for :page_title, 'Crear taller' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Taller', workshops_path }</li><li>Crear taller</li>".html_safe %>
+<div class='box box-solid'>
+	<div class='box-header with-border'>
+		<h3 class='box-title'>Favor de llenar la información</h3>
+	</div>
+	<div class='box-body'>
+		<%= link_to '<i class="fa fa-mail-reply"></i> Back'.html_safe, workshops_path, class: 'btn btn-app' %>
+	</div>
+	<div class='box-body'>
+		<%= render 'form' %>
+	</div>
+</div>
