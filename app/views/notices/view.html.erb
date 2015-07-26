@@ -4,26 +4,31 @@
 
 <div class='row'>
 	<div class='col-xs-12'>
-		<div class='pull-right'>
-			<%= link_to 'Administrar avisos', notices_path, class: 'btn btn-primary' %>
+		<div class='box box-solid'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Acciones</h3>
+			</div>
+			<div class='box-body'>
+				<%= link_to '<i class="fa fa-pencil-square-o"></i> Administrar avisos'.html_safe, notices_path, class: 'btn btn-app' %>
+			</div>
 		</div>
 	</div>
 </div>
 <br />
 <div class='row'>
 	<div class='col-xs-12'>
-		<% @notices.each do |notice| %>
-			<div id='<%= notice.id %>' class='box box-<%= notice.notice_type%>'>
-				<div class='box-header with-border'>
-					<h3 class='box-title'><%= notice.heading %></h3>
-					<div class='box-tools pull-right'>
-						Publicado <%= notice.created_at.strftime(' %b %d, %Y %H:%M') %>
-					</div>
-				</div>
-				<div class='box-body'>
+		<div class='box box-solid'>
+			<div class='box-body'>
+				<hr>
+				<%= will_paginate @notices, renderer: BootstrapPagination::Rails %>
+				<% @notices.each do |notice| %>
+					<h4 class='text-<%= notice.notice_type%>'><%= notice.heading %></h4>
+					<span class='text-muted'>Publicado <%= notice.created_at.strftime(' %b %d, %Y %H:%M') %></span><br />
 					<p><%= notice.text.html_safe %></p>
-				</div>
+					<hr>
+				<% end %>
+				<%= will_paginate @notices, renderer: BootstrapPagination::Rails %>
 			</div>
-		<% end %>
+		</div>
 	</div>
 </div>
