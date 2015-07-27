@@ -1,3 +1,3 @@
 class Workshop < ActiveRecord::Base
-	attachment :image
+	attachment :image, type: :image
 end

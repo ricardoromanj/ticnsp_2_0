@@ -1,19 +1,70 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, 'Catequesis - TIC' %>
+<% content_for :page_title, 'Detalles de catequesis' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Catequesis', lectures_path }</li>".html_safe %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @lecture.name %>
-</p>
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Acciones</h3>
+  </div>
+  <div class='box-body'>
+    <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, lectures_path, class: 'btn btn-app' %>
+    <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_lecture_path(@lecture), class: 'btn btn-app' %>
+  </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @lecture.description %>
-</p>
+<div class='row'>
+  <div class='col-md-4'>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Imagen</h3>
+      </div>
+      <div class='box-body object-image no-padding'>
+        <%= image_tag attachment_url(@lecture, :image), class: 'img-responsive' %>
+      </div>
+    </div>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Información</h3>
+      </div>
+      <div class='box-body'>
+        <p class='lead'><%= @lecture.name %></p>
+        <p>
+          <strong>Description:</strong>
+          <div class='well'><%= @lecture.description %></div>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-8'>
+    <div class='row'>
+      <div class='col-sm-6'>
+        <div class='box box-solid'>
+          <div class='box-header with-border'>
+            <h3 class='box-title'>Coordinadores</h3>
+          </div>
+          <div class='box-body'>
 
-<p>
-  <strong>Image:</strong>
-  <%= @lecture.image_id %>
-</p>
+          </div>
+        </div>
+    </div>
+    <div class='col-sm-6'>
+      <div class='box box-solid'>
+          <div class='box-header with-border'>
+            <h3 class='box-title'>Niños inscritos</h3>
+          </div>
+          <div class='box-body'>
 
-<%= link_to 'Edit', edit_lecture_path(@lecture) %> |
-<%= link_to 'Back', lectures_path %>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class='box box-solid'>
+    <div class='box-header with-border'>
+      <h3 class='box-title'>Historial</h3>
+    </div>
+    <div class='box-body'>
+
+    </div>
+  </div>
+  </div>
+</div>

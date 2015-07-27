@@ -2,12 +2,12 @@ class ChildDatatable < AjaxDatatablesRails::Base
   def_delegators :@view, :link_to, :h, :mailto, :edit_resource_path
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= %w(Child.name Child.lastname Child.gender Child.birthdate Child.allergies Child.notes)
+    @sortable_columns ||= %w(Child.name Child.lastname Child.gender Child.birthdate)
   end
 
   def searchable_columns
     # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= %w(Child.name Child.lastname Child.gender Child.birthdate Child.allergies Child.notes)
+    @searchable_columns ||= %w(Child.name Child.lastname Child.gender Child.birthdate)
   end
 
   private
@@ -25,9 +25,7 @@ class ChildDatatable < AjaxDatatablesRails::Base
         record.name,
         record.lastname,
         record.gender,
-        record.birthdate,
-        record.allergies,
-        record.notes
+        record.birthdate
       ]
     end
   end

@@ -1,0 +1,9 @@
+<%= form_tag '#', method: :post do %>
+  <%= hidden_field_tag :workshop_id %>
+  <div class='input-group'>
+    <%= text_field_tag :workshop, nil, placeholder: 'Taller', class: 'form-control ticnsp-form-control' %>
+    <span class='input-group-btn'>
+      <button class='btn bg-purple' type='button'><i class='fa fa-pencil-square-o'></i> Asignar</button>
+    </span>
+  </div>
+<% end %>

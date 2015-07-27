@@ -1,39 +1,65 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, 'Niños - TIC' %>
+<% content_for :page_title, 'Detalle de niño' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Niños', children_path }</li>".html_safe %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @child.name %>
-</p>
-
-<p>
-  <strong>Lastname:</strong>
-  <%= @child.lastname %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @child.gender %>
-</p>
-
-<p>
-  <strong>Birthdate:</strong>
-  <%= @child.birthdate %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @child.image_id %>
-</p>
-
-<p>
-  <strong>Allergies:</strong>
-  <%= @child.allergies %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @child.notes %>
-</p>
-
-<%= link_to 'Edit', edit_child_path(@child) %> |
-<%= link_to 'Back', children_path %>
+<div class='row'>
+  <div class='col-md-4'>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Imagen</h3>
+      </div>
+      <div class='box-body object-image no-padding'>
+        <%= image_tag attachment_url(@child, :image), class: 'img-responsive' %>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-8'>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Acciones</h3>
+      </div>
+      <div class='box-body'>
+        <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, children_path, class: 'btn btn-app' %>
+        <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_child_path(@child), class: 'btn btn-app' %>
+      </div>
+    </div>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Información</h3>
+      </div>
+      <div class='box-body'>
+        <p class='lead'><%= @child.full_name %></p>
+        <div class='row'>
+          <div class='col-lg-4'>
+            <p>
+              <strong>Gender:</strong>
+              <%= @child.gender_text %>
+            </p>
+            <p>
+              <strong>Birthdate:</strong>
+              <%= @child.birthdate %>
+            </p>
+          </div>
+          <div class='col-lg-8'>
+            <div class='row'>
+              <div class='col-xs-6'>
+                <%= render 'children/assign_lecture_form' %>
+              </div>
+              <div class='col-xs-6'>
+                <%= render 'children/assign_workshop_form' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>
+          <strong>Allergies:</strong>
+          <div class='well'><%= @child.allergies %></div>
+        </p>
+        <p>
+          <strong>Notes:</strong>
+          <div class='well'><%= @child.notes %></div>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
