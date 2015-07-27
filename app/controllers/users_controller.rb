@@ -9,7 +9,7 @@ class UsersController < WebApplicationController
 
   # POST /users/1/toggle_sidebar
   def toggle_sidebar
-    render json: @user.set_setting(:sidebar_toggled?, !@user.settings[:sidebar_toggled?]), status: 200
+    render json: @user.set_setting(:sidebar_toggled, !@user.settings[:sidebar_toggled]), status: 200
   end
 
   # GET /users/1

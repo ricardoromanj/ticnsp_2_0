@@ -18,7 +18,7 @@
 		<link rel="apple-touch-icon" sizes="144x144" href="<%= asset_path 'apple-touch-icon-144x144.png' %>" />
 		<link rel="apple-touch-icon" sizes="152x152" href="<%= asset_path 'apple-touch-icon-152x152.png' %>" />
 	</head>
-	<body class="skin-blue sidebar-mini <%= current_user.settings[:sidebar_toggled?] ? "sidebar-collapse" : "" %>">
+	<body class="skin-blue sidebar-mini <%= current_user.settings[:sidebar_toggled] ? "sidebar-collapse" : "" %>">
 		<div class='wrapper'>
 			<%= render 'layouts/partials/header' %>
 			<%= render 'layouts/partials/main_sidebar' %>
