@@ -10,6 +10,11 @@ class CommissionsController < WebApplicationController
     end
   end
 
+  # GET /commissions/typeaheaddata.json
+  def typeaheaddata
+    render json: Commission.select(:id, :name), status: 200
+  end
+
   # GET /commissions/1
   # GET /commissions/1.json
   def show

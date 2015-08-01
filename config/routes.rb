@@ -32,6 +32,16 @@ Rails.application.routes.draw do
       delete 'unassign_child'
       delete 'unshare_task'
       post 'toggle_sidebar'
+      post 'add_email'
+      post 'add_phone'
+      get 'edit_tutor'
+      get 'edit_coordinator'
+    end
+    collection do
+      get 'tutors'
+      get 'coordinators'
+      get 'new_coordinator'
+      get 'new_tutor'
     end
   end
   resources :emails

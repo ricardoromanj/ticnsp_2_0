@@ -10,6 +10,11 @@ class WorkshopsController < WebApplicationController
     end
   end
 
+  # GET /workshops/typeaheaddata.json
+  def typeaheaddata
+    render json: Workshop.select(:id, :name), status: 200
+  end
+
   # GET /workshops/1
   # GET /workshops/1.json
   def show

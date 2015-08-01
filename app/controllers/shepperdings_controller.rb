@@ -10,6 +10,11 @@ class ShepperdingsController < WebApplicationController
     end
   end
 
+  # GET /shepperdings/typeaheaddata.json
+  def typeaheaddata
+    render json: Shepperding.select(:id, :name), status: 200
+  end
+  
   # GET /shepperdings/1
   # GET /shepperdings/1.json
   def show

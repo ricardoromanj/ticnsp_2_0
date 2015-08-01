@@ -35,11 +35,11 @@ class User < ActiveRecord::Base
   	"#{name} #{lastname}"
   end
 
-  def current_image
+  def current_image(w, h)
   	if use_gravatar?
   		gravatar_url(default: 'identicon')
   	else
-  		# ... Refile stuff
+  		Refile.attachment_url(self, :image, :fill, w, h, format: 'jpg');
   	end
   end
 

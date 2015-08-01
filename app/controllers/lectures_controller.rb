@@ -10,6 +10,11 @@ class LecturesController < WebApplicationController
     end
   end
 
+  # GET /lectures/typeaheaddata.json
+  def typeaheaddata
+    render json: Lecture.select(:id, :name), status: 200
+  end
+
   # GET /lectures/1
   # GET /lectures/1.json
   def show

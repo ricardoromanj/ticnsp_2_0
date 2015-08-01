@@ -8,6 +8,24 @@ $ ->
     pagingType: 'full_numbers'
 
 $ ->
+  $('#coordinators-table').dataTable
+    processing: true
+    autoWidth: false
+    responsive: true
+    serverSide: true
+    ajax: $('#coordinators-table').data('source')
+    pagingType: 'full_numbers'
+
+$ ->
+  $('#tutors-table').dataTable
+    processing: true
+    autoWidth: false
+    responsive: true
+    serverSide: true
+    ajax: $('#tutors-table').data('source')
+    pagingType: 'full_numbers'
+
+$ ->
   $('#lectures-table').dataTable
     processing: true
     autoWidth: false

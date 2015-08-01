@@ -6,7 +6,7 @@
     %>
     <div class="user-panel">
       <div class="pull-left image">
-        <%= image_tag current_user.current_image, class: 'img-circle', alt: 'User Image' %>
+        <%= image_tag current_user.current_image(80,80), class: 'img-circle', alt: 'User Image' %>
       </div>
       <div class="pull-left info">
         <p>Ricardo Roman</p>
@@ -49,9 +49,9 @@
         <ul class="treeview-menu">
           <li class='<%= params['controller'] =~ /children/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-child'></i> <span>Niños inscritos</span>".html_safe, children_path %></li>
 
-          <li class='<%= params['controller'] =~ /coordinators/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Coordinadores</span>".html_safe, '#' %></li>
+          <li class='<%= params['controller'] =~ /coordinators/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Coordinadores</span>".html_safe, coordinators_users_path %></li>
 
-          <li class='<%= params['controller'] =~ /tutors/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Tutores</span>".html_safe, '#' %></li>
+          <li class='<%= params['controller'] =~ /tutors/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Tutores</span>".html_safe, tutors_users_path %></li>
 
           <li class='<%= params['controller'] =~ /lectures/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-institution'></i> <span>Catequesis</span>".html_safe, lectures_path %></li>
 

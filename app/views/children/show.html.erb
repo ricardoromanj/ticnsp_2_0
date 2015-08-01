@@ -19,28 +19,13 @@
         <h3 class='box-title'>Acciones</h3>
       </div>
       <div class='box-body'>
-        <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, children_path, class: 'btn btn-app' %>
-        <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_child_path(@child), class: 'btn btn-app' %>
-      </div>
-    </div>
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Información</h3>
-      </div>
-      <div class='box-body'>
-        <p class='lead'><%= @child.full_name %></p>
         <div class='row'>
           <div class='col-lg-4'>
-            <p>
-              <strong>Gender:</strong>
-              <%= @child.gender_text %>
-            </p>
-            <p>
-              <strong>Birthdate:</strong>
-              <%= @child.birthdate %>
-            </p>
+            <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, children_path, class: 'btn btn-app' %>
+            <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_child_path(@child), class: 'btn btn-app' %>
           </div>
           <div class='col-lg-8'>
+            <br>
             <div class='row'>
               <div class='col-xs-6'>
                 <%= render 'children/assign_lecture_form' %>
@@ -51,14 +36,44 @@
             </div>
           </div>
         </div>
-        <p>
-          <strong>Allergies:</strong>
-          <div class='well'><%= @child.allergies %></div>
-        </p>
-        <p>
-          <strong>Notes:</strong>
-          <div class='well'><%= @child.notes %></div>
-        </p>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-sm-6'>
+        <div class='box box-solid'>
+          <div class='box-header with-border'>
+            <h3 class='box-title'>Información</h3>
+          </div>
+          <div class='box-body'>
+            <p class='lead'><%= @child.full_name %></p>
+            <p>
+              <strong>Gender:</strong>
+              <%= @child.gender_text %>
+            </p>
+            <p>
+              <strong>Birthdate:</strong>
+              <%= @child.birthdate %>
+            </p>
+            <p>
+              <strong>Allergies:</strong>
+              <div class='well'><%= @child.allergies %></div>
+            </p>
+            <p>
+              <strong>Notes:</strong>
+              <div class='well'><%= @child.notes %></div>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class='col-sm-6'>
+        <div class='box box-solid'>
+          <div class='box-header with-border'>
+            <h3 class='box-title'>Tutores responsables</h3>
+          </div>
+          <div class='box-body'>
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
