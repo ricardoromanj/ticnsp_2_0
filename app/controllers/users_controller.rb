@@ -25,7 +25,11 @@ class UsersController < WebApplicationController
 
   # GET /users/typeaheaddata.json
   def typeaheaddata
-    render json: User.select(:id, :name), status: 200
+    users = User.select(:id, :name)
+    if params[:usertype]
+      users = users.where(usertype: params[:usertype])
+    end
+    render json: users, status: 200
   end
 
   # GET /users/1
@@ -68,11 +72,15 @@ class UsersController < WebApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(admin_params)
+    @user = User.new(user_params)
 
+    temp_password = SecureRandom.hex[0,15]
+    @user.password = temp_password
+    @user.password_confirmation = temp_password
+    
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: "#{@user.usertype.capitalize} was successfully created with password #{temp_password}" }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -85,8 +93,8 @@ class UsersController < WebApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(admin_params)
-        format.html { redirect_to @user, notice: 'Admin was successfully updated.' }
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: "#{@user.usertype.capitalize} was successfully updated" }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -98,9 +106,17 @@ class UsersController < WebApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    usertype = @user.usertype
+    redirect_path = ''
+    if usertype =~ /tutor/
+      redirect_path = '/users/tutors'
+    elsif usertype =~ /coordinator/
+      redirect_path = '/users/coordinators'
+    end
+
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'Admin was successfully destroyed.' }
+      format.html { redirect_to redirect_path, notice:  "#{usertype.capitalize} was successfully destroyed" }
       format.json { head :no_content }
     end
   end
@@ -113,6 +129,6 @@ class UsersController < WebApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :usertype)
+      params.require(:user).permit(:email, :usertype, :name, :lastname, :gender, :role, :birthdate, :username, :image_id, :notes)
     end
 end

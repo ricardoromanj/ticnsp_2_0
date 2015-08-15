@@ -11,5 +11,7 @@ class CreateChildren < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :children, :name
+    add_index :children, :lastname
   end
 end

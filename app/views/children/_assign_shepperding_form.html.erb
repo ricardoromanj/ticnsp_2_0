@@ -1,0 +1,22 @@
+<%= form_tag enroll_in_shepperding_child_path, method: :post do %>
+  <%= hidden_field_tag :shepperding_id %>
+  <div class='input-group'>
+    <%= text_field_tag :shepperding, nil, placeholder: 'Taller', class: 'form-control ticnsp-form-control', id: 'shepperdings-typeahead', autocomplete: 'off' %>
+    <span class='input-group-btn'>
+      <button class='btn bg-yellow btn-flat' type='submit'><i class='fa fa-pencil-square-o'></i> Asignar</button>
+    </span>
+    <script>
+    	$(function () {
+    		$.getJSON('/shepperdings/typeaheaddata', function (data) {
+    			$('#shepperdings-typeahead').typeahead({
+	    			source: data,
+	    			scrollBar: true,
+	    			onSelect: function (item) {
+	    				$('#shepperding_id').val(item.value);
+	    			}
+	    		});
+    		});
+    	});
+    </script>
+  </div>
+<% end %>

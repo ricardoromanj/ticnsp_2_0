@@ -1,0 +1,67 @@
+<% content_for :title, 'Tutores - TIC' %>
+<% content_for :page_title, 'Detalle de tutor' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Tutores', tutors_users_path }</li><li>Tutor</li>".html_safe %>
+
+<div class='row'>
+  <div class='col-md-4'>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Imagen</h3>
+      </div>
+      <div class='box-body object-image no-padding'>
+        <%= image_tag @user.current_image, class: 'img-responsive' %>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-8'>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Acciones</h3>
+      </div>
+      <div class='box-body'>
+        <div class='row'>
+          <div class='col-lg-4'>
+            <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, tutors_users_path, class: 'btn btn-app' %>
+            <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_tutor_user_path(@user), class: 'btn btn-app' %>
+          </div>
+          <div class='col-lg-8'>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-sm-6'>
+        <div class='box box-solid'>
+          <div class='box-header with-border'>
+            <h3 class='box-title'>Información</h3>
+          </div>
+          <div class='box-body'>
+            <p class='lead'><%= @user.full_name %></p>
+            <p>
+              <strong>Geenero:</strong>
+              <%= @user.gender_text %>
+            </p>
+            <p>
+              <strong>Rol:</strong>
+              <%= @user.role %>
+            </p>
+            <p>
+              <strong>Notas:</strong>
+              <div class='well'><%= @user.notes %></div>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class='col-sm-6'>
+        <div class='box box-solid'>
+          <div class='box-header with-border'>
+            <h3 class='box-title'>Niños asignados</h3>
+          </div>
+          <div class='box-body'>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

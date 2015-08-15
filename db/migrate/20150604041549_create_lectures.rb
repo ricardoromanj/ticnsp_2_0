@@ -4,6 +4,7 @@ class CreateLectures < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :image_id
+      t.integer :semester_id
 
       t.timestamps null: false
     end

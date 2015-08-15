@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= hidden_field_tag 'user[usertype]', 'coordinator'  %>
+  <%= hidden_field_tag 'user[usertype]', 'tutor'  %>
   <hr>
   <div class="form-group">
     <%= f.label 'Nombre', class: 'control-label col-sm-2' %>
@@ -49,9 +49,17 @@
   </div>
   <hr>
 
+  <div class='form-group'>
+    <%= f.label :notes, class: 'control-label col-sm-2' %>
+    <div class='col-sm-9'>
+      <%= f.text_area :notes, class: 'form-control form-control-ticnsp', style: 'height: 200px; resize: none;' %>
+    </div>
+  </div>
+  <hr>
+
   <div class="form-group">
     <div class='col-sm-offset-2 col-sm-3'>
-      <%= f.submit 'Guardar coordinador', class: 'btn btn-ticnsp btn-flat' %>
+      <%= f.submit 'Guardar tutor', class: 'btn btn-ticnsp btn-flat' %>
     </div>
   </div>
 <% end %>

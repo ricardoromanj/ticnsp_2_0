@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :semesters
   # Application root
   root 'main#index'
   
@@ -36,12 +37,15 @@ Rails.application.routes.draw do
       post 'add_phone'
       get 'edit_tutor'
       get 'edit_coordinator'
+      get 'show_tutor'
+      get 'show_coordinator'
     end
     collection do
       get 'tutors'
       get 'coordinators'
       get 'new_coordinator'
       get 'new_tutor'
+      get 'typeaheaddata'
     end
   end
   resources :emails
@@ -54,6 +58,9 @@ Rails.application.routes.draw do
       post 'enroll_child'
       delete 'unenroll_child'
     end
+    collection do
+      get 'typeaheaddata'
+    end
   end
   resources :lectures do
     member do
@@ -61,6 +68,9 @@ Rails.application.routes.draw do
       delete 'unassign_coordinator'
       post 'enroll_child'
       delete 'unenroll_child'
+    end
+    collection do
+      get 'typeaheaddata'
     end
   end
   resources :children do
@@ -74,6 +84,9 @@ Rails.application.routes.draw do
       delete 'unenroll_from_lecture'
       delete 'unenroll_from_shepperding'
     end
+    collection do
+      get 'typeaheaddata'
+    end
   end
   resources :visitor_messages
   resources :shepperdings do
@@ -83,11 +96,17 @@ Rails.application.routes.draw do
       post 'enroll_child'
       delete 'unenroll_child'
     end
+    collection do
+      get 'typeaheaddata'
+    end
   end
   resources :commissions do
     member do
       post 'assign_coordinator'
       delete 'unassign_coordinator'
+    end
+    collection do
+      get 'typeaheaddata'
     end
   end
   resources :tasks do

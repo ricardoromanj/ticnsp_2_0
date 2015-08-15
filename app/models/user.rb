@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   # Set default values for settings
   before_create :set_defaults
 
+  # Attachments
+  attachment :image, type: :image
+
   # Relations
   has_many :phones
   has_many :emails
@@ -35,11 +38,19 @@ class User < ActiveRecord::Base
   	"#{name} #{lastname}"
   end
 
-  def current_image(w, h)
+  def gender_text
+    gender == 'h' ? 'Hombre' : 'Mujer'
+  end
+
+  def current_image(w = nil, h = nil)
   	if use_gravatar?
   		gravatar_url(default: 'identicon')
   	else
-  		Refile.attachment_url(self, :image, :fill, w, h, format: 'jpg');
+      if w && h
+  		  Refile.attachment_url(self, :image, :fill, w, h, format: 'jpg');
+      else
+        Refile.attachment(self, :image)
+      end
   	end
   end
 

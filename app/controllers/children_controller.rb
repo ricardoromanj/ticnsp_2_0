@@ -1,5 +1,5 @@
 class ChildrenController < WebApplicationController
-  before_action :set_child, only: [:show, :edit, :update, :destroy]
+  before_action :set_child, only: [:show, :edit, :update, :destroy, :assign_to_tutor, :unassign_from_tutor, :enroll_in_workshop, :enroll_in_lecture, :enroll_in_shepperding, :unenroll_from_workshop, :unenroll_from_lecture, :unenroll_from_shepperding]
 
   # GET /children
   # GET /children.json
@@ -14,6 +14,62 @@ class ChildrenController < WebApplicationController
   # GET /children/1
   # GET /children/1.json
   def show
+  end
+
+  # POST /children/1/assign_to_tutor
+  def assign_to_tutor
+    tutor = User.find(params[:tutor_id])
+    tutor.mark_as_responsability @child
+    redirect_to @child, notice: 'Niño ha sido asignado a tutor.'
+  end
+
+  # DELETE /children/1/unassign_from_tutor
+  def unassign_from_tutor
+    tutor = User.find(params[:tutor_id])
+    tutor.remove_mark :responsability, @child
+    redirect_to @child, alert: 'Niño ha sido desasignado.'
+  end
+
+  # POST /children/1/enroll_in_workshop
+  def enroll_in_workshop
+    workshop = Workshop.find(params[:workshop_id])
+    workshop.mark_as_enrolled_workshop @child
+    redirect_to @child, notice: 'Niño inscrito exitosamente.'
+  end
+  
+  # POST /children/1/enroll_in_lecture
+  def enroll_in_lecture
+    lecture = Lecture.find(params[:lecture_id])
+    lecture.mark_as_enrolled_lecture @child
+    redirect_to @child, notice: 'Niño inscrito exitosamente.'
+  end
+  
+  # POST /children/1/enroll_in_shepperding
+  def enroll_in_shepperding
+    shepperding = Shepperding.find(params[:shepperding_id])
+    shepperding.mark_as_enrolled_shepperding @child
+    redirect_to @child, notice: 'Niño inscrito exitosamente.'
+  end
+  
+  # DELETE /children/1/enroll_from_workshop
+  def unenroll_from_workshop
+    workshop = Workshop.find(params[:workshop_id])
+    workshop.remove_mark :enrolled_workshop, @child
+    redirect_to @child, alert: 'El niño ya no está inscrito en el taller.'
+  end
+  
+  # DELETE /children/1/enroll_from_lecture
+  def unenroll_from_lecture
+    lecture = Lecture.find(params[:lecture_id])
+    lecture.remove_mark :enrolled_lecture, @child
+    redirect_to @child, alert: 'El niño ya no está inscrito en la catequesis.'
+  end
+  
+  # DELETE /children/1/enroll_from_shepperding
+  def unenroll_from_shepperding
+    shepperding = Shepperding.find(params[:shepperding_id])
+    shepperding.remove_mark :enrolled_shepperding, @child
+    redirect_to @child, alert: 'El niño ya no está inscrito en el acompañamiento.'
   end
 
   # GET /children/new

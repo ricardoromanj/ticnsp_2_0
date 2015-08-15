@@ -1,9 +1,22 @@
-<%= form_tag '#', method: :post do %>
-  <%= hidden_field_tag :workshop_id %>
+<%= form_tag enroll_in_lecture_child_path, method: :post do %>
+  <%= hidden_field_tag :lecture_id %>
   <div class='input-group'>
-    <%= text_field_tag :workshop, nil, placeholder: 'Taller', class: 'form-control ticnsp-form-control' %>
+    <%= text_field_tag :lecture, nil, placeholder: 'Catequesis', class: 'form-control ticnsp-form-control', id: 'lectures-typeahead', autocomplete: 'off' %>
     <span class='input-group-btn'>
-      <button class='btn bg-purple' type='button'><i class='fa fa-pencil-square-o'></i> Asignar</button>
+      <button class='btn bg-green btn-flat' type='submit'><i class='fa fa-pencil-square-o'></i> Asignar</button>
     </span>
+    <script>
+    	$(function () {
+    		$.getJSON('/lectures/typeaheaddata', function (data) {
+    			$('#lectures-typeahead').typeahead({
+	    			source: data,
+	    			scrollBar: true,
+	    			onSelect: function (item) {
+	    				$('#lecture_id').val(item.value);
+	    			}
+	    		});
+    		});
+    	});
+    </script>
   </div>
 <% end %>

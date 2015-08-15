@@ -2,6 +2,17 @@
 <% content_for :page_title, 'Detalle de niño' %>
 <% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Niños', children_path }</li>".html_safe %>
 
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Acciones</h3>
+  </div>
+  <div class='box-body'>
+    <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, children_path, class: 'btn btn-app' %>
+    <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_child_path(@child), class: 'btn btn-app' %>      
+    <%= link_to '<i class="fa fa-times"></i> Borrar'.html_safe, @child, class: 'btn btn-app bg-maroon pull-right', method: :delete %>
+  </div>
+</div>
+
 <div class='row'>
   <div class='col-md-4'>
     <div class='box box-solid'>
@@ -16,35 +27,11 @@
   <div class='col-md-8'>
     <div class='box box-solid'>
       <div class='box-header with-border'>
-        <h3 class='box-title'>Acciones</h3>
+        <h3 class='box-title'>Información</h3>
       </div>
       <div class='box-body'>
         <div class='row'>
-          <div class='col-lg-4'>
-            <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, children_path, class: 'btn btn-app' %>
-            <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_child_path(@child), class: 'btn btn-app' %>
-          </div>
-          <div class='col-lg-8'>
-            <br>
-            <div class='row'>
-              <div class='col-xs-6'>
-                <%= render 'children/assign_lecture_form' %>
-              </div>
-              <div class='col-xs-6'>
-                <%= render 'children/assign_workshop_form' %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class='row'>
-      <div class='col-sm-6'>
-        <div class='box box-solid'>
-          <div class='box-header with-border'>
-            <h3 class='box-title'>Información</h3>
-          </div>
-          <div class='box-body'>
+          <div class='col-sm-4'>
             <p class='lead'><%= @child.full_name %></p>
             <p>
               <strong>Gender:</strong>
@@ -54,27 +41,99 @@
               <strong>Birthdate:</strong>
               <%= @child.birthdate %>
             </p>
+          </div>
+          <div class='col-sm-8'>
             <p>
               <strong>Allergies:</strong>
-              <div class='well'><%= @child.allergies %></div>
+              <div class='well well-sm'><%= @child.allergies %></div>
             </p>
             <p>
               <strong>Notes:</strong>
-              <div class='well'><%= @child.notes %></div>
+              <div class='well well-sm'><%= @child.notes %></div>
             </p>
           </div>
         </div>
       </div>
-      <div class='col-sm-6'>
-        <div class='box box-solid'>
-          <div class='box-header with-border'>
-            <h3 class='box-title'>Tutores responsables</h3>
-          </div>
-          <div class='box-body'>
+    </div>
 
-          </div>
-        </div>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Tutores responsables</h3>
       </div>
+      <div class='box-body'>
+        <%= render 'children/assign_tutor_form' %>
+      </div>
+      <table class='table table-condensed'>
+        <tbody>
+          <% @child.users_have_marked_as(:responsability).each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= link_to user.full_name, user %></td>
+              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unassign_from_tutor_child_path(tutor_id: user.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Talleres</h3>
+      </div>
+      <div class='box-body'>
+        <%= render 'children/assign_workshop_form' %>
+      </div>
+      <table class='table table-condensed'>
+        <tbody>
+          <% @child.workshops_have_marked_as(:enrolled_workshop).each do |workshop| %>
+            <tr>
+              <td><%= workshop.id %></td>
+              <td><%= link_to workshop.name, workshop %></td>
+              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unenroll_from_workshop_child_path(workshop_id: workshop.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Catequesis</h3>
+      </div>
+      <div class='box-body'>
+        <%= render 'children/assign_lecture_form' %>
+      </div>
+      <table class='table table-condensed'>
+        <tbody>
+          <% @child.lectures_have_marked_as(:enrolled_lecture).each do |lecture| %>
+            <tr>
+              <td><%= lecture.id %></td>
+              <td><%= link_to lecture.name, lecture %></td>
+              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unenroll_from_lecture_child_path(lecture_id: lecture.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Acompañamientos</h3>
+      </div>
+      <div class='box-body'>
+        <%= render 'children/assign_shepperding_form' %>
+      </div>
+      <table class='table table-condensed'>
+        <tbody>
+          <% @child.shepperdings_have_marked_as(:enrolled_shepperding).each do |shepperding| %>
+            <tr>
+              <td><%= shepperding.id %></td>
+              <td><%= link_to shepperding.name, shepperding %></td>
+              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unenroll_from_shepperding_child_path(shepperding_id: shepperding.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
