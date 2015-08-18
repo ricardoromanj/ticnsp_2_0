@@ -1,0 +1,22 @@
+<%= form_tag assign_coordinator_workshop_path, method: :post do %>
+  <%= hidden_field_tag :coordinator_id %>
+  <div class='input-group'>
+    <%= text_field_tag :coordinator, nil, placeholder: 'Coordinador', class: 'form-control ticnsp-form-control', id: 'coordinators-typeahead', autocomplete: 'off' %>
+    <span class='input-group-btn'>
+      <button class='btn bg-green btn-flat' type='submit'><i class='fa fa-pencil-square-o'></i> Asignar</button>
+    </span>
+    <script>
+    	$(function () {
+    		$.getJSON('/users/typeaheaddata', { usertype: 'coordinator' }, function (data) {
+    			$('#coordinators-typeahead').typeahead({
+	    			source: data,
+	    			scrollBar: true,
+	    			onSelect: function (item) {
+	    				$('#coordinator_id').val(item.value);
+	    			}
+	    		});
+    		});
+    	});
+    </script>
+  </div>
+<% end %>

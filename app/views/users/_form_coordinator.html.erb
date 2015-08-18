@@ -48,7 +48,16 @@
     </div>
   </div>
   <hr>
-
+  <div class="form-group">
+    <%= f.label 'Imagen', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-9'>
+      <span class='file-input'>
+        Browse<%= f.attachment_field :image, class: '' %>
+      </span>
+      <span class="filename"></span>
+    </div>
+  </div>
+  <hr>
   <div class='form-group'>
     <%= f.label :notes, class: 'control-label col-sm-2' %>
     <div class='col-sm-9'>

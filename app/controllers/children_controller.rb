@@ -11,6 +11,11 @@ class ChildrenController < WebApplicationController
     end
   end
 
+  # GET /children/typeaheaddata.json
+  def typeaheaddata
+    render json: Child.select(:id, :name, :lastname).map { |c| { id: c.id, name: "#{c.name} #{c.lastname}"} }, status: 200
+  end
+
   # GET /children/1
   # GET /children/1.json
   def show

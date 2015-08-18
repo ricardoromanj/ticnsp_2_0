@@ -25,9 +25,9 @@ class UsersController < WebApplicationController
 
   # GET /users/typeaheaddata.json
   def typeaheaddata
-    users = User.select(:id, :name)
+    users = User.select(:id, :name, :lastname)
     if params[:usertype]
-      users = users.where(usertype: params[:usertype])
+      users = users.where(usertype: params[:usertype]).map { |u| { id: u.id, name: "#{u.name} #{u.lastname}"} }
     end
     render json: users, status: 200
   end
@@ -129,6 +129,6 @@ class UsersController < WebApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :usertype, :name, :lastname, :gender, :role, :birthdate, :username, :image_id, :notes)
+      params.require(:user).permit(:email, :usertype, :name, :lastname, :gender, :role, :birthdate, :username, :image, :notes)
     end
 end

@@ -37,7 +37,7 @@
   <div class="form-group">
     <%= f.label 'Rol', class: 'control-label col-sm-2' %>
     <div class='col-sm-3'>
-      <%= f.select :role, options_for_select([['H','h'],['M','m']], @user.role), {}, { class: 'form-control form-control-ticnsp' } %>
+      <%= f.select :role, options_for_select([['Padre / Madre','parent'],['Abuelo(a)','grandparent'],['Tío(a)','auntuncle'],['Otro familiar','otherfamily'],['Vecino','neighbor'],['Otro','other']], @user.role), {}, { class: 'form-control form-control-ticnsp' } %>
     </div>
   </div>
   <hr>
@@ -48,7 +48,16 @@
     </div>
   </div>
   <hr>
-
+  <div class="form-group">
+    <%= f.label 'Imagen', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-9'>
+      <span class='file-input'>
+        Browse<%= f.attachment_field :image, class: '' %>
+      </span>
+      <span class="filename"></span>
+    </div>
+  </div>
+  <hr>
   <div class='form-group'>
     <%= f.label :notes, class: 'control-label col-sm-2' %>
     <div class='col-sm-9'>
