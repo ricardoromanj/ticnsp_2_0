@@ -46,6 +46,8 @@ Rails.application.routes.draw do
       get 'new_coordinator'
       get 'new_tutor'
       get 'typeaheaddata'
+      get 'profile'
+      patch 'update_password'
     end
   end
   resources :emails

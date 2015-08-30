@@ -1,29 +1,33 @@
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	<i class="fa fa-bell-o"></i>
-	<span id='notifications-badge' class="label label-warning"></span>
-</a>
-<ul class="dropdown-menu">
-	<li id='notifications-header' class="header"></li>
-	<li>
-    	<ul id='notifications-menu' class="menu">
-    		<%
-      			# List of notifications
-      		%>
-    	</ul>
-  	</li>
-  	<li class="footer"><a href="#">View all</a></li>
-</ul>
+<li class="dropdown notifications-menu">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+  	<i class="fa fa-bell-o"></i>
+  	<span id='notifications-badge' class="label label-warning"></span>
+  </a>
+  <ul class="dropdown-menu">
+  	<li id='notifications-header' class="header"></li>
+  	<li>
+      	<ul id='notifications-menu' class="menu">
+      		<%
+        			# List of notifications
+        		%>
+      	</ul>
+    	</li>
+    	<li class="footer"><a href="#">View all</a></li>
+  </ul>
 
-<script>
-  $.getJSON("<%= notices_path %>", function (data) {
-    $('#notifications-header').append('Hay '+ data.length + ' avisos este mes');
-    $('#notifications-badge').append(data.length);
-    $.each(data, function (key, val) {
-      $('#notifications-menu').append('\
-        <li>\
-          <a href="/notices/view#' + val.id + '">\
-            <i class="fa fa-circle-o text-' + val.notice_type + '"></i> ' + val.text_stripped + '\
-        ');
+  <script>
+    $.getJSON("<%= notices_path %>", function (data) {
+      $('#notifications-header').append('Hay '+ data.length + ' avisos este mes');
+      $('#notifications-badge').append(data.length);
+      $.each(data, function (key, val) {
+        $('#notifications-menu').append('\
+          <li>\
+            <a href="/notices/view#' + val.id + '">\
+              <i class="fa fa-circle-o text-' + val.notice_type + '"></i> ' + val.text_stripped + '\
+            </a>\
+          </li>\
+          ');
+      });
     });
-  });
-</script>
+  </script>
+</li>

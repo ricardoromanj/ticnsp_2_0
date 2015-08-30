@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :phones
   has_many :emails
 
+  accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: lambda {|attributes| attributes['number'].blank?}
+  accepts_nested_attributes_for :emails, allow_destroy: true, reject_if: lambda {|attributes| attributes['email'].blank?}
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, # :registerable,
@@ -28,6 +31,7 @@ class User < ActiveRecord::Base
   markable_as :coordinator_workshop, by: :workshop
   markable_as :coordinator_lecture, by: :lecture
   markable_as :coordinator_shepperding, by: :shepperding
+  markable_as :coordinator_commission, by: :commission
 
   # Serialized objects
   serialize :recents
@@ -43,8 +47,10 @@ class User < ActiveRecord::Base
   end
 
   def current_image(w = nil, h = nil)
-  	if use_gravatar?
-  		gravatar_url(default: 'identicon')
+  	if use_gravatar? || image_id.blank?
+  		self.use_gravatar = true
+      self.save
+      gravatar_url(default: 'identicon')
   	else
       if w && h
   		  Refile.attachment_url(self, :image, :fill, w, h, format: 'jpg');

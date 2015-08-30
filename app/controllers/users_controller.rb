@@ -1,5 +1,5 @@
 class UsersController < WebApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_sidebar, :edit_tutor, :edit_coordinator]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_sidebar, :edit_tutor, :edit_coordinator, :assign_to_workshop, :unassign_from_workshop, :assign_to_lecture, :unassign_from_lecture, :assign_to_shepperding, :unassign_from_shepperding, :assign_to_commission, :unassign_from_commission]
 
   # GET /users
   # GET /users.json
@@ -37,6 +37,62 @@ class UsersController < WebApplicationController
   def show
   end
 
+  # POST /users/1/assign_to_workshop
+  def assign_to_workshop
+    workshop = Workshop.find(params[:workshop_id])
+    workshop.mark_as_coordinator_workshop @user
+    redirect_to @user, notice: 'Coordinador ha sido asignado al taller'
+  end
+
+  # DELETE /users/1/unassign_from_workshop
+  def unassign_from_workshop
+    workshop = Workshop.find(params[:workshop_id])
+    workshop.remove_mark :coordinator_workshop, @user
+    redirect_to @user, alert: 'Coordinador ya no está asignado al taller seleccionado'
+  end
+
+  # POST /users/1/assign_to_lecture
+  def assign_to_lecture
+    lecture = Lecture.find(params[:lecture_id])
+    lecture.mark_as_coordinator_lecture @user
+    redirect_to @user, notice: 'Coordinador ha sido asignado a la catequesis'
+  end
+
+  # DELETE /users/1/unassign_from_lecture
+  def unassign_from_lecture
+    lecture = Lecture.find(params[:lecture_id])
+    lecture.remove_mark :coordinator_lecture, @user
+    redirect_to @user, alert: 'Coordinador ya no está asignado a la catequesis seleccionad'
+  end
+
+  # POST /users/1/assign_to_shepperding
+  def assign_to_shepperding
+    shepperding = Shepperding.find(params[:shepperding_id])
+    shepperding.mark_as_coordinator_shepperding @user
+    redirect_to @user, notice: 'Coordinador ha sido asignado al acompañamiento'
+  end
+
+  # DELETE /users/1/unassign_from_shepperding
+  def unassign_from_shepperding
+    shepperding = Shepperding.find(params[:shepperding_id])
+    shepperding.remove_mark :coordinator_shepperding, @user
+    redirect_to @user, alert: 'Coordinador ya no está asignado al acompañamiento seleccionado'
+  end
+
+  # POST /users/1/assign_to_commission
+  def assign_to_commission
+    commission = Commission.find(params[:commission_id])
+    commission.mark_as_coordinator_commission @user
+    redirect_to @user, notice: 'Coordinador ha sido asignado a la comisión'
+  end
+
+  # DELETE /users/1/unassign_from_commission
+  def unassign_from_commission
+    commission = Commission.find(params[:commission_id])
+    commission.remove_mark :coordinator_commission, @user
+    redirect_to @user, alert: 'Coordinador ya no está asignado a la comisión seleccionada'
+  end
+
   # POST /users/1/toggle_sidebar
   def toggle_sidebar
     render json: @user.set_setting(:sidebar_toggled, !@user.settings[:sidebar_toggled]), status: 200
@@ -50,11 +106,13 @@ class UsersController < WebApplicationController
   # GET /users/new_tutor
   def new_tutor
     @user = User.new(usertype: 'tutor')
+    2.times { @user.phones.build }
   end
 
   # GET /users/coordinator
   def new_coordinator
     @user = User.new(usertype: 'coordinator')
+    2.times { @user.phones.build }
   end
 
   # GET /users/1/edit
@@ -67,6 +125,7 @@ class UsersController < WebApplicationController
 
   # GET /users/1/edit_coordinator
   def edit_coordinator
+    2.times { @user.phones.build }
   end
 
   # POST /users
@@ -77,6 +136,9 @@ class UsersController < WebApplicationController
     temp_password = SecureRandom.hex[0,15]
     @user.password = temp_password
     @user.password_confirmation = temp_password
+
+    use_gravatar = params[:user][:image_source] =~ /^gravatar$/ ? true : false
+    @user.use_gravatar = use_gravatar
     
     respond_to do |format|
       if @user.save
@@ -92,6 +154,9 @@ class UsersController < WebApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    use_gravatar = params[:user][:image_source] =~ /^gravatar$/ ? true : false
+    @user.use_gravatar = use_gravatar
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: "#{@user.usertype.capitalize} was successfully updated" }
@@ -100,6 +165,22 @@ class UsersController < WebApplicationController
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # GET /users/profile
+  def profile
+    @user = current_user
+  end
+
+  # PATCH/PUT /users/change_password
+  def update_password
+    @user = User.find(current_user.id)
+    if @user.update_with_password(user_params)
+      sign_in @user, bypass: true
+      redirect_to profile_users_path, notice: 'Contraseña actualizada'
+    else
+      redirect_to profile_users_path, alert: 'Tu contraseña no pudo ser actualizada'
     end
   end
 
@@ -129,6 +210,6 @@ class UsersController < WebApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :usertype, :name, :lastname, :gender, :role, :birthdate, :username, :image, :notes)
+      params.require(:user).permit(:email, :usertype, :name, :lastname, :gender, :role, :birthdate, :username, :image, :notes, :password, :password_confirmation, :current_password, phones_attributes: [:id, :number, :phone_type, :_destroy])
     end
 end

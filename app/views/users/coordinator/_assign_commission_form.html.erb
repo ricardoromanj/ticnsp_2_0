@@ -1,0 +1,22 @@
+<%= form_tag assign_to_commission_user_path, method: :post do %>
+  <%= hidden_field_tag :commission_id %>
+  <div class='input-group'>
+    <%= text_field_tag :commission, nil, placeholder: 'Catequesis', class: 'form-control ticnsp-form-control', id: 'commissions-typeahead', autocomplete: 'off' %>
+    <span class='input-group-btn'>
+      <button class='btn bg-green btn-flat' type='submit'><i class='fa fa-pencil-square-o'></i> Asignar</button>
+    </span>
+    <script>
+    	$(function () {
+    		$.getJSON('/commissions/typeaheaddata', function (data) {
+    			$('#commissions-typeahead').typeahead({
+	    			source: data,
+	    			scrollBar: true,
+	    			onSelect: function (item) {
+	    				$('#commission_id').val(item.value);
+	    			}
+	    		});
+    		});
+    	});
+    </script>
+  </div>
+<% end %>

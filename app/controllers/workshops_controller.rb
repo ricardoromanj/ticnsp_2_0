@@ -22,7 +22,7 @@ class WorkshopsController < WebApplicationController
 
   # POST /workshops/1/assign_coordinator
   def assign_coordinator
-    if @workshop.set_mark :coordinator_workshop, User.find(params[:id])
+    if @workshop.set_mark :coordinator_workshop, User.find(params[:coordinator_id])
       redirect_to @workshop, notice: 'Coordinator successfully assigned'
     else
       redirect_to @workshops, alert: 'Could not assign coordinator'
@@ -31,7 +31,7 @@ class WorkshopsController < WebApplicationController
 
   # DELETE /workshops/1/unassign_coordinator
   def unassign_coordinator
-    if @workshop.remove_mark :coordinator_workshop, User.find(params[:id])
+    if @workshop.remove_mark :coordinator_workshop, User.find(params[:coordinator_id])
       redirect_to @workshop, notice: 'Coordinator successfully unassigned'
     else
       redirect_to @workshops, alert: 'Could not unassign coordinator'
@@ -40,7 +40,7 @@ class WorkshopsController < WebApplicationController
 
   # POST /workshops/1/enroll_child
   def enroll_child
-    if @workshop.set_mark :enrolled_workshop, Child.find(params[:id])
+    if @workshop.set_mark :enrolled_workshop, Child.find(params[:child_id])
       redirect_to @workshop, notice: 'Child successfully enrolled'
     else
       redirect_to @workshops, alert: 'Could not enroll child'
@@ -49,7 +49,7 @@ class WorkshopsController < WebApplicationController
 
   # DELETE /workshops/1/unenroll_child
   def unenroll_child
-    if @workshop.remove_mark :enrolled_workshop, Child.find(params[:id])
+    if @workshop.remove_mark :enrolled_workshop, Child.find(params[:child_id])
       redirect_to @workshop, notice: 'Child successfully unenrolled'
     else
       redirect_to @workshops, alert: 'Could not unenroll child'
