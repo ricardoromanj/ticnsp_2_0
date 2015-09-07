@@ -39,7 +39,7 @@
   <div class='col-md-8'>
     <div class='row'>
     	<div class='col-sm-6'>
-		    <div class='box box-solid box-success'>
+		    <div class='box box-solid'>
 		    	<div class='box-header with-border'>
 		    		<h3 class='box-title'>Coordinadores</h3>
 		    	</div>
@@ -52,42 +52,42 @@
                 <tr>
                   <td><%= coordinator.id %></td>
                   <td><%= link_to coordinator.full_name, coordinator %></td>
-                  <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unassign_coordinator_workshop_path(coordinator_id: coordinator.id), class: 'btn btn-maroon', method: :delete %></td>
+                  <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unassign_coordinator_workshop_path(coordinator_id: coordinator.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
 		    </div>
-		</div>
-		<div class='col-sm-6'>
-			<div class='box box-solid box-primary'>
-		    	<div class='box-header with-border'>
-		    		<h3 class='box-title'>Niños inscritos</h3>
-		    	</div>
-		    	<div class='box-body'>
-            <%= render 'workshops/assign_child_form' %>
-		    	</div>
-          <table class='table table-condensed'>
-            <tbody>
-              <% @workshop.children_marked_as(:enrolled_workshop).each do |child| %>
-                <tr>
-                  <td><%= child.id %></td>
-                  <td><%= link_to child.full_name, child %></td>
-                  <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unenroll_child_workshop_path(child_id: child.id), class: 'btn btn-maroon', method: :delete %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-		    </div>
-		</div>
-	</div>
-	<div class='box box-solid'>
-		<div class='box-header with-border'>
-			<h3 class='box-title'>Historial</h3>
-		</div>
-		<div class='box-body'>
+		  </div>
+  		<div class='col-sm-6'>
+  			<div class='box box-solid'>
+  		    	<div class='box-header with-border'>
+  		    		<h3 class='box-title'>Niños inscritos</h3>
+  		    	</div>
+  		    	<div class='box-body'>
+              <%= render 'workshops/assign_child_form' %>
+  		    	</div>
+            <table class='table table-condensed'>
+              <tbody>
+                <% @workshop.children_marked_as(:enrolled_workshop).each do |child| %>
+                  <tr>
+                    <td><%= child.id %></td>
+                    <td><%= link_to child.full_name, child %></td>
+                    <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unenroll_child_workshop_path(child_id: child.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+  		    </div>
+  		</div>
+  	</div>
+  	<div class='box box-solid'>
+  		<div class='box-header with-border'>
+  			<h3 class='box-title'>Historial</h3>
+  		</div>
+  		<div class='box-body'>
 
-		</div>
-	</div>
+  		</div>
+  	</div>
   </div>
 </div>

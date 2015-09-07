@@ -9,6 +9,7 @@
   <div class='box-body'>
     <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, shepperdings_path, class: 'btn btn-app' %>
     <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_shepperding_path(@shepperding), class: 'btn btn-app' %>
+    <%= link_to '<i class="fa fa-times"></i> Borrar'.html_safe, @shepperding, class: 'btn btn-app bg-maroon pull-right', method: :delete %>
   </div>
 </div>
 

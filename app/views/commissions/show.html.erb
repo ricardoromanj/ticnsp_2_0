@@ -9,6 +9,7 @@
   <div class='box-body'>
     <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, commissions_path, class: 'btn btn-app' %>
     <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_commission_path(@commission), class: 'btn btn-app' %>
+    <%= link_to '<i class="fa fa-times"></i> Borrar'.html_safe, @commission, class: 'btn btn-app bg-maroon pull-right', method: :delete %>
   </div>
 </div>
 
@@ -37,34 +38,35 @@
   </div>
   <div class='col-md-8'>
     <div class='row'>
-      <div class='col-sm-6'>
+      <div class='col-sm-12'>
         <div class='box box-solid'>
           <div class='box-header with-border'>
             <h3 class='box-title'>Coordinadores</h3>
           </div>
           <div class='box-body'>
-
+            <%= render 'commissions/assign_coordinator_form' %>
           </div>
+          <table class='table table-condensed'>
+            <tbody>
+              <% @commission.users_marked_as(:coordinator_commission).each do |coordinator| %>
+                <tr>
+                  <td><%= coordinator.id %></td>
+                  <td><%= link_to coordinator.full_name, coordinator %></td>
+                  <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unassign_coordinator_commission_path(coordinator_id: coordinator.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-    <div class='col-sm-6'>
-      <div class='box box-solid'>
-          <div class='box-header with-border'>
-            <h3 class='box-title'>Niños inscritos</h3>
-          </div>
-          <div class='box-body'>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Historial</h3>
+      </div>
+      <div class='box-body'>
 
-          </div>
-        </div>
+      </div>
     </div>
-  </div>
-  <div class='box box-solid'>
-    <div class='box-header with-border'>
-      <h3 class='box-title'>Historial</h3>
-    </div>
-    <div class='box-body'>
-
-    </div>
-  </div>
   </div>
 </div>
