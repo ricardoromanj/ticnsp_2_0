@@ -1,0 +1,22 @@
+<%= form_tag enroll_child_lecture_path, method: :post do %>
+  <%= hidden_field_tag :child_id %>
+  <div class='input-group'>
+    <%= text_field_tag :child, nil, placeholder: 'Niño', class: 'form-control ticnsp-form-control', id: 'children-typeahead', autocomplete: 'off' %>
+    <span class='input-group-btn'>
+      <button class='btn bg-blue btn-flat' type='submit'><i class='fa fa-pencil-square-o'></i> Asignar</button>
+    </span>
+    <script>
+    	$(function () {
+    		$.getJSON('/children/typeaheaddata', function (data) {
+    			$('#children-typeahead').typeahead({
+	    			source: data,
+	    			scrollBar: true,
+	    			onSelect: function (item) {
+	    				$('#child_id').val(item.value);
+	    			}
+	    		});
+    		});
+    	});
+    </script>
+  </div>
+<% end %>
