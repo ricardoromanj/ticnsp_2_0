@@ -2,6 +2,16 @@
 <% content_for :page_title, 'Detalle de coordinador' %>
 <% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Coordinadores', coordinators_users_path }</li><li>Coordinador</li>".html_safe %>
 
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Acciones</h3>
+  </div>
+  <div class='box-body'>
+    <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, coordinators_users_path, class: 'btn btn-app' %>
+    <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_coordinator_user_path(@user), class: 'btn btn-app' %>
+  </div>
+</div>
+
 <div class='row'>
   <div class='col-md-4'>
     <div class='box box-solid'>
@@ -9,20 +19,11 @@
         <h3 class='box-title'>Imagen</h3>
       </div>
       <div class='box-body object-image no-padding'>
-        <%= image_tag @user.current_image, class: 'img-responsive' %>
+        <%= image_tag @user.current_image(800), class: 'img-responsive' %>
       </div>
     </div>
   </div>
   <div class='col-md-8'>
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Acciones</h3>
-      </div>
-      <div class='box-body'>
-        <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, coordinators_users_path, class: 'btn btn-app' %>
-        <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_coordinator_user_path(@user), class: 'btn btn-app' %>
-      </div>
-    </div>
     <div class='row'>
       <div class='col-sm-6'>
         <div class='box box-solid'>

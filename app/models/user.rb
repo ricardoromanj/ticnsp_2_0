@@ -46,14 +46,16 @@ class User < ActiveRecord::Base
     gender == 'h' ? 'Hombre' : 'Mujer'
   end
 
-  def current_image(w = nil, h = nil)
+  def current_image(s = nil)
   	if use_gravatar? || image_id.blank?
   		self.use_gravatar = true
       self.save
-      gravatar_url(default: 'identicon')
+      gravatar_options = { default: 'identicon' }
+      gravatar_options[:size] = s if s
+      gravatar_url(gravatar_options)
   	else
       if w && h
-  		  Refile.attachment_url(self, :image, :fill, w, h, format: 'jpg');
+  		  Refile.attachment_url(self, :image, :fill, s, s, format: 'jpg');
       else
         Refile.attachment(self, :image)
       end

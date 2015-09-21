@@ -14,7 +14,7 @@ class CoordinatorDatatable < AjaxDatatablesRails::Base
 
   def data
     records.map do |record|
-      image = "<img src=#{record.current_image(30,30)} class='img-circle pull-right' alt='#{record.name} image' height='30px' style='margin-left: 15px;'/>"
+      image = "<img src=#{record.current_image(30)} class='img-circle pull-right' alt='#{record.name} image' height='30px' style='margin-left: 15px;'/>"
       show = "<a style= 'margin: 0 .5em;' class='btn btn-xs bg-teal' href='/users/#{record.id}'>Show</a>"
       edit = "<a style= 'margin: 0 .5em;' class='btn btn-xs btn-default' href='/users/#{record.id}/edit_coordinator'>Edit</a>"
       destroy = "<a style= 'margin: 0 .5em;' data-confirm='Are you sure?' class='btn btn-xs bg-maroon' rel='ofollow' data-method='delete' href='/users/#{record.id}'>Destroy</a>"

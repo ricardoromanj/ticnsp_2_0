@@ -6,11 +6,11 @@
 		<%
 			# Mini logo for sidebar mini 50 x 50 pixels
 		%>
-		<span class='logo-mini'>tic</span>
+		<span class='logo-mini'><%= image_tag 'tic_logo_nobg_flat.png', height: '40' %></span>
 		<%
 			# Logo for regular state and mobile devices 
 		%>
-		<span class='logo-lg'><b>TIC</b>NSP.org</span>
+		<span class='logo-lg'><%= image_tag 'tic_logo_nobg_flat.png', height: '40' %>ticnsp.org</span>
 	</a>
 
 	<%
@@ -47,7 +47,7 @@
 				%>
 				<li class='dropdown user user-menu'>
 					<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-						<%= image_tag current_user.current_image(40, 40), class: 'user-image', alt: 'User Image' %>
+						<%= image_tag current_user.current_image(40), class: 'user-image', alt: 'User Image' %>
 						<span class='hidden-xs'><%= current_user.full_name %></span>
 					</a>
 					<ul class='dropdown-menu'>
@@ -55,24 +55,24 @@
 							# User menu
 						%>
 						<li class='user-header'>
-							<%= image_tag current_user.current_image(80,80), class: 'img-circle', alt:'User Image' %>
+							<%= image_tag current_user.current_image(80), class: 'img-circle', alt:'User Image' %>
 							<p>
 								<%= current_user.full_name %> - <%= current_user.usertype.capitalize %>
-								<small>Miembro desde 2010</small>
+								<small>Miembro desde <%= current_user.created_at.year %></small>
 							</p>
 						</li>
 						<% if false %>
-						<li class='user-body'>
-							<div class="col-xs-4 text-center">
-		                      <a href="#">Followers</a>
-		                    </div>
-		                    <div class="col-xs-4 text-center">
-		                      <a href="#">Sales</a>
-		                    </div>
-		                    <div class="col-xs-4 text-center">
-		                      <a href="#">Friends</a>
-		                    </div>
-						</li>
+							<li class='user-body'>
+								<div class="col-xs-4 text-center">
+			                      <a href="#">Followers</a>
+			                    </div>
+			                    <div class="col-xs-4 text-center">
+			                      <a href="#">Sales</a>
+			                    </div>
+			                    <div class="col-xs-4 text-center">
+			                      <a href="#">Friends</a>
+			                    </div>
+							</li>
 						<% end %>
 						<li class='user-footer'>
 							<div class="pull-left">
@@ -88,9 +88,9 @@
 					# Control sidebar toggle
 				%>
 				<% if false %>
-				<li>
-	                <a href="#" data-toggle="control-sidebar"><i class="fa fa-send-o"></i></a>
-	            </li>
+					<li>
+		                <a href="#" data-toggle="control-sidebar"><i class="fa fa-send-o"></i></a>
+		            </li>
 	            <% end %>
 			</ul>
 		</div>
