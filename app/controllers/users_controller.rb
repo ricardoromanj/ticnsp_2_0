@@ -121,6 +121,7 @@ class UsersController < WebApplicationController
 
   # GET /users/1/edit_tutor
   def edit_tutor
+    2.times { @user.phones.build }
   end
 
   # GET /users/1/edit_coordinator
@@ -142,6 +143,10 @@ class UsersController < WebApplicationController
     
     respond_to do |format|
       if @user.save
+
+        # Send the wolcome email with temp password
+        CoordinatorMailer.welcome_coordinator(@user, temp_password).deliver_now
+
         format.html { redirect_to @user, notice: "#{@user.usertype.capitalize} was successfully created with password #{temp_password}" }
         format.json { render :show, status: :created, location: @user }
       else
@@ -171,6 +176,7 @@ class UsersController < WebApplicationController
   # GET /users/profile
   def profile
     @user = current_user
+    2.times { @user.phones.build }
   end
 
   # PATCH/PUT /users/change_password
@@ -181,6 +187,19 @@ class UsersController < WebApplicationController
       redirect_to profile_users_path, notice: 'Contraseña actualizada'
     else
       redirect_to profile_users_path, alert: 'Tu contraseña no pudo ser actualizada'
+    end
+  end
+
+  # PATCH/PUT /users/update_profile
+  def update_profile
+    @user = User.find(current_user.id)
+    use_gravatar = params[:user][:image_source] =~ /^gravatar$/ ? true : false
+    @user.use_gravatar = use_gravatar
+
+    if @user.update(user_params)
+      redirect_to profile_users_path, notice: 'Perfil actualizado.'
+    else
+      redirect_to profile_users_path, alert: 'Tu perfil no pudo ser guardado.'
     end
   end
 

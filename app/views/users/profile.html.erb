@@ -14,7 +14,7 @@
   <div class='box-body'>
     <%= form_for(@user, :url => { :action => "update_password" }, html: { class: 'form-horizontal', id: 'change-password-form' }) do |f| %>
      <div class="form-group">
-        <%= f.label :current_password, class: 'control-label col-sm-3' %> <i>(we need your current password to confirm your changes)</i>
+        <%= f.label :current_password, class: 'control-label col-sm-3' %> <i>(necesitamos tu contraseña actual para confirmar cambios)</i>
         <div class='col-sm-3'>
           <%= f.password_field :current_password, class: 'form-control' %>
         </div>
@@ -45,7 +45,7 @@
     <h3 class='box-title'>Cambiar mi perfil</h3>
   </div>
   <div class='box-body'>
-    <%= form_for(@user, html: { class: 'form-horizontal' }) do |f| %>
+    <%= form_for(@user, url: { action: 'update_profile' }, html: { class: 'form-horizontal' }) do |f| %>
       <% if @user.errors.any? %>
         <div class='alert alert-danger' id="error_explanation">
           <strong><%= pluralize(@user.errors.count, "error") %> prohibited this coordinator from being saved:</strong>
@@ -90,14 +90,14 @@
       <div class="form-group">
         <%= f.label :email, class: 'control-label col-sm-2' %>
         <div class='col-sm-9'>
-          <%= f.email_field :email, class: 'form-control form-control-ticnsp' %>
+          <%= f.email_field :email, class: 'form-control form-control-ticnsp', disabled: true %>
         </div>
       </div>
       <hr>
       <div class='form-group'>
         <%= label_tag 'user[image_source]', 'Usar imagen', class: 'col-sm-2 control-label' %>
         <div class='col-sm-3'>
-          <%= select_tag 'user[image_source]', options_for_select([['Gravatar','gravatar'],['Imagen propia','image']], (@user.use_gravatar? ? 'gravatar' : 'image')), class: 'form-control' %>
+          <%= select_tag 'user[image_source]', options_for_select([['Gravatar','gravatar'],['Imagen propia','image']], (@user.use_gravatar? ? 'gravatar' : 'image')), class: 'form-control', onchange: 'imageSelectionHide()' %>
         </div>
       </div>
       <div class="form-group" id='image-form-group'>
@@ -158,10 +158,6 @@
           $('#image-form-group').removeClass('hide');
         }
       }
-
-      $('#user_image_source').click(function () {
-        imageSelectionHide();
-      });
 
       $(function () {
         imageSelectionHide();

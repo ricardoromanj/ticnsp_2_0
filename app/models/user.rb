@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
       gravatar_options[:size] = s if s
       gravatar_url(gravatar_options)
   	else
-      if w && h
+      if s # w && h
   		  Refile.attachment_url(self, :image, :fill, s, s, format: 'jpg');
       else
         Refile.attachment(self, :image)

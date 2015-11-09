@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       get 'typeaheaddata'
       get 'profile'
       patch 'update_password'
+      patch 'update_profile'
     end
   end
   resources :emails

@@ -22,7 +22,7 @@ class LecturesController < WebApplicationController
 
   # POST /lectures/1/assign_coordinator
   def assign_coordinator
-    if @lecture.set_mark :coordinator_lecture, User.find(params[:id])
+    if @lecture.set_mark :coordinator_lecture, User.find(params[:coordinator_id])
       redirect_to @lecture, notice: 'Coordinator successfully assigned'
     else
       redirect_to @lecture, alert: 'Could not assign coordinator'
@@ -31,7 +31,7 @@ class LecturesController < WebApplicationController
 
   # DELETE /lectures/1/unassign_coordinator
   def unassign_coordinator
-    if @lecture.remove_mark :coordinator_lecture, User.find(params[:id])
+    if @lecture.remove_mark :coordinator_lecture, User.find(params[:coordinator_id])
       redirect_to @lecture, notice: 'Coordinator successfully unassigned'
     else
       redirect_to @lecture, alert: 'Could not unassign coordinator'
@@ -40,7 +40,7 @@ class LecturesController < WebApplicationController
 
   # POST /lectures/1/enroll_child
   def enroll_child
-    if @lecture.set_mark :enrolled_lecture, Child.find(params[:id])
+    if @lecture.set_mark :enrolled_lecture, Child.find(params[:child_id])
       redirect_to @lecture, notice: 'Child successfully enrolled'
     else
       redirect_to @lecture, alert: 'Could not enroll child'
@@ -49,7 +49,7 @@ class LecturesController < WebApplicationController
 
   # DELETE /lectures/1/unenroll_child
   def unenroll_child
-    if @lecture.remove_mark :enrolled_lecture, Child.find(params[:id])
+    if @lecture.remove_mark :enrolled_lecture, Child.find(params[:child_id])
       redirect_to @lecture, notice: 'Child successfully unenrolled'
     else
       redirect_to @lecture, alert: 'Could not unenroll child'
