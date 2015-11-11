@@ -65,3 +65,4 @@ gem "kaminari"
 gem 'markable', github: 'chrome/markable'
 gem 'will_paginate-bootstrap'
 gem 'sucker_punch'
+gem 'curb'
