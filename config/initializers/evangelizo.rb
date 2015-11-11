@@ -150,6 +150,24 @@ module Evangelizo
       return http.body_str.force_encoding( 'UTF-8' ).split( "<br /><br />" ).first
     end
 
+    def self.daypack( date, lang )
+      daypack = []
+
+      # Get first reading
+      daypack << { title: title( date, lang, 'FR' ), reading: reading( date, lang, 'FR' ) }
+
+      # For the second reading, we need validation
+      second_reading = { title: title( date, lang, 'SR' ), reading: reading( date, lang, 'SR' ) }
+      unless second_reading[:title] == " <font dir=\"ltr\"></font>\n"
+        daypack << second_reading
+      end
+
+      # Get the Gospel
+      daypack << { title: title( date, lang, 'GSP' ), reading: reading( date, lang, 'GSP' ) }
+      
+      return daypack
+    end
+
   end
 
   class Feast

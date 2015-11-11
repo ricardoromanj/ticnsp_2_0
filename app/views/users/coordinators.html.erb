@@ -2,6 +2,7 @@
 <% content_for :page_title, 'Coordinadores' %>
 <% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>Coordinadores</li>".html_safe %>
 
+<% if current_user.usertype == 'admin' %>
 <div class='box box-solid'>
   <div class='box-header with-border'>
     <h3 class='box-title'>Acciones</h3>
@@ -10,6 +11,7 @@
     <%= link_to '<i class="fa fa-plus"></i> Agregar'.html_safe, new_coordinator_users_path, class: 'btn btn-app' %>
   </div>
 </div>
+<% end %>
 
 <div class='box box-solid'>
   <div class='container-fluid table-responsive'>

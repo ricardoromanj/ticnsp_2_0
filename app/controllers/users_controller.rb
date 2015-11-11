@@ -144,8 +144,10 @@ class UsersController < WebApplicationController
     respond_to do |format|
       if @user.save
 
-        # Send the wolcome email with temp password
-        CoordinatorMailer.welcome_coordinator(@user, temp_password).deliver_now
+        if @user.usertype == 'coordinator'
+          # Send the wolcome email with temp password
+          CoordinatorMailer.welcome_coordinator(@user, temp_password).deliver_now
+        end
 
         format.html { redirect_to @user, notice: "#{@user.usertype.capitalize} was successfully created with password #{temp_password}" }
         format.json { render :show, status: :created, location: @user }

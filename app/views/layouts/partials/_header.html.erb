@@ -57,8 +57,8 @@
 						<li class='user-header'>
 							<%= image_tag current_user.current_image(80), class: 'img-circle', alt:'User Image' %>
 							<p>
-								<%= current_user.full_name %> - <%= current_user.usertype.capitalize %>
-								<small>Miembro desde <%= current_user.created_at.year %></small>
+								<%= current_user.full_name %>
+								<small><%= current_user.usertype.capitalize %></small>
 							</p>
 						</li>
 						<% if false %>

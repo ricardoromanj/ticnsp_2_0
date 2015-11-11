@@ -54,12 +54,17 @@
 
 <div class='row'>
 	<div class='col-sm-4'>
-		<div class='box box-warning'>
+		<div class='box box-danger'>
 			<div class='box-header with-border'>
-				<h3 class='box-title'>Actividades</h3>
+				<h3 class='box-title'>Evangelio del día</h3>
 			</div>
 			<div class='box-body'>
-
+				<% @readings.each do |reading| %>
+					<p>
+						<strong><%= reading[:title].html_safe %></strong><br>
+						<%= reading[:reading].html_safe %>
+					</p>
+				<% end %>
 			</div>
 			<div class='box-footer'>
 
@@ -76,6 +81,17 @@
 			</div>
 			<div class='box-footer'>
 				
+			</div>
+		</div>
+		<div class='box box-warning'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Actividades</h3>
+			</div>
+			<div class='box-body'>
+
+			</div>
+			<div class='box-footer'>
+
 			</div>
 		</div>
 	</div>

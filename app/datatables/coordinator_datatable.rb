@@ -21,7 +21,7 @@ class CoordinatorDatatable < AjaxDatatablesRails::Base
       [
         # comma separated list of the values for each cell of a table row
         # example: record.attribute,
-        show + edit + destroy + image + "<span class='pull-right'>#{record.id}</span>".html_safe,
+        show + image + "<span class='pull-right'>#{record.id}</span>".html_safe,
         record.name,
         record.lastname,
         record.gender,
