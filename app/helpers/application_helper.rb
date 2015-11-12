@@ -3,4 +3,16 @@ module ApplicationHelper
 	    gravatar_id = Digest::MD5.hexdigest(email.downcase)
 	    "http://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=identicon"
 	end
+
+	def user_type_display( usertype )
+		if usertype =~ /^admin/
+			return 'Adminsitrador'
+		elsif usertype =~ /^general/
+			return 'Coordinador general'
+		elsif usertype =~ /^coordinator$/
+			return 'Coordinador'
+		else
+			return 'Usuario'
+		end
+	end
 end

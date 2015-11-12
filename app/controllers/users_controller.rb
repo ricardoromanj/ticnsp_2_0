@@ -144,7 +144,7 @@ class UsersController < WebApplicationController
     respond_to do |format|
       if @user.save
 
-        if @user.usertype == 'coordinator'
+        if @user.usertype =~ /coordinator/
           # Send the wolcome email with temp password
           CoordinatorMailer.welcome_coordinator(@user, temp_password).deliver_now
         end

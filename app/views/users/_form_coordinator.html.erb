@@ -11,7 +11,12 @@
     </div>
   <% end %>
 
-  <%= hidden_field_tag 'user[usertype]', 'coordinator'  %>
+  <div class="form-group">
+    <%= f.label 'Rango', class: 'control-label col-sm-2' %>
+    <div class='col-sm-3'>
+      <%= f.select :usertype, options_for_select([['Coordinador','coordinator'],['Coordinador General','general_coordinator']], @user.usertype), {}, { class: 'form-control form-control-ticnsp' } %>
+    </div>
+  </div>
   <hr>
   <div class="form-group">
     <%= f.label 'Nombre', class: 'control-label col-sm-2' %>

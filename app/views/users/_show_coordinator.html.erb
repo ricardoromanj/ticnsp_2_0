@@ -8,7 +8,7 @@
   </div>
   <div class='box-body'>
     <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, coordinators_users_path, class: 'btn btn-app' %>
-    <% if current_user.usertype == 'admin'%>
+    <% if current_user.usertype =~ /admin/%>
     <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_coordinator_user_path(@user), class: 'btn btn-app' %>
     <%= link_to '<i class="fa fa-times"></i> Eliminar'.html_safe, @user, class: 'btn btn-app bg-maroon pull-right', method: :delete, 'data-confirm' => 'Are you sure?' %>
     <% end %>
@@ -19,15 +19,16 @@
   <div class='col-md-6'>
     <div class="box box-widget widget-user-2">
       <!-- Add the bg color to the header using any of the bg-* classes -->
-      <div class="widget-user-header bg-aqua">
+      <div class="widget-user-header bg-teal">
         <div class="widget-user-image">
           <%= image_tag @user.current_image(128), class: 'img-circle' %>
         </div>
         <!-- /.widget-user-image -->
         <h3 class="widget-user-username"><%= @user.full_name %></h3>
-        <h5 class="widget-user-desc"><%= @user.usertype %></h5>
+        <h5 class="widget-user-desc"><%= user_type_display @user.usertype %></h5>
       </div>
       <div class='box-body'>
+        <br>
         <p>
           <strong>Correo:</strong>
           <%= @user.email %>

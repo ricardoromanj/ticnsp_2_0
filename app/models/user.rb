@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  validates :usertype, inclusion: { in: ['admin', 'general_coordinator', 'coordinator'] }
   # Set default values for settings
   before_create :set_defaults
 

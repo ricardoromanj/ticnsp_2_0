@@ -58,7 +58,7 @@
 							<%= image_tag current_user.current_image(80), class: 'img-circle', alt:'User Image' %>
 							<p>
 								<%= current_user.full_name %>
-								<small><%= current_user.usertype.capitalize %></small>
+								<small><%= user_type_display current_user.usertype %></small>
 							</p>
 						</li>
 						<% if false %>
