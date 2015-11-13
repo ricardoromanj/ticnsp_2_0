@@ -24,6 +24,7 @@ class CoordinatorDatatable < AjaxDatatablesRails::Base
         show + image + "<span class='pull-right'>#{record.id}</span>".html_safe,
         record.name,
         record.lastname,
+        (record.usertype =~ /general/ ? 'Coordinador general' : 'Coordinador'),
         record.gender,
         record.email,
         record.birthdate
@@ -33,7 +34,7 @@ class CoordinatorDatatable < AjaxDatatablesRails::Base
 
   def get_raw_records
     # insert query here
-    User.where(usertype: 'coordinator')
+    User.where("usertype like '%coordinator'")
   end
 
   def typecast
