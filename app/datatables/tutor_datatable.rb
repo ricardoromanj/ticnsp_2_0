@@ -36,5 +36,9 @@ class TutorDatatable < AjaxDatatablesRails::Base
     User.where(usertype: 'tutor')
   end
 
+  def typecast
+    'CHAR'
+  end
+
   # ==== Insert 'presenter'-like methods below if necessary
 end

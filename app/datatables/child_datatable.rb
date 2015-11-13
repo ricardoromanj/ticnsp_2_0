@@ -35,5 +35,9 @@ class ChildDatatable < AjaxDatatablesRails::Base
     Child.all
   end
 
+  def typecast
+    'CHAR'
+  end
+
   # ==== Insert 'presenter'-like methods below if necessary
 end

@@ -33,5 +33,9 @@ class CommissionDatatable < AjaxDatatablesRails::Base
     Commission.all
   end
 
+  def typecast
+    'CHAR'
+  end
+
   # ==== Insert 'presenter'-like methods below if necessary
 end

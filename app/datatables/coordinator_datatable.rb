@@ -36,5 +36,9 @@ class CoordinatorDatatable < AjaxDatatablesRails::Base
     User.where(usertype: 'coordinator')
   end
 
+  def typecast
+    'CHAR'
+  end
+
   # ==== Insert 'presenter'-like methods below if necessary
 end

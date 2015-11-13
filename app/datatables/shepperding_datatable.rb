@@ -33,5 +33,9 @@ class ShepperdingDatatable < AjaxDatatablesRails::Base
     Shepperding.all
   end
 
+  def typecast
+    'CHAR'
+  end
+
   # ==== Insert 'presenter'-like methods below if necessary
 end

@@ -30,5 +30,9 @@ class VisitorMessageDatatable < AjaxDatatablesRails::Base
     VisitorMessage.all
   end
 
+  def typecast
+    'CHAR'
+  end
+
   # ==== Insert 'presenter'-like methods below if necessary
 end

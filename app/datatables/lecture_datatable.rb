@@ -33,5 +33,9 @@ class LectureDatatable < AjaxDatatablesRails::Base
     Lecture.all
   end
 
+  def typecast
+    'CHAR'
+  end
+
   # ==== Insert 'presenter'-like methods below if necessary
 end
