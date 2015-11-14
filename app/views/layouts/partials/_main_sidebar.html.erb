@@ -34,6 +34,8 @@
       
       <li class='<%= params['action'] =~ /dashboard/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-dashboard'></i> <span>Dashboard</span>".html_safe, root_path %></li>
 
+      <li class='<%= params['action'] =~ /evangelio/ ? 'active' : '' %>'><%= link_to "<i class='ion ion-ios-bookmarks'></i> <span>Evangelio</span>".html_safe, evangelio_path %></li>
+
       <li class='<%= params['controller'] =~ /notices/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-comment'></i> <span>Avisos</span>".html_safe, view_notices_path %></li>
 
       <li class='<%= params['controller'] =~ /visitor_messages/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-inbox'></i> <span>Mensajes</span>".html_safe, visitor_messages_path %></li>

@@ -1,0 +1,44 @@
+<% content_for :title, 'Dashboard - TIC' %>
+<% content_for :page_title, 'Evangelio' %>
+
+<div class='row'>
+	<div class='col-lg-4 col-md-5 col-sm-12'>
+		<div class='box box-solid'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Selecciona una fecha: </h3>
+			</div>
+			<div class='box-body'>
+				<%= form_tag evangelio_path, method: :get do %>
+					<%= hidden_field_tag :current_readings, @date.strftime( '%Y%m%d' ), class: 'form-control form-control-ticnsp datepicker' %>
+					<%= text_field_tag :request_readings, nil, class: 'form-control form-control-ticnsp datepicker' %>
+					<br />
+					<%= submit_tag 'Solicitar', class: 'btn btn-flat bg-aqua btn-block' %>
+				<% end %>
+				<script>
+					$('.datepicker').datepicker({
+						format: 'mm/dd/yyyy'
+					})
+				</script>
+			</div>
+		</div>
+	</div>
+	<div class='col-lg-8 col-md-7 col-sm-12'>
+		<div class='box box-solid'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Evangelio de <%= @date.strftime( '%b %d, %Y' ) %></h3>
+				<div class='box-tools'>
+					<%= link_to "<i class='fa fa-angle-left'></i> #{ ( @date - 1.day ).strftime( '%b %d, %Y' ) }".html_safe, evangelio_path( request_readings: ( @date - 1 ).strftime( '%m/%d/%Y' ) ), class: 'btn btn-default btn-flat' %> |
+					<%= link_to "#{ ( @date + 1.day ).strftime( '%b %d, %Y' ) } <i class='fa fa-angle-right'></i>".html_safe, evangelio_path( request_readings: ( @date + 1 ).strftime( '%m/%d/%Y' ) ), class: 'btn btn-default btn-flat' %>
+				</div>
+			</div>
+			<div class='box-body'>
+				<% @readings.each do |reading| %>
+					<p>
+						<strong><%= reading[:title].html_safe %></strong><br />
+						<%= reading[:reading].html_safe %>
+					</p>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

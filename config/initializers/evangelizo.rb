@@ -151,21 +151,32 @@ module Evangelizo
     end
 
     def self.daypack( date, lang )
-      daypack = []
+      daypack_result = Rails.cache.fetch( "daypack_#{ date }_#{ lang }", expires_in: 5.days ) do
+        daypack = []
 
-      # Get first reading
-      daypack << { title: title( date, lang, 'FR' ), reading: reading( date, lang, 'FR' ) }
+        # Get first reading
+        daypack << { title: title( date, lang, 'FR' ), reading: reading( date, lang, 'FR' ) }
 
-      # For the second reading, we need validation
-      second_reading = { title: title( date, lang, 'SR' ), reading: reading( date, lang, 'SR' ) }
-      unless second_reading[:title] == " <font dir=\"ltr\"></font>\n"
-        daypack << second_reading
+        # Check if we got no error
+        if daypack.first[:title] =~ /^<font color=red><b>Error/
+          daypack = [ { title: 'No hay información. Elige una fecha a no más de 30 días de la fecha actual.', reading: '' } ]
+        else
+
+          # For the second reading, we need validation
+          second_reading = { title: title( date, lang, 'SR' ), reading: reading( date, lang, 'SR' ) }
+          unless second_reading[:title] == " <font dir=\"ltr\"></font>\n"
+            daypack << second_reading
+          end
+
+          # Get the Gospel
+          daypack << { title: title( date, lang, 'GSP' ), reading: reading( date, lang, 'GSP' ) }
+
+        end
+
+        daypack
       end
-
-      # Get the Gospel
-      daypack << { title: title( date, lang, 'GSP' ), reading: reading( date, lang, 'GSP' ) }
       
-      return daypack
+      return daypack_result
     end
 
   end

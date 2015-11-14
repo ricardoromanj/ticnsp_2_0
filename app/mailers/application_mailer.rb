@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "avisos@ticnsp.org"
+  default from: "TICNSP <avisos@ticnsp.org>"
   layout 'mailer'
 end
