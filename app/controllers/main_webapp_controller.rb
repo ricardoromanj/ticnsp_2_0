@@ -7,7 +7,7 @@ class MainWebappController < WebApplicationController
   	unless params[:request_readings].blank?
   		@date = Date.strptime( params[:request_readings], '%m/%d/%Y' )
   	else
-  		@date = params[:current_readings].blank? ? Date.today.strftime( '%Y%m%d' ) : Date.strptime( params[:current_readings], '%Y%m%d' )
+  		@date = params[:current_readings].blank? ? Date.today : Date.strptime( params[:current_readings], '%Y%m%d' )
   	end
   	@readings = Evangelizo::Reading.daypack( @date.strftime( '%Y%m%d' ), 'SP' )
   end
