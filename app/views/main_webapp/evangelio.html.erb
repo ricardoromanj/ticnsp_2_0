@@ -27,8 +27,8 @@
 			<div class='box-header with-border'>
 				<h3 class='box-title'>Evangelio de <%= @date.strftime( '%b %d, %Y' ) %></h3>
 				<div class='box-tools'>
-					<%= link_to "<i class='fa fa-angle-left'></i> #{ ( @date - 1.day ).strftime( '%b %d, %Y' ) }".html_safe, evangelio_path( request_readings: ( @date - 1 ).strftime( '%m/%d/%Y' ) ), class: 'btn btn-default btn-flat' %> |
-					<%= link_to "#{ ( @date + 1.day ).strftime( '%b %d, %Y' ) } <i class='fa fa-angle-right'></i>".html_safe, evangelio_path( request_readings: ( @date + 1 ).strftime( '%m/%d/%Y' ) ), class: 'btn btn-default btn-flat' %>
+					<%= link_to "<i class='fa fa-angle-left'></i>".html_safe, evangelio_path( request_readings: ( @date - 1 ).strftime( '%m/%d/%Y' ) ), class: 'btn btn-default btn-flat' %>
+					<%= link_to "<i class='fa fa-angle-right'></i>".html_safe, evangelio_path( request_readings: ( @date + 1 ).strftime( '%m/%d/%Y' ) ), class: 'btn btn-default btn-flat' %>
 				</div>
 			</div>
 			<div class='box-body'>

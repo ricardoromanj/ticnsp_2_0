@@ -85,14 +85,14 @@
 <section class='section-team' id='team'>
 	<div class='container'>
 		<h1 class='ticnsp-section-title'>Conoce a nuestra <strong>comunidad</strong> de coordinadores</h1>
-		<% ['ana','med','hil','ils','isa','jor','lau','dan','ola','pao','ric','gab'].each_slice(4) do |coord_set| %>
+		<% @coordinators.each_slice( 4 ) do |coord_set| %>
 			<div class='row'>
 				<% coord_set.each do |coord| %>
 					<div class='col-md-3 col-sm-6'>
 						<div class='ticnsp-team-member'>
-							<%= image_tag "coord_#{coord}.jpg", class: 'ticnsp-team-member-image' %><br/>
-							<span class='ticnsp-team-member-name'><%= @coord_info[coord][:name] %></span><br/>
-							<span class='ticnsp-team-member-position'><%= @coord_info[coord][:position] %></span>
+							<%= image_tag coord.current_image(150), class: 'ticnsp-team-member-image' %><br />
+							<span class='ticnsp-team-member-name'><%= coord.full_name %></span><br />
+							<span class='ticnsp-team-member-position'><%= user_type_display coord.usertype %></span>
 						</div>
 					</div>
 				<% end %>
