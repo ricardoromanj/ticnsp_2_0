@@ -4,12 +4,12 @@ class NoticesController < WebApplicationController
   # GET /notices
   # GET /notices.json
   def index
-    @notices = Notice.all.paginate(page: params[:page], per_page: 5)
+    @notices = Notice.includes( :user ).order( created_at: :desc ).paginate(page: params[:page], per_page: 5)
   end
 
   # GET /notices/view
   def view
-    @notices = Notice.all.paginate(page: params[:page], per_page: 5)
+    @notices = Notice.includes( :user ).order( created_at: :desc ).paginate(page: params[:page], per_page: 5)
   end
 
   # GET /notices/1
@@ -30,10 +30,17 @@ class NoticesController < WebApplicationController
   # POST /notices.json
   def create
     @notice = Notice.new(notice_params)
+    @notice.user = current_user
 
     respond_to do |format|
       if @notice.save
-        format.html { redirect_to @notice, notice: 'Notice was successfully created.' }
+
+        # Create a notifition when a notice is created
+        ( User.all - [ current_user ] ).each do |user|
+          Notification.create( recipient: user, actor: current_user, action: 'publicó', notifiable: @notice )
+        end
+
+        format.html { redirect_to notices_url( anchor: "notice_#{ @notice.id }" ), notice: 'Notice was successfully created.' }
         format.json { render :show, status: :created, location: @notice }
       else
         format.html { render :new }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808063149) do
+ActiveRecord::Schema.define(version: 20151211054329) do
 
   create_table "children", force: :cascade do |t|
     t.string   "name"
@@ -98,6 +98,18 @@ ActiveRecord::Schema.define(version: 20150808063149) do
     t.string   "notice_type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "phones", force: :cascade do |t|

@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   resources :semesters
   # Application root
   root 'main#index'
-  
+
   # Path for leaving messages
   post '/leave_message' => 'main#leave_message'
-  
+
   # Main dasboard index
   get 'main_webapp/index'
   get 'dashboard' => 'main_webapp#dashboard'
@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Resources configurations
+  resources :notifications do
+    collection do
+      post 'mark_as_read'
+    end
+  end
   resources :notices do
     collection do
       get 'view'

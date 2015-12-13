@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   has_many :phones
   has_many :emails
 
+  # Notifications relation
+  has_many :notifications, foreign_key: :recipient_id
+
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: lambda {|attributes| attributes['number'].blank?}
   accepts_nested_attributes_for :emails, allow_destroy: true, reject_if: lambda {|attributes| attributes['email'].blank?}
 

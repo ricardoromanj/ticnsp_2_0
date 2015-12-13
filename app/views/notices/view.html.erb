@@ -17,18 +17,10 @@
 <br />
 <div class='row'>
 	<div class='col-xs-12'>
-		<div class='box box-solid'>
-			<div class='box-body'>
-				<hr>
-				<%= will_paginate @notices, renderer: BootstrapPagination::Rails %>
-				<% @notices.each do |notice| %>
-					<h4 class='text-<%= notice.notice_type%>'><%= notice.heading %></h4>
-					<span class='text-muted'>Publicado <%= notice.created_at.strftime(' %b %d, %Y %H:%M') %></span><br />
-					<p><%= notice.text.html_safe %></p>
-					<hr>
-				<% end %>
-				<%= will_paginate @notices, renderer: BootstrapPagination::Rails %>
-			</div>
-		</div>
+		<%= will_paginate @notices, renderer: BootstrapPagination::Rails %>
+    <% @notices.each do |notice| %>
+      <%= render 'notices/notice', notice: notice %>
+		<% end %>
+		<%= will_paginate @notices, renderer: BootstrapPagination::Rails %>
 	</div>
 </div>
