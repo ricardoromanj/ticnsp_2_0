@@ -40,6 +40,8 @@ class NoticesController < WebApplicationController
           Notification.create( recipient: user, actor: current_user, action: 'publicó', notifiable: @notice )
         end
 
+        # Send Twilio SMS (use the subject field)
+
         format.html { redirect_to notices_url( anchor: "notice_#{ @notice.id }" ), notice: 'Notice was successfully created.' }
         format.json { render :show, status: :created, location: @notice }
       else
