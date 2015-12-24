@@ -4,7 +4,7 @@
   	<span data-behavior='notification-unreadcount' class="label label-warning"></span>
   </a>
   <ul class="dropdown-menu">
-  	<li id='notifications-header' class="header"></li>
+  	<li id='notifications-header' class="header" data-behavior='notification-header'></li>
   	<li>
      	<ul id='notifications-menu' class="menu" data-behavior='notification-items'>
       		<%
@@ -12,22 +12,6 @@
        		%>
      	</ul>
    	</li>
-    <!-- <li class="footer"><a href="#">Ver todas</a></li> -->
+    <li class="footer"><a href="#">Ver todas</a></li>
   </ul>
-
-  <script>
-    $.getJSON("<%= notices_path %>", function (data) {
-      // $('#notifications-header').append('Hay '+ data.length + ' avisos este mes');
-      // $('#notifications-badge').append(data.length);
-      $.each(data, function (key, val) {
-        // $('#notifications-menu').append('\
-        //   <li>\
-        //    <a href="/notices/view#' + val.id + '">\
-        //      <i class="fa fa-circle-o text-' + val.notice_type + '"></i> ' + val.text_stripped + '\
-        //    </a>\
-        //  </li>\
-        //  ');
-      });
-    });
-  </script>
 </li>

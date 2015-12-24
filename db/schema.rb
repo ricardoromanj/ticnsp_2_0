@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211054329) do
+ActiveRecord::Schema.define(version: 20151224003014) do
 
   create_table "children", force: :cascade do |t|
     t.string   "name"
@@ -156,12 +156,12 @@ ActiveRecord::Schema.define(version: 20151211054329) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",   null: false
-    t.string   "encrypted_password",     default: "",   null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,    null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -170,10 +170,10 @@ ActiveRecord::Schema.define(version: 20151211054329) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "usertype",               default: "",   null: false
-    t.string   "username",               default: "",   null: false
+    t.string   "usertype",               default: "",    null: false
+    t.string   "username",               default: "",    null: false
     t.string   "image_id"
-    t.boolean  "use_gravatar",           default: true, null: false
+    t.boolean  "use_gravatar",           default: true,  null: false
     t.string   "name"
     t.string   "lastname"
     t.string   "birthdate"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20151211054329) do
     t.string   "settings"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",                 default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

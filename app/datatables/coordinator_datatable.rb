@@ -2,7 +2,7 @@ class CoordinatorDatatable < AjaxDatatablesRails::Base
   def_delegators :@view, :link_to, :h, :mailto, :edit_resource_path
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= %w(User.name User.lastname User.gender User.email User.birthdate)
+    @sortable_columns ||= %w(User.active User.name User.lastname User.gender User.email User.birthdate)
   end
 
   def searchable_columns
@@ -14,6 +14,7 @@ class CoordinatorDatatable < AjaxDatatablesRails::Base
 
   def data
     records.map do |record|
+      active = "<i class='fa fa-circle pull-right text-#{ record.active? ? 'green' : 'gray' }'></i>"
       image = "<img src=#{record.current_image(30)} class='img-circle pull-right' alt='#{record.name} image' height='30px' style='margin-left: 15px;'/>"
       show = "<a style= 'margin: 0 .5em;' class='btn btn-xs bg-teal' href='/users/#{record.id}'>Show</a>"
       edit = "<a style= 'margin: 0 .5em;' class='btn btn-xs btn-default' href='/users/#{record.id}/edit_coordinator'>Edit</a>"
@@ -22,6 +23,7 @@ class CoordinatorDatatable < AjaxDatatablesRails::Base
         # comma separated list of the values for each cell of a table row
         # example: record.attribute,
         show + image + "<span class='pull-right'>#{record.id}</span>".html_safe,
+        active,
         record.name,
         record.lastname,
         (record.usertype =~ /general/ ? 'Coordinador general' : 'Coordinador'),

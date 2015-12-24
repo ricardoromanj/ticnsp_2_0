@@ -8,7 +8,7 @@
       <span class='description'>Publicado <%= notice.created_at.strftime( '%b %d, %Y %H:%M' ) %></span>
     </div>
     <div class='box-tools'>
-      <%= link_to "<i class='fa fa-times'></i>".html_safe, notice, class: 'btn btn-box-tools', method: :delete, 'data-confirm' => "¿Seguro que deseas borrar este aviso?" %>
+      <%= (link_to "<i class='fa fa-times'></i>".html_safe, notice, class: 'btn btn-box-tools', method: :delete, 'data-confirm' => "¿Seguro que deseas borrar este aviso?") if ['general_coordinator', 'admin'].include? current_user.usertype %>
     </div>
   </div>
   <div class='box-body'>

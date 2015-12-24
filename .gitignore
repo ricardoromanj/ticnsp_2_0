@@ -24,3 +24,5 @@
 /log/*
 !/log/.keep
 /tmp
+
+start_dev_server.sh

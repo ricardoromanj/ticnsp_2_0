@@ -17,8 +17,8 @@
 	<div class='col-md-3'>
 		<div class='small-box bg-yellow'>
 			<div class='inner'>
-				<h3><%= User.where(usertype: 'coordinator').count %></h3>
-				<p>Coordinadores</p>
+				<h3><%= User.active_coordinators.count %></h3>
+				<p>Coordinadores activos</p>
 			</div>
 			<div class='icon'>
 				<i class='ion ion-person-stalker'></i>
@@ -67,7 +67,7 @@
 				<% end %>
 			</div>
 			<div class='box-footer'>
-
+        <%= link_to 'Calendario litúrgico <i class="fa fa-chevron-right"></i>'.html_safe, evangelio_path, class: 'pull-right btn btn-flat btn-danger' %>
 			</div>
 		</div>
 	</div>
@@ -77,10 +77,23 @@
 				<h3 class='box-title'>Avisos</h3>
 			</div>
 			<div class='box-body'>
-
+        <div class='direct-chat-messages'>
+          <% Notice.all.order( created_at: :desc ).limit(5).each do |notice| %>
+            <div class='direct-chat-msg'>
+              <div class='direct-chat-info clearfix'>
+                <span class='direct-chat-name pull-left'><%= notice.user.full_name %></span>
+                <span class='direct-chat-timestamp pull-right'><%= notice.created_at %></span>
+              </div>
+              <%= image_tag notice.user.current_image( 128 ), class: 'direct-chat-img' %>
+              <div class='direct-chat-text'>
+                <%= text_shrinkinator notice.text.html_safe, 140, "#{ link_to '...', notices_path( anchor: dom_id( notice ) ) }" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
 			</div>
 			<div class='box-footer'>
-				
+        <%= link_to 'Ver todos <i class="fa fa-chevron-right"></i>'.html_safe, notices_path, class: 'pull-right btn btn-flat btn-primary' %>
 			</div>
 		</div>
 		<div class='box box-warning'>
@@ -101,10 +114,23 @@
 				<h3 class='box-title'>Mensajes de visitas</h3>
 			</div>
 			<div class='box-body'>
-
+        <div class='direct-chat-messages'>
+          <% VisitorMessage.all.order( created_at: :desc ).limit(5).each do |vmessage| %>
+            <div class='direct-chat-msg'>
+              <div class='direct-chat-info clearfix'>
+                <span class='direct-chat-name pull-left'><%= vmessage.name %></span>
+                <span class='direct-chat-timestamp pull-right'><%= vmessage.created_at %></span>
+              </div>
+              <%= image_tag gravatar_url_from_email( vmessage.email ), class: 'direct-chat-img' %>
+              <div class='direct-chat-text'>
+                <%= text_shrinkinator vmessage.message_text.html_safe, 140, "#{ link_to '...', visitor_messages_path }" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
 			</div>
 			<div class='box-footer'>
-				
+        <%= link_to 'Ver todos <i class="fa fa-chevron-right"></i>'.html_safe, visitor_messages_path, class: 'pull-right btn btn-flat btn-success' %>
 			</div>
 		</div>
 	</div>

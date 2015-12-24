@@ -19,7 +19,7 @@
   <div class='col-md-6'>
     <div class="box box-widget widget-user-2">
       <!-- Add the bg color to the header using any of the bg-* classes -->
-      <div class="widget-user-header bg-teal">
+      <div class="widget-user-header bg-<%= @user.active? ? (@user.gender == 'h' ? 'blue' : 'red') : 'gray' %>">
         <div class="widget-user-image">
           <%= image_tag @user.current_image(128), class: 'img-circle' %>
         </div>

@@ -4,7 +4,7 @@
 <div class='user-profile-picture'>
   <center><%= image_tag @user.current_image(150), class: 'img-responsive img-circle' %></center>
   <h1 class='text-center'><%= current_user.full_name %></h1>
-  <p class='text-center'><%= current_user.usertype.capitalize %></p>
+  <p class='text-center'><%= user_type_display current_user.usertype %></p>
 </div>
 
 <div class='box box-solid'>
@@ -14,26 +14,26 @@
   <div class='box-body'>
     <%= form_for(@user, :url => { :action => "update_password" }, html: { class: 'form-horizontal', id: 'change-password-form' }) do |f| %>
      <div class="form-group">
-        <%= f.label :current_password, class: 'control-label col-sm-3' %> <i>(necesitamos tu contraseña actual para confirmar cambios)</i>
+        <%= f.label 'Contraseña actual', class: 'control-label col-sm-3' %> <i>(necesitamos tu contraseña actual para confirmar cambios)</i>
         <div class='col-sm-3'>
           <%= f.password_field :current_password, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group">
-        <%= f.label :password, "Password", class: 'control-label col-sm-3' %>
+        <%= f.label 'Contraseña nueva', "Password", class: 'control-label col-sm-3' %>
         <div class='col-sm-3'>
           <%= f.password_field :password, :autocomplete => "off" , class: 'form-control' %>
         </div>
       </div>
       <div class="form-group">
-        <%= f.label :password_confirmation, class: 'control-label col-sm-3' %>
+        <%= f.label 'Repetir contraseña', class: 'control-label col-sm-3' %>
         <div class='col-sm-3'>
           <%= f.password_field :password_confirmation, class: 'form-control' %>
         </div>
       </div>
       <div class="form-group">
         <div class='col-sm-offset-3 col-sm-3'>
-          <%= f.submit 'Confirm', class: 'btn btn-primary' %>
+          <%= f.submit 'Cambiar', class: 'btn btn-primary' %>
         </div>
       </div>
     <% end %>

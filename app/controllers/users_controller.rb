@@ -1,4 +1,6 @@
 class UsersController < WebApplicationController
+  MAX_PHONE_FIELD_COUNT = 5
+
   before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_sidebar, :edit_tutor, :edit_coordinator, :assign_to_workshop, :unassign_from_workshop, :assign_to_lecture, :unassign_from_lecture, :assign_to_shepperding, :unassign_from_shepperding, :assign_to_commission, :unassign_from_commission]
 
   # GET /users
@@ -101,6 +103,7 @@ class UsersController < WebApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.active = true
   end
 
   # GET /users/new_tutor
@@ -112,7 +115,10 @@ class UsersController < WebApplicationController
   # GET /users/coordinator
   def new_coordinator
     @user = User.new(usertype: 'coordinator')
-    2.times { @user.phones.build }
+
+    # Phone field count
+    pfc = [ MAX_PHONE_FIELD_COUNT - @user.phones.count, 2].min
+    pfc.times { @user.phones.build }
   end
 
   # GET /users/1/edit
@@ -126,7 +132,9 @@ class UsersController < WebApplicationController
 
   # GET /users/1/edit_coordinator
   def edit_coordinator
-    2.times { @user.phones.build }
+    # Phone field count
+    pfc = [ MAX_PHONE_FIELD_COUNT - @user.phones.count, 2].min
+    pfc.times { @user.phones.build }
   end
 
   # POST /users
@@ -140,7 +148,7 @@ class UsersController < WebApplicationController
 
     use_gravatar = params[:user][:image_source] =~ /^gravatar$/ ? true : false
     @user.use_gravatar = use_gravatar
-    
+
     respond_to do |format|
       if @user.save
 
@@ -178,7 +186,9 @@ class UsersController < WebApplicationController
   # GET /users/profile
   def profile
     @user = current_user
-    2.times { @user.phones.build }
+    # Phone field count
+    pfc = [ MAX_PHONE_FIELD_COUNT - @user.phones.count, 2].min
+    pfc.times { @user.phones.build }
   end
 
   # PATCH/PUT /users/change_password
@@ -231,6 +241,6 @@ class UsersController < WebApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :usertype, :name, :lastname, :gender, :role, :birthdate, :username, :image, :notes, :password, :password_confirmation, :current_password, phones_attributes: [:id, :number, :phone_type, :_destroy])
+      params.require(:user).permit(:active, :email, :usertype, :name, :lastname, :gender, :role, :birthdate, :username, :image, :notes, :password, :password_confirmation, :current_password, phones_attributes: [:id, :number, :phone_type, :_destroy])
     end
 end

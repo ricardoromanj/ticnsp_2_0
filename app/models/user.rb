@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   # Notifications relation
   has_many :notifications, foreign_key: :recipient_id
 
-  accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: lambda {|attributes| attributes['number'].blank?}
+  accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: (lambda {|attributes| attributes['number'].blank?})
   accepts_nested_attributes_for :emails, allow_destroy: true, reject_if: lambda {|attributes| attributes['email'].blank?}
 
   # Include default devise modules. Others available are:
@@ -41,6 +41,11 @@ class User < ActiveRecord::Base
   serialize :recents
   serialize :favorites
   serialize :settings
+
+  # Scopes
+  scope :coordinators, -> { where( "usertype in ('coordinator', 'general_coordinator' )" ) }
+  scope :active_coordinators, -> { where( "usertype in ('coordinator', 'general_coordinator')" ).where( active: true ) }
+  scope :general_coordinators, -> { where( usertype: 'general_coordinator' ) }
 
   def full_name
   	"#{name} #{lastname}"

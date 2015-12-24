@@ -15,4 +15,12 @@ module ApplicationHelper
 			return 'Usuario'
 		end
 	end
+
+  def text_shrinkinator( text, chars, link )
+    if text.length > chars
+      (text[0..chars] + link).html_safe
+    else
+      text
+    end
+  end
 end

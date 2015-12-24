@@ -5,12 +5,19 @@ class Notifications
 
   setup: ->
     $("[data-behavior='notification-link']").on "click", @handleClick
-    $.ajax(
-      url: "/notifications.json"
-      dataType: 'JSON'
-      method: 'GET'
-      success: @handleSuccess
-    )
+    @fetchData()
+    setInterval @fetchData, 5000
+
+
+  fetchData: =>
+    unless $("[data-behavior='notification-items']").is(':visible')
+      $.ajax(
+        url: "/notifications.json"
+        dataType: 'JSON'
+        method: 'GET'
+        success: @handleSuccess
+      )
+
 
   handleClick: (e) =>
     $.ajax(
@@ -24,9 +31,14 @@ class Notifications
   handleSuccess: (data) =>
     console.log(data)
     items = $.map data, (notification) ->
-      "<li><a href='#{notification.url}'>#{notification.actor} #{notification.action} #{notification.notifiable.type}</a></li>"
+      "<li><a href='#{notification.url}'><i class='#{notification.notifiable.icon} #{notification.notifiable.iconColor}'></i> #{notification.actor} #{notification.action} #{notification.notifiable.type}</a></li>"
     $("[data-behavior='notification-unreadcount']").html(items.length)
+    if items.length > 0
+      $("[data-behavior='notification-header']").html('Tienes ' + items.length + ' notificaciones nuevas')
+    else
+      $("[data-behavior='notification-header']").html('No hay notificaciones nuevas')
     $("[data-behavior='notification-items']").html(items)
 
 jQuery ->
   new Notifications
+

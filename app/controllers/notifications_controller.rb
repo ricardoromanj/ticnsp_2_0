@@ -11,6 +11,6 @@ class NotificationsController < WebApplicationController
 
   private
     def set_notifications
-      @notifications = Notification.where( recipient: current_user ).unread
+      @notifications = Notification.where( recipient: current_user ).unread.order( created_at: :desc )
     end
 end
