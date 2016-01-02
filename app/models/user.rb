@@ -71,6 +71,16 @@ class User < ActiveRecord::Base
   	end
   end
 
+  def usertype_string
+    if usertype =~ /^admin$/
+      'Administrador'
+    elsif usertype =~ /^general/
+      'Coordinador general'
+    elsif usertype =~ /^coordinator$/
+      'Coordinador'
+    end
+  end
+
   def set_setting(key, value)
     self.settings[key] = value
     self.save

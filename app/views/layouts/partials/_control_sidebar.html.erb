@@ -8,7 +8,13 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <!-- Home tab content -->
-    <div class="tab-pane active" id="control-sidebar-home-tab">
+    <div data-behavior='activity-stream' class="tab-pane active" id="control-sidebar-home-tab">
+      <h3 class='control-sidebar-heading'>Actividad reciente</h3>
+      <ul class='control-sidebar-menu' data-behavior='activity-stream-items'>
+        
+      </ul>
+
+      <% if false %>
       <h3 class="control-sidebar-heading">Recent Activity</h3>
       <ul class='control-sidebar-menu'>
         <li>
@@ -36,6 +42,7 @@
           </a>
         </li>                         
       </ul><!-- /.control-sidebar-menu -->         
+      <% end %>
 
     </div><!-- /.tab-pane -->
     <!-- Stats tab content -->

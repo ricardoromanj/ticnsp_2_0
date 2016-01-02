@@ -6,7 +6,7 @@ class Notifications
   setup: ->
     $("[data-behavior='notification-link']").on "click", @handleClick
     @fetchData()
-    setInterval @fetchData, 5000
+    setInterval @fetchData, 30000
 
 
   fetchData: =>

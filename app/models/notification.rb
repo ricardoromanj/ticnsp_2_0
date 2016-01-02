@@ -4,4 +4,5 @@ class Notification < ActiveRecord::Base
   belongs_to :notifiable, polymorphic: true
 
   scope :unread, -> { where( read_at: nil ) }
+  scope :read, -> { where( 'read_at NOT null' ) }
 end
