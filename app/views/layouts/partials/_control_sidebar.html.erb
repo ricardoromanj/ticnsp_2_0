@@ -2,8 +2,8 @@
 <aside class="control-sidebar control-sidebar-dark">                
   <!-- Create the tabs -->
   <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-    <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-    <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+    <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-folder-open-o"></i></a></li>
   </ul>
   <!-- Tab panes -->
   <div class="tab-content">
@@ -11,7 +11,18 @@
     <div data-behavior='activity-stream' class="tab-pane active" id="control-sidebar-home-tab">
       <h3 class='control-sidebar-heading'>Actividad reciente</h3>
       <ul class='control-sidebar-menu' data-behavior='activity-stream-items'>
-        
+        <% Notification.latest.each do |notif| %>
+          <li>
+            <a href='<%= eval("#{notif.notifiable.class.to_s.pluralize.downcase}_path( anchor: dom_id( notif.notifiable ) )") %>'>
+              <i class="menu-icon <%= "#{ notif.human_notifiable[:icon] } bg-#{ notif.human_notifiable[:color] }" %>"></i>
+              <div class='menu-info'>
+                <h4 class='control-sidebar-subheading'><%= notif.actor.full_name %></h4>
+                <p><%= notif.action %> <%= notif.human_notifiable[:text] %></p>
+                <p><%= human_date notif.created_at %></p>
+              </div>
+            </a>
+          </li>
+        <% end %>
       </ul>
 
       <% if false %>
@@ -50,7 +61,7 @@
     <!-- Settings tab content -->
     <div class="tab-pane" id="control-sidebar-settings-tab">            
       <form method="post">
-        <h3 class="control-sidebar-heading">General Settings</h3>
+        <h3 class="control-sidebar-heading">Sitios recientes</h3>
         <div class="form-group">
           <label class="control-sidebar-subheading">
             Report panel usage

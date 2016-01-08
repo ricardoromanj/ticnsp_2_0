@@ -23,4 +23,8 @@ module ApplicationHelper
       text
     end
   end
+
+  def human_date( date )
+    date.strftime('%b %d, %Y')
+  end
 end
