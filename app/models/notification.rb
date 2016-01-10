@@ -13,4 +13,8 @@ class Notification < ActiveRecord::Base
     end
   end
 
+  def self.for_user( user )
+    where( recipient: user ).where.not( actor: user )
+  end
+
 end

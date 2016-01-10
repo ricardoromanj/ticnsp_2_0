@@ -26,6 +26,6 @@ class RecentItem < ActiveRecord::Base
   private
     def check_dupe
       temp = RecentItem.where( visitor: visitor ).last
-      !( temp.recentable == recentable )
+      !( temp.recentable == recentable ) if temp
     end
 end

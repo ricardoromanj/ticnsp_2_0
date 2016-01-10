@@ -2,6 +2,70 @@
 <% content_for :page_title, 'Detalle de coordinador' %>
 <% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Coordinadores', coordinators_users_path }</li><li>Coordinador</li>".html_safe %>
 
+<div class='row'>
+  <div class='col-lg-3'>
+    <!-- Mainbox -->
+    <div class='box box-primary'>
+      <div class='box-body'>
+        <%= image_tag @user.current_image(128), class: 'profile-user-img img-responsive img-circle' %>
+        <h3 class='profile-username text-center'><%= @user.full_name %></h3>
+        <p class='text-muted text-center'><%= user_type_display @user.usertype %></p>
+        <ul class='list-group list-group-unbordered'>
+          <li class='list-group-item'>
+            <b>Status</b>
+            <span class='pull-right label label-<%= @user.active? ? "success" : "default" %>'><%= @user.active? ? "Activo" : "Inactivo" %></span>
+          </li>
+        </ul>
+        <% if ['admin', 'general_coordinator'].include? current_user.usertype %>
+          <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_coordinator_user_path( @user ), class: 'btn btn-default' %>
+        <% end %>
+        <% if current_user.usertype =~ /admin/ %>
+          <%= link_to '<i class="fa fa-times"></i> Eliminar'.html_safe, @user, class: 'btn bg-maroon pull-right', method: :delete, 'data-confirm' => 'Are you sure?' %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- About box -->
+    <div class='box box-primary'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Información</h3>
+      </div>
+      <div class='box-body'>
+        <strong><i class='fa fa-envelope'></i> Correo</strong>
+        <p class='text-muted'><%= @user.email %></p>
+        <hr>
+        <strong><i class='fa fa-calendar'></i> Fecha de nacimiento</strong>
+        <p class='text-muted'><%= @user.birthdate %></p>
+        <hr>
+        <strong><i class='fa fa-phone'></i> Teléfonos</strong>
+        <ul>
+          <% @user.phones.each do |phone| %>
+            <li><span class='text-muted'><%= phone.phone_type_display %>:</span> <a href='tel:<%= phone.number %>'><%= phone.number %></a></li>
+          <% end %>
+        </ul>
+        <hr>
+        <strong><i class='fa fa-file-text'></i> Notas</strong>
+        <div class='well'><%= @user.notes %></div>
+      </div>
+    </div>
+
+  </div>
+  <div class='col-lg-9'>
+    <div class='nav-tabs-custom'>
+      <ul class='nav nav-tabs'>
+        <li class='active'><a href='#profile-activity' data-toggle='tab'>Actividad</a></li>
+        <li><a href='#profile-assignments' data-toggle='tab'>Asignaciones</a></li>
+      </ul>
+      <div class='tab-content'>
+        <div class='tab-pane active' id='profile-activity'>
+          <%= render 'main_webapp/timeline', notifications: @notifications %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if false %>
 <div class='box box-solid'>
   <div class='box-header with-border'>
     <h3 class='box-title'>Acciones</h3>
@@ -54,7 +118,7 @@
     </div>
   </div>
   <div class='col-md-6'>
-    
+
         <div class='box box-solid'>
           <div class='box-header with-border'>
             <h3 class='box-title'>Taller</h3>
@@ -134,6 +198,7 @@
             </tbody>
           </table>
         </div>
-      
+
   </div>
 </div>
+<% end %>

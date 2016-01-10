@@ -36,7 +36,7 @@ class NoticesController < WebApplicationController
       if @notice.save
 
         # Create a notifition when a notice is created
-        ( User.all - [ current_user ] ).each do |user|
+        User.all.each do |user|
           Notification.create( recipient: user, actor: current_user, action: 'publicó', notifiable: @notice )
         end
 

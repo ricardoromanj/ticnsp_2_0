@@ -11,7 +11,7 @@
     <div data-behavior='activity-stream' class="tab-pane active" id="control-sidebar-home-tab">
       <h3 class='control-sidebar-heading'>Actividad reciente</h3>
       <ul class='control-sidebar-menu' data-behavior='activity-stream-items'>
-        <% Notification.latest.each do |notif| %>
+        <% Notification.where( recipient: current_user ).latest.each do |notif| %>
           <li>
             <a href='<%= eval("#{notif.notifiable.class.to_s.pluralize.downcase}_path( anchor: dom_id( notif.notifiable ) )") %>'>
               <i class="menu-icon <%= "#{ notif.human_notifiable[:icon] } bg-#{ notif.human_notifiable[:color] }" %>"></i>
