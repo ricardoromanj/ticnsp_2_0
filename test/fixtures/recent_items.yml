@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visitor_id: 1
+  recentable_id: 1
+  recentable_type: MyString
+
+two:
+  visitor_id: 1
+  recentable_id: 1
+  recentable_type: MyString

@@ -1,7 +1,7 @@
 class Child < ActiveRecord::Base
 	# Image
 	attachment :image, type: :image
-	
+
 	# Markable configuration
 	markable_as :responsability, by: :user
 	markable_as :enrolled_workshop, by: :workshop

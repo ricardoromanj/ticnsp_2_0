@@ -18,6 +18,7 @@ class WorkshopsController < WebApplicationController
   # GET /workshops/1
   # GET /workshops/1.json
   def show
+    RecentItem.create( visitor: current_user, recentable: @workshop )
   end
 
   # POST /workshops/1/assign_coordinator

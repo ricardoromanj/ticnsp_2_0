@@ -78,6 +78,8 @@ class User < ActiveRecord::Base
       'Coordinador general'
     elsif usertype =~ /^coordinator$/
       'Coordinador'
+    elsif usertype =~ /^tutor$/
+      'Tutor'
     end
   end
 

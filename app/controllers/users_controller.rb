@@ -37,6 +37,7 @@ class UsersController < WebApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    RecentItem.create( visitor: current_user, recentable: @user )
   end
 
   # POST /users/1/assign_to_workshop

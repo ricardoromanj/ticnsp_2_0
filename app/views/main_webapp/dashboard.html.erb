@@ -57,6 +57,9 @@
 		<div class='box box-danger'>
 			<div class='box-header with-border'>
 				<h3 class='box-title'>Evangelio del día</h3>
+        <div class='box-tools pull-right'>
+          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
 			</div>
 			<div class='box-body'>
 				<% @readings.each do |reading| %>
@@ -68,6 +71,22 @@
 			</div>
 			<div class='box-footer'>
         <%= link_to 'Calendario litúrgico <i class="fa fa-chevron-right"></i>'.html_safe, evangelio_path, class: 'pull-right btn btn-flat btn-danger' %>
+			</div>
+		</div>
+	</div>
+	<div class='col-sm-4'>
+		<div class='box box-purple'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Actividad grupal</h3>
+        <div class='box-tools pull-right'>
+          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+			</div>
+			<div class='box-body'>
+        <%= render 'main_webapp/timeline' %>
+			</div>
+			<div class='box-footer'>
+
 			</div>
 		</div>
 	</div>
@@ -96,19 +115,6 @@
         <%= link_to 'Ver todos <i class="fa fa-chevron-right"></i>'.html_safe, notices_path, class: 'pull-right btn btn-flat btn-primary' %>
 			</div>
 		</div>
-		<div class='box box-warning'>
-			<div class='box-header with-border'>
-				<h3 class='box-title'>Actividades</h3>
-			</div>
-			<div class='box-body'>
-
-			</div>
-			<div class='box-footer'>
-
-			</div>
-		</div>
-	</div>
-	<div class='col-sm-4'>
 		<div class='box box-success'>
 			<div class='box-header with-border'>
 				<h3 class='box-title'>Mensajes de visitas</h3>

@@ -40,14 +40,32 @@
 
       <li class='<%= params['controller'] =~ /visitor_messages/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-inbox'></i> <span>Mensajes</span>".html_safe, visitor_messages_path %></li>
 
+      <% if false %>
       <li class='<%= params['controller'] =~ /tasks/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-tasks'></i> <span>Actividades</span>".html_safe, '#' %></li>
 
       <li class='<%= params['controller'] =~ /events/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-calendar'></i> <span>Eventos</span>".html_safe, events_path %></li>
+      <% end %>
 
       <li class="header">ADMINISTRACIÓN DE CURSO</li>
 
+          <li class='<%= params['controller'] =~ /children/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-child'></i> <span>Niños inscritos</span>".html_safe, children_path %></li>
+
+          <li class='<%= params['controller'] =~ /coordinators/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Coordinadores</span>".html_safe, coordinators_users_path %></li>
+
+          <li class='<%= params['controller'] =~ /tutors/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Tutores</span>".html_safe, tutors_users_path %></li>
+
+          <li class='<%= params['controller'] =~ /lectures/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-institution'></i> <span>Catequesis</span>".html_safe, lectures_path %></li>
+
+          <li class='<%= params['controller'] =~ /workshops/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-graduation-cap'></i> <span>Talleres</span>".html_safe, workshops_path %></li>
+
+          <li class='<%= params['controller'] =~ /shepperdings/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-flag'></i> <span>Acompañamientos</span>".html_safe, shepperdings_path %></li>
+
+          <li class='<%= params['controller'] =~ /commissions/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-flag'></i> <span>Comisiones</span>".html_safe, commissions_path %></li>
+
+      <li class='header'>ADMINISTRACIÓN DE SISTEMA</li>
+
       <li class="treeview">
-        <a href="#"><i class='fa fa-book'></i> <span>Curso</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <a href="#"><i class='fa fa-gears'></i> <span>Sistema</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
           <li class='<%= params['controller'] =~ /children/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-child'></i> <span>Niños inscritos</span>".html_safe, children_path %></li>
 

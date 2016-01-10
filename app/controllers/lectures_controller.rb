@@ -18,6 +18,7 @@ class LecturesController < WebApplicationController
   # GET /lectures/1
   # GET /lectures/1.json
   def show
+    RecentItem.create( visitor: current_user, recentable: @lecture )
   end
 
   # POST /lectures/1/assign_coordinator
