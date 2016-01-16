@@ -64,34 +64,32 @@
 						<% if false %>
 							<li class='user-body'>
 								<div class="col-xs-4 text-center">
-			                      <a href="#">Followers</a>
-			                    </div>
-			                    <div class="col-xs-4 text-center">
-			                      <a href="#">Sales</a>
-			                    </div>
-			                    <div class="col-xs-4 text-center">
-			                      <a href="#">Friends</a>
-			                    </div>
+			            <a href="#">Followers</a>
+			          </div>
+			          <div class="col-xs-4 text-center">
+			            <a href="#">Sales</a>
+			          </div>
+			          <div class="col-xs-4 text-center">
+			            <a href="#">Friends</a>
+			          </div>
 							</li>
 						<% end %>
 						<li class='user-footer'>
 							<div class="pull-left">
-		                      <%= link_to 'Perfil', profile_users_path, class: 'btn btn-default btn-flat' %>
-		                    </div>
-		                    <div class="pull-right">
-		                      <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: 'btn btn-default btn-flat' %>
-		                    </div>
+		            <%= link_to 'Perfil', profile_users_path, class: 'btn btn-default btn-flat' %>
+		          </div>
+		          <div class="pull-right">
+		            <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: 'btn btn-default btn-flat' %>
+		          </div>
 						</li>
 					</ul>
 				</li>
 				<%
 					# Control sidebar toggle
 				%>
-				<% if false %>
-					<li>
-		                <a href="#" data-toggle="control-sidebar"><i class="fa fa-send-o"></i></a>
-		            </li>
-	            <% end %>
+				<li>
+		      <a href="#" data-toggle="control-sidebar"><i class="fa fa-send-o"></i></a>
+		    </li>
 			</ul>
 		</div>
 	</nav>

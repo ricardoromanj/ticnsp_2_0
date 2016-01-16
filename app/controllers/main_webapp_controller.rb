@@ -1,6 +1,7 @@
 class MainWebappController < WebApplicationController
   def dashboard
 	@readings = Evangelizo::Reading.daypack( Date.today.strftime( '%Y%m%d' ), 'SP' )
+  @notifications = Notification.where( recipient: current_user )
   end
 
   def evangelio

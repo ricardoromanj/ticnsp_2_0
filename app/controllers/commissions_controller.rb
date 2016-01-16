@@ -18,6 +18,7 @@ class CommissionsController < WebApplicationController
   # GET /commissions/1
   # GET /commissions/1.json
   def show
+    RecentItem.create( visitor: current_user, recentable: @commission )
   end
 
   # POST /commissions/1/assign_coordinator

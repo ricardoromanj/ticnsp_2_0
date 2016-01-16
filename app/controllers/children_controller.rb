@@ -19,6 +19,7 @@ class ChildrenController < WebApplicationController
   # GET /children/1
   # GET /children/1.json
   def show
+    RecentItem.create( visitor: current_user, recentable: @child )
   end
 
   # POST /children/1/assign_to_tutor

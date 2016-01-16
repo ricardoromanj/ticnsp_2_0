@@ -1,0 +1,18 @@
+<ul class='timeline timeline-inverse'>
+  <% notifications.latest.each do |notif| %>
+    <li>
+      <i class='<%= "#{ notif.human_notifiable[:icon] } bg-#{ notif.human_notifiable[:color] }" %>'></i>
+      <div class='timeline-item'>
+        <span class='time'><%= human_date notif.created_at %></span>
+        <h3 class='timeline-header'><%= "#{ link_to notif.actor.full_name, notif.actor } #{ notif.action } #{ link_to notif.human_notifiable[:text], notif.notifiable }".html_safe %></h3>
+        <div class='timeline-body'>
+          <% if notif.notifiable.class == Notice %>
+            <%= text_shrinkinator( notif.notifiable.text_stripped, 300, ( link_to '...', notif.notifiable ) ) %>
+          <% else %>
+            <%= link_to 'Mostrar', eval( "#{ recenti.recentable.class.to_s.downcase }_path( recenti.recentable )" ), class: 'btn btn-flat' %>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

@@ -1,4 +1,187 @@
 <% content_for :title, 'Iniciar sesión' %>
+
+<style>
+#recover-password-form {
+  margin-top: 200px;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #3498db;
+  background-image: url("<%= asset_path("login_bg.jpg") %>");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+</style>
+
+<!-- particles.js container -->
+<div id="particles-js"></div>
+
+<div class='container-fluid'>
+  <div class='row'>
+    <div class='col-xs-12 col-sm-offset-1 col-md-offset-4 col-md-4 col-sm-10'>
+      <div class='panel' id='recover-password-form'>
+        <div class='panel-body'>
+          <p class='lead'><a href='/' ><%= image_tag 'tic_logo_nobg_flat.png', height: 70, class: 'text-center' %></a>Iniciar sesión</p>
+
+          <%= render 'layouts/partials/alerts' %>
+
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
+            <div class="form-group">
+              <div class='col-sm-12'>
+                <%= f.email_field :email, autofocus: true, placeholder: 'Usuario', class: 'form-control form-control-ticnsp' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class='col-sm-12'>
+                <%= f.password_field :password, autocomplete: "off", placeholder: 'Contraseña', class: 'form-control form-control-ticnsp' %>
+              </div>
+            </div>
+
+            <% if devise_mapping.rememberable? -%>
+              <div class="form-group">
+                <div class='col-sm-6'>
+                  <%= f.check_box :remember_me %>
+                  <%= f.label 'Recuérdame' %>
+                </div>
+              </div>
+              <div class='form-group'>
+                <div class='col-sm-12'>
+                  <%= f.submit "Log in", class: 'btn btn-primary btn-block' %>
+                </div>
+              </div>
+            <% end -%>
+          <% end %>
+          <div class='text-center'>
+            <%= render "devise/shared/links" %>
+          </div>
+          <div class='text-center'>
+            <p class='small text-muted'>2015 © Talleres Infantiles Católicos - El plagio es pecado</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+particlesJS("particles-js", {
+  "particles": {
+    "number": {
+      "value": 80,
+      "density": {
+        "enable": true,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": "#ffffff"
+    },
+    "shape": {
+      "type": "circle",
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 5
+      },
+      "image": {
+        "src": "img/github.svg",
+        "width": 100,
+        "height": 100
+      }
+    },
+    "opacity": {
+      "value": 0.5,
+      "random": false,
+      "anim": {
+        "enable": false,
+        "speed": 1,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 5,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 40,
+        "size_min": 0.1,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 6,
+      "direction": "none",
+      "random": false,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": false,
+        "mode": "repulse"
+      },
+      "onclick": {
+        "enable": false,
+        "mode": "push"
+      },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 400,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 400,
+        "size": 40,
+        "duration": 2,
+        "opacity": 8,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": {
+        "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
+      }
+    }
+  },
+  "retina_detect": true
+});
+</script>
+
+<% if false %>
 <style>
   body {
     background: url('<%= asset_path("login_bg.jpg") %>') no-repeat center center fixed;
@@ -48,3 +231,5 @@
     </div>
   </div>
 </div>
+
+<% end %>

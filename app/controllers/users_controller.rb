@@ -37,6 +37,8 @@ class UsersController < WebApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    RecentItem.create( visitor: current_user, recentable: @user )
+    @notifications = Notification.where( recipient: @user )
   end
 
   # POST /users/1/assign_to_workshop
@@ -158,7 +160,7 @@ class UsersController < WebApplicationController
           WelcomeCoordinatorEmailJob.new.async.perform(@user, temp_password)
         end
 
-        format.html { redirect_to @user, notice: "#{@user.usertype.capitalize} was successfully created with password #{temp_password}" }
+        format.html { redirect_to @user, notice: "#{@user.usertype_string} creado con la contraseña #{temp_password}" }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -175,7 +177,7 @@ class UsersController < WebApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: "#{@user.usertype.capitalize} was successfully updated" }
+        format.html { redirect_to @user, notice: "#{@user.usertype_string} actualizado" }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }

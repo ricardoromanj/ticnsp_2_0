@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # Resources configurations
   resources :notifications do
     collection do
+      get 'read'
       post 'mark_as_read'
     end
   end

@@ -35,8 +35,8 @@
 		Síguenos en Facebook
 				</div>
 			</div>
-			<div class='col-sm-6'>
-				<%= image_tag 'front_export_bordered.png', height: 400 %>
+			<div class='col-sm-6' id='particles-js'>
+				<% image_tag 'front_export_bordered.png', height: 400 %>
 			</div>
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 						<%= image_tag "talleres.jpg", class: 'ticnsp-activity-image' %>
 						<p class='lead'>Talleres</p>
 					</div>
-				</div>				
+				</div>
 			</div>
 			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
 				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-catequesis-card'>
@@ -69,7 +69,7 @@
 						<%= image_tag "retiro.jpg", class: 'ticnsp-activity-image' %>
 						<p class='lead'>Retiro</p>
 					</div>
-				</div>				
+				</div>
 			</div>
 			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
 				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-diadejuego-card'>
@@ -77,7 +77,7 @@
 						<%= image_tag "dias_de_juego.jpg", class: 'ticnsp-activity-image' %>
 						<p class='lead'>Días de juego</p>
 					</div>
-				</div>				
+				</div>
 			</div>
 		</div>
 	</div>
@@ -230,3 +230,116 @@
 		<a href='#' class='btn btn-to-top pull-right'><i class='glyphicon glyphicon-menu-up'></i></a>
 	</div>
 </section>
+
+<script>
+particlesJS("particles-js", {
+  "particles": {
+    "number": {
+      "value": 90,
+      "density": {
+        "enable": true,
+        "value_area": 700
+      }
+    },
+    "color": {
+      "value": "#ffffff"
+    },
+    "shape": {
+      "type": "circle",
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 5
+      },
+      "image": {
+        "src": "img/github.svg",
+        "width": 100,
+        "height": 100
+      }
+    },
+    "opacity": {
+      "value": 0.7,
+      "random": false,
+      "anim": {
+        "enable": false,
+        "speed": .91,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 5,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 40,
+        "size_min": 0.1,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 6,
+      "direction": "none",
+      "random": false,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": false,
+        "mode": "repulse"
+      },
+      "onclick": {
+        "enable": false,
+        "mode": "push"
+      },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 400,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 400,
+        "size": 40,
+        "duration": 2,
+        "opacity": 8,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": {
+        "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
+      }
+    }
+  },
+  "retina_detect": true
+});
+</script>
