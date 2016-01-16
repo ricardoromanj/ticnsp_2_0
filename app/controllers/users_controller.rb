@@ -154,7 +154,8 @@ class UsersController < WebApplicationController
 
         if @user.usertype =~ /coordinator/
           # Send the wolcome email with temp password
-          CoordinatorMailer.welcome_coordinator(@user, temp_password).deliver_now
+          # CoordinatorMailer.welcome_coordinator(@user, temp_password).deliver_now
+          WelcomeCoordinatorEmailJob.new.async.perform(@user, temp_password)
         end
 
         format.html { redirect_to @user, notice: "#{@user.usertype.capitalize} was successfully created with password #{temp_password}" }
