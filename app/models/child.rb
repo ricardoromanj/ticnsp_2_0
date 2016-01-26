@@ -8,6 +8,8 @@ class Child < ActiveRecord::Base
 	markable_as :enrolled_lecture, by: :lecture
 	markable_as :enrolled_shepperding, by: :shepperding
 
+  has_many :child_semesters
+
 	def full_name
 		"#{name} #{lastname}"
 	end

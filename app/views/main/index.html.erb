@@ -32,7 +32,7 @@
 						<footer>Proverbios 22 : 6</footer>
 					</blockquote>
 					<%= link_to '<span class="fa fa-facebook"></span>'.html_safe, 'https://www.facebook.com/talleresinfantilescatolicos?fref=ts', class: 'btn btn-ticnsp-social', target: '_blank' %>
-		Síguenos en Facebook
+		      Síguenos en Facebook
 				</div>
 			</div>
 			<div class='col-sm-6' id='particles-js'>
@@ -41,43 +41,74 @@
 		</div>
 	</div>
 </section>
-<section class='section-aboutus' id='aboutus'>
-	<div class='container-fluid ticnsp-section-title-container' id='ticnsp-section-aboutus-title-container'>
-		<h1 class='ticnsp-section-title'>¡Ven a conocer más a <strong>Jesús</strong> divirtiéndote con nosotros!</h1>
+<section class='section-mainbanner' id='mainbanner'>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-sm-6 text-center'>
+        <%= image_tag 'front_export_bordered.png', height: 400 %>
+      </div>
+      <div class='col-sm-6'>
+		    <h1 class=''>¡Ven a conocer más a <strong>Jesús</strong> divirtiéndote con nosotros!</h1>
+        <div id='countdown' data-date="2016-02-13 11:00:00"></div>
+        <script>
+          $('#countdown').TimeCircles({
+            "animation": "smooth",
+            "bg_width": 0.9,
+            "fg_width": 0.023333333333333334,
+            "circle_bg_color": "#bdc3c7",
+            "time": {
+                "Days": {
+                    "text": "Días",
+                    "color": "#f1c40f",
+                    "show": true
+                },
+                "Hours": {
+                    "text": "Horas",
+                    "color": "#3498db",
+                    "show": true
+                },
+                "Minutes": {
+                    "text": "Minutos",
+                    "color": "#2ecc71",
+                    "show": true
+                },
+                "Seconds": {
+                    "text": "Segundos",
+                    "color": "#e74c3c",
+                    "show": true
+                }
+            }
+          });
+        </script>
+        <div class='panel panel-body mainbanner-banner'>
+          <p class='lead'>
+            Inscripciones el primer día<br />
+            <strong>13 de febrero</strong> 11:00 a.m.<br />
+            Parroquia <strong>Nuestra Señora de la Paz</strong>
+          </p>
+        </div>
+      </div>
+    </div>
 	</div>
+</section>
+<section class='section-aboutus' id='abouts'>
 	<div class='container'>
 		<div class='row'>
-			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
-				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-talleres-card'>
-					<div class='panel-body text-center'>
-						<%= image_tag "talleres.jpg", class: 'ticnsp-activity-image' %>
-						<p class='lead'>Talleres</p>
-					</div>
-				</div>
+			<div class='col-sm-6 col-md-3 text-center'>
+				<%= image_tag "talleres.jpg", class: 'ticnsp-activity-image' %>
+				<p class='lead'>Talleres</p>
 			</div>
-			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
-				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-catequesis-card'>
-					<div class='panel-body text-center'>
-						<%= image_tag "catequesis.jpg", class: 'ticnsp-activity-image' %>
-						<p class='lead'>Catequesis</p>
-					</div>
-				</div>
+			<div class='col-sm-6 col-md-3 text-center'>
+				<%= image_tag "catequesis.jpg", class: 'ticnsp-activity-image' %>
+				<p class='lead'>Catequesis</p>
 			</div>
-			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
-				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-retiro-card'>
-					<div class='panel-body text-center'>
-						<%= image_tag "retiro.jpg", class: 'ticnsp-activity-image' %>
-						<p class='lead'>Retiro</p>
-					</div>
-				</div>
+      <div class='col-sm-6 col-md-3 text-center'>
+				<%= image_tag "retiro.jpg", class: 'ticnsp-activity-image' %>
+				<p class='lead'>Retiro</p>
 			</div>
-			<div class='col-sm-6 col-md-3 ticnsp-activity-card-container'>
-				<div class='panel panel-default ticnsp-activity-card ticnsp-activity-diadejuego-card'>
-					<div class='panel-body text-center'>
-						<%= image_tag "dias_de_juego.jpg", class: 'ticnsp-activity-image' %>
-						<p class='lead'>Días de juego</p>
-					</div>
-				</div>
+      <div class='col-sm-6 col-md-3 text-center'>
+				<%= image_tag "dias_de_juego.jpg", class: 'ticnsp-activity-image' %>
+				<p class='lead'>Días de juego</p>
 			</div>
 		</div>
 	</div>
@@ -101,10 +132,11 @@
 	</div>
 </section>
 <section class='section-contact' id='contact'>
+  <div class="bg-overlay"></div>
 	<div class='container'>
-		<h1 class='ticnsp-section-title'>Si necesitas información, déjanos tus datos:</h1>
 		<div class='row'>
-			<div class='col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3'>
+			<div class='col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2'>
+		    <h1 class='ticnsp-section-title'>Si necesitas información, déjanos tus datos:</h1>
 				<%= render 'layouts/partials/alerts' %>
 			</div>
 		</div>

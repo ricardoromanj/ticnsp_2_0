@@ -5,7 +5,7 @@ class Notification < ActiveRecord::Base
 
   scope :unread, -> { where( read_at: nil ) }
   scope :read, -> { where( 'read_at NOT null' ) }
-  scope :latest, -> { last( 30 ) }
+  scope :latest, -> { last( 13 ) }
 
   def human_notifiable
     if notifiable.class == Notice

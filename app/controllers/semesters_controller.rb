@@ -1,4 +1,4 @@
-class SemestersController < ApplicationController
+class SemestersController < WebApplicationController
   before_action :set_semester, only: [:show, :edit, :update, :destroy]
 
   # GET /semesters
@@ -24,40 +24,55 @@ class SemestersController < ApplicationController
   # POST /semesters
   # POST /semesters.json
   def create
-    @semester = Semester.new(semester_params)
+    if current_user.usertype == 'admin'
+      @semester = Semester.new(semester_params)
 
-    respond_to do |format|
-      if @semester.save
-        format.html { redirect_to @semester, notice: 'Semester was successfully created.' }
-        format.json { render :show, status: :created, location: @semester }
-      else
-        format.html { render :new }
-        format.json { render json: @semester.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @semester.save
+          format.html { redirect_to semesters_url, notice: 'Semester was successfully created.' }
+          format.json { render :show, status: :created, location: @semester }
+        else
+          format.html { render :new }
+          format.json { render json: @semester.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      format.html { redirect_to @semester, alert: 'Privilegios insuficientes' }
+      format.json { render json: { success: false, reason: 'Insufficient privileges' } }
     end
   end
 
   # PATCH/PUT /semesters/1
   # PATCH/PUT /semesters/1.json
   def update
-    respond_to do |format|
-      if @semester.update(semester_params)
-        format.html { redirect_to @semester, notice: 'Semester was successfully updated.' }
-        format.json { render :show, status: :ok, location: @semester }
-      else
-        format.html { render :edit }
-        format.json { render json: @semester.errors, status: :unprocessable_entity }
+    if current_user.usertype == 'admin'
+      respond_to do |format|
+        if @semester.update(semester_params)
+          format.html { redirect_to semesters_url, notice: 'Semester was successfully updated.' }
+          format.json { render :show, status: :ok, location: @semester }
+        else
+          format.html { render :edit }
+          format.json { render json: @semester.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      format.html { redirect_to @semester, alert: 'Privilegios insuficientes' }
+      format.json { render json: { success: false, reason: 'Insufficient privileges' } }
     end
   end
 
   # DELETE /semesters/1
   # DELETE /semesters/1.json
   def destroy
-    @semester.destroy
-    respond_to do |format|
-      format.html { redirect_to semesters_url, notice: 'Semester was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user.usertype == 'admin'
+      @semester.destroy
+      respond_to do |format|
+        format.html { redirect_to semesters_url, notice: 'Semester was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      format.html { redirect_to @semester, alert: 'Privilegios insuficientes' }
+      format.json { render json: { success: false, reason: 'Insufficient privileges' } }
     end
   end
 
@@ -69,6 +84,6 @@ class SemestersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def semester_params
-      params.require(:semester).permit(:name, :date_start, :date_end)
+      params.require(:semester).permit(:start_date, :end_date, :name, :current)
     end
 end

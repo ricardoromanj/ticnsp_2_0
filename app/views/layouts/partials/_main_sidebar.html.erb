@@ -31,7 +31,7 @@
     %>
     <ul class="sidebar-menu">
       <li class="header">MENU</li>
-      
+
       <li class='<%= params['action'] =~ /dashboard/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-dashboard'></i> <span>Dashboard</span>".html_safe, root_path %></li>
 
       <li class='<%= params['action'] =~ /evangelio/ ? 'active' : '' %>'><%= link_to "<i class='ion ion-ios-bookmarks'></i> <span>Evangelio</span>".html_safe, evangelio_path %></li>
@@ -48,26 +48,28 @@
 
       <li class="header">ADMINISTRACIÓN DE CURSO</li>
 
-          <li class='<%= params['controller'] =~ /children/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-child'></i> <span>Niños inscritos</span>".html_safe, children_path %></li>
+          <li class='<%= params['controller'] =~ /child_semesters/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-child'></i> <span>Niños inscritos</span>".html_safe, child_semesters_path %></li>
 
-          <li class='<%= params['controller'] =~ /coordinators/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Coordinadores</span>".html_safe, coordinators_users_path %></li>
+          <li class='<%= params['controller'] =~ /coordinator_semesters/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Coordinadores</span>".html_safe, coordinator_semesters_path %></li>
 
           <li class='<%= params['controller'] =~ /tutors/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Tutores</span>".html_safe, tutors_users_path %></li>
 
-          <li class='<%= params['controller'] =~ /lectures/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-institution'></i> <span>Catequesis</span>".html_safe, lectures_path %></li>
+          <li class='<%= params['controller'] =~ /group_offerings/ && params['action'] =~ /lectures/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-institution'></i> <span>Catequesis</span>".html_safe, lectures_group_offerings_path %></li>
 
-          <li class='<%= params['controller'] =~ /workshops/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-graduation-cap'></i> <span>Talleres</span>".html_safe, workshops_path %></li>
+          <li class='<%= params['controller'] =~ /group_offerings/ && params['action'] =~ /workshops/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-graduation-cap'></i> <span>Talleres</span>".html_safe, workshops_group_offerings_path %></li>
 
-          <li class='<%= params['controller'] =~ /shepperdings/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-flag'></i> <span>Acompañamientos</span>".html_safe, shepperdings_path %></li>
+          <li class='<%= params['controller'] =~ /group_offerings/ && params['action'] =~ /shepperdings/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-flag'></i> <span>Acompañamientos</span>".html_safe, shepperdings_group_offerings_path %></li>
 
-          <li class='<%= params['controller'] =~ /commissions/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-flag'></i> <span>Comisiones</span>".html_safe, commissions_path %></li>
+          <li class='<%= params['controller'] =~ /group_offerings/ && params['action'] =~ /commissions/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-flag'></i> <span>Comisiones</span>".html_safe, commissions_group_offerings_path %></li>
 
       <li class='header'>ADMINISTRACIÓN DE SISTEMA</li>
 
       <li class="treeview">
         <a href="#"><i class='fa fa-gears'></i> <span>Sistema</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-          <li class='<%= params['controller'] =~ /children/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-child'></i> <span>Niños inscritos</span>".html_safe, children_path %></li>
+          <li class-'<%= params['controller'] =~ /semesters/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-calendar'></i> <span>Semestres</span>".html_safe, semesters_path %></li>
+
+          <li class='<%= params['controller'] =~ /children/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-child'></i> <span>Niños</span>".html_safe, children_path %></li>
 
           <li class='<%= params['controller'] =~ /coordinators/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-users'></i> <span>Coordinadores</span>".html_safe, coordinators_users_path %></li>
 

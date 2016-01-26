@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108061918) do
+ActiveRecord::Schema.define(version: 20160124014015) do
+
+  create_table "child_semesters", force: :cascade do |t|
+    t.integer  "child_id"
+    t.integer  "semester_id"
+    t.boolean  "paid"
+    t.datetime "paid_at"
+    t.float    "paid_amt"
+    t.text     "notes"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "children", force: :cascade do |t|
     t.string   "name"
@@ -37,6 +48,14 @@ ActiveRecord::Schema.define(version: 20160108061918) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "coordinator_semesters", force: :cascade do |t|
+    t.integer  "coordinator_id"
+    t.integer  "semester_id"
+    t.text     "notes"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "emails", force: :cascade do |t|
     t.string   "email"
     t.string   "email_type"
@@ -56,6 +75,22 @@ ActiveRecord::Schema.define(version: 20160108061918) do
     t.string   "longitude"
     t.string   "location"
     t.string   "audience"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "group_enrollments", force: :cascade do |t|
+    t.integer  "group_offering_id"
+    t.string   "enrolled_type"
+    t.integer  "enrolled_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "group_offerings", force: :cascade do |t|
+    t.integer  "group_id"
+    t.string   "group_type"
+    t.integer  "semester_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -139,9 +174,10 @@ ActiveRecord::Schema.define(version: 20160108061918) do
   end
 
   create_table "semesters", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string   "name"
-    t.datetime "date_start"
-    t.datetime "date_end"
+    t.boolean  "current"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

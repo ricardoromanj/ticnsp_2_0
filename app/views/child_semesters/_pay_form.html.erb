@@ -1,0 +1,6 @@
+<%= form_tag pay_child_semester_path( child_semester ), method: :put, class: 'form-inline' do %>
+  <div class='form-group'>
+    <%= text_field_tag :paid_amt, nil, placeholder: '0.00', class: 'form-control input-sm' %>
+    <%= submit_tag 'Marcar pago', class: 'btn btn-sm btn-flat btn-success' %>
+  </div>
+<% end %>

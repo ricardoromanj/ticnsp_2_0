@@ -36,8 +36,23 @@ class NoticesController < WebApplicationController
       if @notice.save
 
         # Create a notifition when a notice is created
-        User.all.each do |user|
-          Notification.create( recipient: user, actor: current_user, action: 'publicó', notifiable: @notice )
+        users_to_notify = []
+        case @notie.audience
+        when 'coordinators'
+          users_to_notify = User.not_tutors
+        when 'tutors'
+          users_to_notify = User.tutors + User.where( usertype: 'admin' )
+        when 'all'
+          users_to_notify = User.where( active: true )
+        else
+          # nothing to do here ...here
+        end
+
+        users_to_notify.each do |user|
+          notification = Notification.create( recipient: user, actor: current_user, action: 'publicó', notifiable: @notice )
+
+          # Create send notification by email background job
+          NotificationEmailJob.new.async.perform( user, notification )
         end
 
         # Send Twilio SMS (use the subject field)

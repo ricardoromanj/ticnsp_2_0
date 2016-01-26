@@ -19,6 +19,8 @@ class WorkshopsController < WebApplicationController
   # GET /workshops/1.json
   def show
     RecentItem.create( visitor: current_user, recentable: @workshop )
+    @semester = ( params['semester'] == nil ? @current_semester : Semester.find( params['semester'] ) )
+    @group_enrollment = GroupEnrollment.new
   end
 
   # POST /workshops/1/assign_coordinator

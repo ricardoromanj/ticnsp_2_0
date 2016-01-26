@@ -1,0 +1,44 @@
+<% content_for :title, 'Catequesis - TIC' %>
+<% content_for :page_title, 'Catequesis' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>Catequesis</li>".html_safe %>
+
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Acciones</h3>
+  </div>
+  <div class='box-body'>
+    <%= link_to 'Agregar', new_group_offering_path, class: 'btn btn-flat btn-default bg-green' %>
+    <%= form_tag lectures_group_offerings_path, method: :get, class: 'form-inline pull-right' do %>
+      <%= select_tag :semester, options_from_collection_for_select( Semester.current_first, 'id', 'name', @semester.id ), class: 'form-control', onchange: 'this.form.submit();' %>
+    <% end %>
+  </div>
+</div>
+
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Catequesis de este semestre</h3>
+  </div>
+  <div class='box-body'>
+    <table class='table table-hover'>
+      <thead>
+        <tr>
+          <th>Catequesis</th>
+          <th>Semestre</th>
+          <th colspan='1'></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @group_offerings.each do |group_offering| %>
+          <tr>
+            <td><%= link_to group_offering.group.name, lecture_path( group_offering.group ) %></td>
+            <td><%= group_offering.semester.name %></td>
+            <td><% link_to 'Mostrar', group_offering, class: 'btn btn-sm btn-flat btn-default' %></td>
+            <td><% link_to 'Modificar', edit_group_offering_path(group_offering), class: 'btn btn-sm btn-flat btn-default' %></td>
+            <td><%= link_to 'Borrar', group_offering, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-flat btn-default' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

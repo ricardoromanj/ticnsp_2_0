@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  start_date: 2016-01-13 20:03:39
+  end_date: 2016-01-13 20:03:39
   name: MyString
-  date_start: 2015-08-08 00:31:49
-  date_end: 2015-08-08 00:31:49
+  current: false
 
 two:
+  start_date: 2016-01-13 20:03:39
+  end_date: 2016-01-13 20:03:39
   name: MyString
-  date_start: 2015-08-08 00:31:49
-  date_end: 2015-08-08 00:31:49
+  current: false

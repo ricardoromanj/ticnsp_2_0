@@ -1,0 +1,62 @@
+<%= form_for(@group_offering, html: { class: 'form-horizontal' }) do |f| %>
+  <% if @group_offering.errors.any? %>
+    <div id="error_explanation" class='alert alert-danger'>
+      <strong><%= pluralize(@group_offering.errors.count, "error") %> prohibited this group_offering from being saved:</strong>
+
+      <ul>
+      <% @group_offering.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label 'Semestre', class: 'control-label col-sm-2' %>
+    <div class='col-sm-9'>
+      <%= f.select :semester_id, options_from_collection_for_select( Semester.current_first, 'id', 'name' ), {}, { class: 'form-control' } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Agregar', class: 'control-label col-sm-2' %>
+    <div class='col-sm-9'>
+      <%= f.select :group_type, options_for_select( [ [ 'Catequesis', 'Lecture' ], [ 'Taller', 'Workshop' ], [ 'Comisión', 'Commission' ], [ 'Acompañamiento', 'Shepperding' ] ] ), {}, { class: 'form-control', onchange: 'loadTypeahead();' } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Grupo', class: 'control-label col-sm-2' %>
+    <%= f.hidden_field :group_id %>
+    <div class='col-sm-9' id='group-typeahead-container'>
+      <% text_field_tag :group, nil, placeholder: 'Grupo', class: 'form-control', id: 'group-typeahead', autocomplete: 'off' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class='col-sm-offset-2 col-sm-3'>
+      <%= f.submit 'Agregar grupo', class: 'btn btn-success btn-flat' %>
+    </div>
+  </div>
+<% end %>
+<script>
+  function loadTypeahead() {
+    var group_type = $('#group_offering_group_type').val();
+
+    $('#group-typeahead-container').empty();
+    $('#group-typeahead-container').append('<input type="text" value="" placeholder="Grupo" class="form-control" id="group-typeahead" autocomplete="off">');
+
+    $.getJSON('/' + group_type.toLowerCase() + 's/typeaheaddata', function ( data ) {
+      $( '#group-typeahead' ).typeahead({
+        source: data,
+        scrollBar: true,
+        onSelect: function ( item ) {
+          $('#group_offering_group_id').val(item.value);
+        }
+      });
+
+      console.log('Loaded data: ' + JSON.stringify(data));
+    });
+  }
+
+  $( function () {
+    loadTypeahead();
+  });
+</script>

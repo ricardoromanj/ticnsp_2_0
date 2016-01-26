@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group_offering_id: 1
+  enrolled_type: MyString
+  enrolled_id: 1
+
+two:
+  group_offering_id: 1
+  enrolled_type: MyString
+  enrolled_id: 1

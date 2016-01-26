@@ -1,0 +1,46 @@
+<% content_for :title, 'Iscripciones Coordinadores - TIC' %>
+<% content_for :page_title, 'Inscripciones coordinadores' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>Inscripciones coordinadores</li>".html_safe %>
+
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Acciones</h3>
+  </div>
+  <div class='box-body'>
+    <%= link_to 'Inscribir', new_coordinator_semester_path, class: 'btn btn-flat btn-default bg-green' %>
+    <%= form_tag coordinator_semesters_path, method: :get, class: 'form-inline pull-right' do %>
+      <%= select_tag :semester, options_from_collection_for_select( Semester.current_first, 'id', 'name', @semester.id ), class: 'form-control', onchange: 'this.form.submit();' %>
+    <% end %>
+  </div>
+</div>
+
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Coordinadores inscritos este semestre</h3>
+  </div>
+  <div class='box-body'>
+    <table class='table table-hover'>
+      <thead>
+        <tr>
+          <th>Coordinador</th>
+          <th>Semestre</th>
+          <th>Notas</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @coordinator_semesters.each do |coordinator_semester| %>
+          <tr>
+            <td><%= link_to coordinator_semester.coordinator.full_name, coordinator_semester.coordinator %></td>
+            <td><%= coordinator_semester.semester.name %></td>
+            <td><%= coordinator_semester.notes %></td>
+            <td><%= link_to 'Mostrar', coordinator_semester, class: 'btn btn-sm btn-flat btn-default' %></td>
+            <td><%= link_to 'Modificar', edit_coordinator_semester_path(coordinator_semester), class: 'btn btn-sm btn-flat btn-default' %></td>
+            <td><%= link_to 'Borrar', coordinator_semester, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-flat btn-default' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -40,6 +40,11 @@
 					El plagio es pecado
 				</div>
 				<strong>Copyright &copy; <%= Date.today.year %> <a href="<%= root_path %>">TICNSP.org</a>,</strong> All rights reserved.
+        <% if Rails.env =~ /development/ %>
+          <code class='pull-right'>
+            <%= params %>
+          </code>
+        <% end %>
 			</footer>
 			<%= render 'layouts/partials/control_sidebar' %>
 		</div>

@@ -107,16 +107,32 @@ body {
 	}
 }
 
+.section-mainbanner {
+  background-color: #ecf0f1;
+  padding: 20px;
+
+  h1 {
+    font-weight: lighter;
+  }
+
+  .mainbanner-banner {
+    padding: 20px;
+    margin-top: 10px;
+  }
+}
+
 .section-aboutus {
-	padding-bottom: 50px;
-	background-color: #ecf0f1;
+	background-color: #fff;
 	color: #333;
+  padding-top: 20px;
 }
 
 .section-team {
 	padding-top: 50px;
 	padding-bottom: 50px;
 	color: #343434;
+  background-color: #ecf0f1;
+
 }
 
 .section-contact {
@@ -127,6 +143,21 @@ body {
 	  -moz-background-size: cover;
 	  -o-background-size: cover;
 	  background-size: cover;
+  position: relative;
+}
+
+.bg-overlay {
+  background: -webkit-linear-gradient(#34495e, #516395);
+  background: -moz-linear-gradient(#34495e, #516395);
+  background: -ms-linear-gradient(#34495e, #516395);
+  background: -o-linear-gradient(#34495e, #516395);
+  background: linear-gradient(#34495e, #516395);
+  height: 100%;
+  width: 100%;
+  background-position: fixed;
+  position: absolute;
+  top: 0px;
+  opacity: 0.8;
 }
 
 .section-footer {

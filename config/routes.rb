@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :semesters
   # Application root
   root 'main#index'
 
@@ -13,6 +12,37 @@ Rails.application.routes.draw do
 
   # Devise configuration
   devise_for :users
+
+  # Semesters and enrollment
+  resources :semesters do
+    member do
+      post 'current'
+    end
+  end
+  resources :group_enrollments
+  resources :group_offerings do
+    collection do
+      get 'lectures'
+      get 'workshops'
+      get 'commissions'
+      get 'shepperdings'
+    end
+  end
+  resources :child_semesters do
+    collection do
+      get 'current'
+    end
+    member do
+      get 'receipt'
+      put 'pay'
+      put 'unpay'
+    end
+  end
+  resources :coordinator_semesters do
+    collection do
+      get 'current'
+    end
+  end
 
   # Resources configurations
   resources :notifications do

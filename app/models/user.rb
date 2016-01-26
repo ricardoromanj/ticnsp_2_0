@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   validates :usertype, inclusion: { in: ['admin', 'general_coordinator', 'coordinator'] }
   # Set default values for settings
   before_create :set_defaults
+  before_destroy :remove_recents_and_notifs
 
   # Attachments
   attachment :image, type: :image
@@ -13,8 +14,15 @@ class User < ActiveRecord::Base
   # Notifications relation
   has_many :notifications, foreign_key: :recipient_id
 
+  # Enrollments relation
+  has_many :group_enrollments, as: :enrolled
+
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: (lambda {|attributes| attributes['number'].blank?})
   accepts_nested_attributes_for :emails, allow_destroy: true, reject_if: lambda {|attributes| attributes['email'].blank?}
+
+  # Scopes
+  scope :coordinators, -> { where( "usertype <> 'tutor'" ) }
+  scope :tutors, -> { where( usertype: 'tutor' ) }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -45,7 +53,8 @@ class User < ActiveRecord::Base
   # Scopes
   scope :coordinators, -> { where( "usertype in ('coordinator', 'general_coordinator' )" ) }
   scope :active_coordinators, -> { where( "usertype in ('coordinator', 'general_coordinator')" ).where( active: true ) }
-  scope :general_coordinators, -> { where( usertype: 'general_coordinator' ) }
+  scope :not_tutors, -> { where( "usertype <> 'tutor'" ).where( active: true ) }
+  scope :general_coordinators, -> { where( usertype: 'general_coordinator' ).where( active: true ) }
 
   def full_name
   	"#{name} #{lastname}"
@@ -98,4 +107,8 @@ class User < ActiveRecord::Base
       }
     end
 
+    def remove_recents_and_notifs
+      Notification.where( "recipient_id = ? or actor_id = ?", self.id, self.id ).each { |n| n.destroy }
+      RecentItem.where( "( recentable_type = 'User' and recentable_id = ? ) or visitor_id = ?", self.id, self.id ).each { |r| r.destroy }
+    end
 end

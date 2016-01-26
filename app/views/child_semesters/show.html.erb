@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Child:</strong>
+  <%= @child_semester.child_id %>
+</p>
+
+<p>
+  <strong>Semester:</strong>
+  <%= @child_semester.semester_id %>
+</p>
+
+<p>
+  <strong>Paid:</strong>
+  <%= @child_semester.paid %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @child_semester.notes %>
+</p>
+
+<%= link_to 'Edit', edit_child_semester_path(@child_semester) %> |
+<%= link_to 'Back', child_semesters_path %>

@@ -1,0 +1,58 @@
+<%= form_for(@coordinator_semester, html: { class: 'form-horizontal' }) do |f| %>
+  <% if @coordinator_semester.errors.any? %>
+    <div id="error_explanation" class='alert alert-danger'>
+      <strong><%= pluralize(@coordinator_semester.errors.count, "error") %> prohibited this coordinator_semester from being saved:</strong>
+
+      <ul>
+      <% @coordinator_semester.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label 'Coordinador a inscribir', class: 'control-label col-sm-2' %>
+    <div class='col-sm-9'>
+      <%= f.hidden_field :coordinator_id %>
+      <%= text_field_tag :coordinator, nil, placeholder: 'Coordinador', class: 'form-control ticnsp-form-control', id: 'coordinatorren-typeahead', autocomplete: 'off' %>
+      <script>
+        $( function () {
+    		  $.getJSON('/users/typeaheaddata', { usertype: 'coordinator' }, function (data) {
+            $( '#coordinatorren-typeahead' ).typeahead({
+              source: data,
+              scrollBar: true,
+              onSelect: function ( item ) {
+                $('#coordinator_semester_coordinator_id').val( item.value );
+              }
+            });
+          });
+        });
+      </script>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :semester_id, class: 'control-label col-sm-2' %>
+    <div class='col-sm-9'>
+      <% f.number_field :semester_id, placeholder: 'Semestre', class: 'form-control' %>
+      <%= f.select :semester_id, options_from_collection_for_select( Semester.current_first, 'id', 'name' ), {}, { class: 'form-control' } %>
+    </div>
+  </div>
+  <% if false %>
+  <div class="form-group">
+    <%= f.label :paid %><br>
+    <%= f.check_box :paid %>
+  </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :notes, class: 'control-label col-sm-2' %>
+    <div class='col-sm-9'>
+      <%= f.text_area :notes, class: 'form-control col-sm-9', style: 'resize: none;' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class='col-sm-offset-2 col-sm-9'>
+      <%= f.submit 'Inscribir', class: 'btn btn-flat btn-success' %>
+    </div>
+  </div>
+<% end %>

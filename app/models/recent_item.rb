@@ -2,7 +2,7 @@ class RecentItem < ActiveRecord::Base
   belongs_to :visitor, class_name: 'User'
   belongs_to :recentable, polymorphic: true
 
-  scope :latest, -> { order( created_at: :desc ).limit(30) }
+  scope :latest, -> { order( created_at: :desc ).limit(13) }
   scope :full_history, -> { order( created_at: :desc ) }
 
   before_create :check_dupe

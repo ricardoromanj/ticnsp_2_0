@@ -1,0 +1,58 @@
+<%= form_for(@child_semester, html: { class: 'form-horizontal' }) do |f| %>
+  <% if @child_semester.errors.any? %>
+    <div id="error_explanation" class='alert alert-danger'>
+      <strong><%= pluralize(@child_semester.errors.count, "error") %> prohibited this child_semester from being saved:</strong>
+
+      <ul>
+      <% @child_semester.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label 'Niño a inscribir', class: 'control-label col-sm-2' %>
+    <div class='col-sm-9'>
+      <%= f.hidden_field :child_id %>
+      <%= text_field_tag :child, nil, placeholder: 'Niño', class: 'form-control ticnsp-form-control', id: 'children-typeahead', autocomplete: 'off' %>
+      <script>
+        $( function () {
+          $.getJSON( '/children/typeaheaddata', function ( data ) {
+            $( '#children-typeahead' ).typeahead({
+              source: data,
+              scrollBar: true,
+              onSelect: function ( item ) {
+                $('#child_semester_child_id').val( item.value );
+              }
+            });
+          });
+        });
+      </script>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :semester_id, class: 'control-label col-sm-2' %>
+    <div class='col-sm-9'>
+      <% f.number_field :semester_id, placeholder: 'Semestre', class: 'form-control' %>
+      <%= f.select :semester_id, options_from_collection_for_select( Semester.current_first, 'id', 'name' ), {}, { class: 'form-control' } %>
+    </div>
+  </div>
+  <% if false %>
+  <div class="form-group">
+    <%= f.label :paid %><br>
+    <%= f.check_box :paid %>
+  </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :notes, class: 'control-label col-sm-2' %>
+    <div class='col-sm-9'>
+      <%= f.text_area :notes, class: 'form-control col-sm-9', style: 'resize: none;' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class='col-sm-offset-2 col-sm-9'>
+      <%= f.submit 'Inscribir', class: 'btn btn-flat btn-success' %>
+    </div>
+  </div>
+<% end %>

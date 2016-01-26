@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Group Offerings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th>Group type</th>
+      <th>Semester</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group_offerings.each do |group_offering| %>
+      <tr>
+        <td><%= group_offering.group_id %></td>
+        <td><%= group_offering.group_type %></td>
+        <td><%= group_offering.semester_id %></td>
+        <td><%= link_to 'Show', group_offering %></td>
+        <td><%= link_to 'Edit', edit_group_offering_path(group_offering) %></td>
+        <td><%= link_to 'Destroy', group_offering, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Group offering', new_group_offering_path %>

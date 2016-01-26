@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  coordinator_id: 1
+  semester_id: 1
+  notes: MyText
+
+two:
+  coordinator_id: 1
+  semester_id: 1
+  notes: MyText
