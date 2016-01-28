@@ -19,6 +19,9 @@ class ShepperdingsController < WebApplicationController
   # GET /shepperdings/1.json
   def show
     RecentItem.create( visitor: current_user, recentable: @shepperding )
+    @semester = ( params['semester'] == nil ? @current_semester : Semester.find( params['semester'] ) )
+    @group_enrollment = GroupEnrollment.new
+    @group_offering = @shepperding.group_offerings.find_by_semester_id( @semester.id )
   end
 
   # POST /shepperdings/1/assign_coordinator

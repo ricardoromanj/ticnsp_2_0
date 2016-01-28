@@ -53,28 +53,30 @@
           <div class='row'>
             <div class='col-xs-12'>
               <%= form_for( @group_enrollment, html: { class: 'form-inline pull-left' } ) do |f| %>
-                <%= f.hidden_field :group_offering_id, value: @workshop.group_offerings.find_by_semester_id( @semester.id ).id %>
+                <%= f.hidden_field :group_offering_id, value: @group_offering.id if @group_offering %>
                 <%= f.hidden_field :enrolled_type, value: 'Child' %>
                 <%= f.hidden_field :enrolled_id, id: 'child_enrolled_id' %>
-                <div class='input-group'>
-                  <%= text_field_tag :child, nil, placeholder: 'Nombre', id: 'children-typeahead', class: 'form-control', autocomplete: 'off' %>
-                  <span class="input-group-btn">
-                    <%= f.submit 'Inscribir niño', class: 'btn btn-default btn-flat' %>
-                  </span>
-                  <script>
-                    $(function () {
-                      $.getJSON('/child_semesters/current', function (data) {
-                        $('#children-typeahead').typeahead({
-                          source: data,
-                          scrollBar: true,
-                          onSelect: function (item) {
-                            $('#child_enrolled_id').val(item.value);
-                          }
+                <fieldset <%= "disabled" unless @group_offering %>>
+                  <div class='input-group'>
+                    <%= text_field_tag :child, nil, placeholder: 'Nombre', id: 'children-typeahead', class: 'form-control', autocomplete: 'off' %>
+                    <span class="input-group-btn">
+                      <%= f.submit 'Inscribir niño', class: 'btn btn-default btn-flat' %>
+                    </span>
+                    <script>
+                      $(function () {
+                        $.getJSON('/child_semesters/current', function (data) {
+                          $('#children-typeahead').typeahead({
+                            source: data,
+                            scrollBar: true,
+                            onSelect: function (item) {
+                              $('#child_enrolled_id').val(item.value);
+                            }
+                          });
                         });
                       });
-                    });
-                  </script>
-                </div>
+                    </script>
+                  </div>
+                </fieldset>
                 <% if @group_enrollment.errors.any? %>
                   <div class="alert alert-danger">
                     <strong><%= pluralize(@group_enrollment.errors.count, "error") %> prohibited this article from being saved:</strong>
@@ -106,28 +108,30 @@
           <div class='row'>
             <div class='col-xs-12'>
               <%= form_for( @group_enrollment, html: { class: 'form-inline pull-left' } ) do |f| %>
-                <%= f.hidden_field :group_offering_id, value: @workshop.group_offerings.find_by_semester_id( @semester.id ).id %>
+                <%= f.hidden_field :group_offering_id, value: @group_offering.id if @group_offering %>
                 <%= f.hidden_field :enrolled_type, value: 'User' %>
                 <%= f.hidden_field :enrolled_id, id: 'coordinator_enrolled_id' %>
-                <div class='input-group'>
-                  <%= text_field_tag :coordinator, nil, placeholder: 'Nombre', id: 'coordinator-typeahead', class: 'form-control', autocomplete: 'off' %>
-                  <span class="input-group-btn">
-                    <%= f.submit 'Inscribir coordinador', class: 'btn btn-default btn-flat' %>
-                  </span>
-                  <script>
-                    $(function () {
-                      $.getJSON('/coordinator_semesters/current', function (data) {
-                        $('#coordinator-typeahead').typeahead({
-                          source: data,
-                          scrollBar: true,
-                          onSelect: function (item) {
-                            $('#coordinator_enrolled_id').val(item.value);
-                          }
+                <fieldset <%= "disabled" unless @group_offering %>>
+                  <div class='input-group'>
+                    <%= text_field_tag :coordinator, nil, placeholder: 'Nombre', id: 'coordinator-typeahead', class: 'form-control', autocomplete: 'off' %>
+                    <span class="input-group-btn">
+                      <%= f.submit 'Inscribir coordinador', class: 'btn btn-default btn-flat' %>
+                    </span>
+                    <script>
+                      $(function () {
+                        $.getJSON('/coordinator_semesters/current', function (data) {
+                          $('#coordinator-typeahead').typeahead({
+                            source: data,
+                            scrollBar: true,
+                            onSelect: function (item) {
+                              $('#coordinator_enrolled_id').val(item.value);
+                            }
+                          });
                         });
                       });
-                    });
-                  </script>
-                </div>
+                    </script>
+                  </div>
+                </fieldset>
               <% end %>
               <%= form_tag workshop_path( @workshop ), method: :get, class: 'form-inline pull-right' do %>
                 <%= select_tag :semester, options_from_collection_for_select( Semester.current_first, 'id', 'name', @semester.id ), class: 'form-control', onchange: 'this.form.submit();' %>

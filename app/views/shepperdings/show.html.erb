@@ -2,70 +2,154 @@
 <% content_for :page_title, 'Acompañamientos' %>
 <% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Acompañamientos', shepperdings_path}</li>".html_safe %>
 
-<div class='box box-solid'>
-  <div class='box-header with-border'>
-    <h3 class='box-title'>Acciones</h3>
-  </div>
-  <div class='box-body'>
-    <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, shepperdings_path, class: 'btn btn-app' %>
-    <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_shepperding_path(@shepperding), class: 'btn btn-app' %>
-    <%= link_to '<i class="fa fa-times"></i> Borrar'.html_safe, @shepperding, class: 'btn btn-app bg-maroon pull-right', method: :delete %>
-  </div>
-</div>
-
 <div class='row'>
-  <div class='col-md-4'>
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Imagen</h3>
-      </div>
-      <div class='box-body object-image no-padding'>
-        <%= image_tag attachment_url(@shepperding, :image), class: 'img-responsive' %>
+  <div class='col-lg-3'>
+    <!-- Mainbox -->
+    <div class='box box-primary'>
+      <div class='box-body'>
+        <%= image_tag attachment_url(@shepperding, :image), class: 'profile-user-img img-responsive img-circle' %>
+        <h3 class='profile-username text-center'><%= @shepperding.name %></h3>
+        <p class='text-muted text-center'>Taller</p>
+        <ul class='list-group list-group-unbordered'>
+          <li class='list-group-item'>
+            <b>Niños inscritos</b>
+            <span class='pull-right'><%= @shepperding.children_enrolled_on_semester( @semester ).count %></span>
+          </li>
+          <li class='list-group-item'>
+            <b>Coordinadores inscritos</b>
+            <span class='pull-right'><%= @shepperding.coordinators_enrolled_on_semester( @semester ).count %></span>
+          </li>
+        </ul>
+        <% if ['admin', 'general_coordinator'].include? current_user.usertype %>
+          <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_shepperding_path( @shepperding ), class: 'btn btn-default' %>
+        <% end %>
+        <% if current_user.usertype =~ /admin/ %>
+          <%= link_to '<i class="fa fa-times"></i> Eliminar'.html_safe, @shepperding, class: 'btn bg-maroon pull-right', method: :delete, 'data-confirm' => 'Are you sure?' %>
+        <% end %>
       </div>
     </div>
-    <div class='box box-solid'>
+
+    <!-- About box -->
+    <div class='box box-primary'>
       <div class='box-header with-border'>
         <h3 class='box-title'>Información</h3>
       </div>
       <div class='box-body'>
-        <p class='lead'><%= @shepperding.name %></p>
-        <p>
-          <strong>Description:</strong>
-          <div class='well'><%= @shepperding.description %></div>
-        </p>
+        <strong><i class='fa fa-list'></i> Descripción</strong>
+        <p class='text-muted'><%= @shepperding.description %></p>
+        <hr>
       </div>
     </div>
-  </div>
-  <div class='col-md-8'>
-    <div class='row'>
-      <div class='col-sm-6'>
-        <div class='box box-solid'>
-          <div class='box-header with-border'>
-            <h3 class='box-title'>Coordinadores</h3>
-          </div>
-          <div class='box-body'>
 
+  </div>
+  <div class='col-lg-9'>
+    <div class='nav-tabs-custom'>
+      <ul class='nav nav-tabs'>
+        <li class='active'><a href='#shepperding-enrollment-children' data-toggle='tab'>Niños</a></li>
+        <li><a href='#shepperding-enrollment-coordinators' data-toggle='tab'>Coordinadores</a></li>
+      </ul>
+      <div class='tab-content'>
+        <div class='tab-pane active' id='shepperding-enrollment-children'>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <%= form_for( @group_enrollment, html: { class: 'form-inline pull-left' } ) do |f| %>
+                <%= f.hidden_field :group_offering_id, value: @group_offering.id if @group_offering %>
+                <%= f.hidden_field :enrolled_type, value: 'Child' %>
+                <%= f.hidden_field :enrolled_id, id: 'child_enrolled_id' %>
+                <fieldset <%= "disabled" unless @group_offering %>>
+                  <div class='input-group'>
+                    <%= text_field_tag :child, nil, placeholder: 'Nombre', id: 'children-typeahead', class: 'form-control', autocomplete: 'off' %>
+                    <span class="input-group-btn">
+                      <%= f.submit 'Inscribir niño', class: 'btn btn-default btn-flat' %>
+                    </span>
+                    <script>
+                      $(function () {
+                        $.getJSON('/child_semesters/current', function (data) {
+                          $('#children-typeahead').typeahead({
+                            source: data,
+                            scrollBar: true,
+                            onSelect: function (item) {
+                              $('#child_enrolled_id').val(item.value);
+                            }
+                          });
+                        });
+                      });
+                    </script>
+                  </div>
+                </fieldset>
+                <% if @group_enrollment.errors.any? %>
+                  <div class="alert alert-danger">
+                    <strong><%= pluralize(@group_enrollment.errors.count, "error") %> prohibited this article from being saved:</strong>
+                    <ul>
+                      <% @group_enrollment.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+              <% end %>
+              <%= form_tag shepperding_path( @shepperding ), method: :get, class: 'form-inline pull-right' do %>
+                <%= select_tag :semester, options_from_collection_for_select( Semester.current_first, 'id', 'name', @semester.id ), class: 'form-control', onchange: 'this.form.submit();' %>
+              <% end %>
+            </div>
+          </div>
+          <br>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <% @shepperding.children_enrolled_on_semester( @semester ).each do |child_enrollment| %>
+                <%= link_to child_enrollment.enrolled.full_name, child_enrollment.enrolled %>
+                <%= link_to "<i class='fa fa-times'></i>".html_safe, child_enrollment, method: :delete, class: 'btn btn-danger pull-right', data: { confirm: 'Are you sure?' } %>
+                <hr>
+              <% end %>
+            </div>
           </div>
         </div>
-    </div>
-    <div class='col-sm-6'>
-      <div class='box box-solid'>
-          <div class='box-header with-border'>
-            <h3 class='box-title'>Niños inscritos</h3>
+        <div class='tab-pane' id='shepperding-enrollment-coordinators'>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <%= form_for( @group_enrollment, html: { class: 'form-inline pull-left' } ) do |f| %>
+                <%= f.hidden_field :group_offering_id, value: @group_offering.id if @group_offering %>
+                <%= f.hidden_field :enrolled_type, value: 'User' %>
+                <%= f.hidden_field :enrolled_id, id: 'coordinator_enrolled_id' %>
+                <fieldset <%= "disabled" unless @group_offering %>>
+                  <div class='input-group'>
+                    <%= text_field_tag :coordinator, nil, placeholder: 'Nombre', id: 'coordinator-typeahead', class: 'form-control', autocomplete: 'off' %>
+                    <span class="input-group-btn">
+                      <%= f.submit 'Inscribir coordinador', class: 'btn btn-default btn-flat' %>
+                    </span>
+                    <script>
+                      $(function () {
+                        $.getJSON('/coordinator_semesters/current', function (data) {
+                          $('#coordinator-typeahead').typeahead({
+                            source: data,
+                            scrollBar: true,
+                            onSelect: function (item) {
+                              $('#coordinator_enrolled_id').val(item.value);
+                            }
+                          });
+                        });
+                      });
+                    </script>
+                  </div>
+                </fieldset>
+              <% end %>
+              <%= form_tag shepperding_path( @shepperding ), method: :get, class: 'form-inline pull-right' do %>
+                <%= select_tag :semester, options_from_collection_for_select( Semester.current_first, 'id', 'name', @semester.id ), class: 'form-control', onchange: 'this.form.submit();' %>
+              <% end %>
+            </div>
           </div>
-          <div class='box-body'>
-
+          <br>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <% @shepperding.coordinators_enrolled_on_semester( @semester ).each do |coordinator_enrollment| %>
+                <%= link_to coordinator_enrollment.enrolled.full_name, coordinator_enrollment.enrolled %>
+                <%= link_to "<i class='fa fa-times'></i>".html_safe, coordinator_enrollment, method: :delete, class: 'btn btn-danger pull-right', data: { confirm: 'Are you sure?' } %>
+                <hr>
+              <% end %>
+            </div>
           </div>
         </div>
+      </div>
     </div>
-  </div>
-  <div class='box box-solid'>
-    <div class='box-header with-border'>
-      <h3 class='box-title'>Historial</h3>
-    </div>
-    <div class='box-body'>
-
-    </div>
-  </div>
   </div>
 </div>

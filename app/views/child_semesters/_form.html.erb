@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+  <% if params['action'] =~ /new/ %>
   <div class="form-group">
     <%= f.label 'Niño a inscribir', class: 'control-label col-sm-2' %>
     <div class='col-sm-9'>
@@ -38,6 +39,7 @@
       <%= f.select :semester_id, options_from_collection_for_select( Semester.current_first, 'id', 'name' ), {}, { class: 'form-control' } %>
     </div>
   </div>
+<% end %>
   <% if false %>
   <div class="form-group">
     <%= f.label :paid %><br>

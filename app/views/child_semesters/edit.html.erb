@@ -1,6 +1,21 @@
-<h1>Editing Child Semester</h1>
+<% content_for :title, 'Iscribir niño - TIC' %>
+<% content_for :page_title, 'Inscribir niño' %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Inscripciones', child_semesters_path }</li><li>Inscribir niño</li>".html_safe %>
 
-<%= render 'form' %>
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Acciones</h3>
+  </div>
+  <div class='box-body'>
+    <%= link_to '<i class="fa fa-mail-reply"></i> Atrás'.html_safe, child_semesters_path, class: 'btn btn-app' %>
+  </div>
+</div>
 
-<%= link_to 'Show', @child_semester %> |
-<%= link_to 'Back', child_semesters_path %>
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Inscribir Niño</h3>
+  </div>
+  <div class='box-body'>
+    <%= render 'form' %>
+  </div>
+</div>

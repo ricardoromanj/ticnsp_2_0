@@ -2,71 +2,99 @@
 <% content_for :page_title, 'Comisiones' %>
 <% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Comisiones', commissions_path}</li>".html_safe %>
 
-<div class='box box-solid'>
-  <div class='box-header with-border'>
-    <h3 class='box-title'>Acciones</h3>
-  </div>
-  <div class='box-body'>
-    <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, commissions_path, class: 'btn btn-app' %>
-    <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_commission_path(@commission), class: 'btn btn-app' %>
-    <%= link_to '<i class="fa fa-times"></i> Borrar'.html_safe, @commission, class: 'btn btn-app bg-maroon pull-right', method: :delete %>
-  </div>
-</div>
-
 <div class='row'>
-  <div class='col-md-4'>
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Imagen</h3>
-      </div>
-      <div class='box-body object-image no-padding'>
-        <%= image_tag attachment_url(@commission, :image), class: 'img-responsive' %>
+  <div class='col-lg-3'>
+    <!-- Mainbox -->
+    <div class='box box-primary'>
+      <div class='box-body'>
+        <%= image_tag attachment_url(@commission, :image), class: 'profile-user-img img-responsive img-circle' %>
+        <h3 class='profile-username text-center'><%= @commission.name %></h3>
+        <p class='text-muted text-center'>Taller</p>
+        <ul class='list-group list-group-unbordered'>
+          <li class='list-group-item'>
+            <b>Niños inscritos</b>
+            <span class='pull-right'><%= @commission.children_enrolled_on_semester( @semester ).count %></span>
+          </li>
+          <li class='list-group-item'>
+            <b>Coordinadores inscritos</b>
+            <span class='pull-right'><%= @commission.coordinators_enrolled_on_semester( @semester ).count %></span>
+          </li>
+        </ul>
+        <% if ['admin', 'general_coordinator'].include? current_user.usertype %>
+          <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_commission_path( @commission ), class: 'btn btn-default' %>
+        <% end %>
+        <% if current_user.usertype =~ /admin/ %>
+          <%= link_to '<i class="fa fa-times"></i> Eliminar'.html_safe, @commission, class: 'btn bg-maroon pull-right', method: :delete, 'data-confirm' => 'Are you sure?' %>
+        <% end %>
       </div>
     </div>
-    <div class='box box-solid'>
+
+    <!-- About box -->
+    <div class='box box-primary'>
       <div class='box-header with-border'>
         <h3 class='box-title'>Información</h3>
       </div>
       <div class='box-body'>
-        <p class='lead'><%= @commission.name %></p>
-        <p>
-          <strong>Description:</strong>
-          <div class='well'><%= @commission.description %></div>
-        </p>
+        <strong><i class='fa fa-list'></i> Descripción</strong>
+        <p class='text-muted'><%= @commission.description %></p>
+        <hr>
       </div>
     </div>
-  </div>
-  <div class='col-md-8'>
-    <div class='row'>
-      <div class='col-sm-12'>
-        <div class='box box-solid'>
-          <div class='box-header with-border'>
-            <h3 class='box-title'>Coordinadores</h3>
-          </div>
-          <div class='box-body'>
-            <%= render 'commissions/assign_coordinator_form' %>
-          </div>
-          <table class='table table-condensed'>
-            <tbody>
-              <% @commission.users_marked_as(:coordinator_commission).each do |coordinator| %>
-                <tr>
-                  <td><%= coordinator.id %></td>
-                  <td><%= link_to coordinator.full_name, coordinator %></td>
-                  <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unassign_coordinator_commission_path(coordinator_id: coordinator.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Historial</h3>
-      </div>
-      <div class='box-body'>
 
+  </div>
+  <div class='col-lg-9'>
+    <div class='nav-tabs-custom'>
+      <ul class='nav nav-tabs'>
+        <li class='active'><a href='#commission-enrollment-coordinators' data-toggle='tab'>Coordinadores</a></li>
+      </ul>
+      <div class='tab-content'>
+        <div class='tab-pane active' id='commission-enrollment-coordinators'>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <%= form_for( @group_enrollment, html: { class: 'form-inline pull-left' } ) do |f| %>
+                <%= f.hidden_field :group_offering_id, value: @group_offering.id if @group_offering %>
+                <%= f.hidden_field :enrolled_type, value: 'User' %>
+                <%= f.hidden_field :enrolled_id, id: 'coordinator_enrolled_id' %>
+                <fieldset <%= "disabled" unless @group_offering %>>
+                  <div class='input-group'>
+                    <%= text_field_tag :coordinator, nil, placeholder: 'Nombre', id: 'coordinator-typeahead', class: 'form-control', autocomplete: 'off' %>
+                    <span class="input-group-btn">
+                      <%= f.submit 'Inscribir coordinador', class: 'btn btn-default btn-flat' %>
+                    </span>
+                    <script>
+                      $(function () {
+                        $.getJSON('/coordinator_semesters/current', function (data) {
+                          $('#coordinator-typeahead').typeahead({
+                            source: data,
+                            scrollBar: true,
+                            onSelect: function (item) {
+                              $('#coordinator_enrolled_id').val(item.value);
+                            }
+                          });
+                        });
+                      });
+                    </script>
+                  </div>
+                </fieldset>
+              <% end %>
+              <%= form_tag commission_path( @commission ), method: :get, class: 'form-inline pull-right' do %>
+                <%= select_tag :semester, options_from_collection_for_select( Semester.current_first, 'id', 'name', @semester.id ), class: 'form-control', onchange: 'this.form.submit();' %>
+              <% end %>
+            </div>
+          </div>
+          <br>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <% @commission.coordinators_enrolled_on_semester( @semester ).each do |coordinator_enrollment| %>
+                <%= link_to coordinator_enrollment.enrolled.full_name, coordinator_enrollment.enrolled %>
+                <%= link_to "<i class='fa fa-times'></i>".html_safe, coordinator_enrollment, method: :delete, class: 'btn btn-danger pull-right', data: { confirm: 'Are you sure?' } %>
+                <hr>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
