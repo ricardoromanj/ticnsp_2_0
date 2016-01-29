@@ -13,7 +13,7 @@
         <ul class='list-group list-group-unbordered'>
           <li class='list-group-item'>
             <b>Status</b>
-            <span class='pull-right label label-<%= @user.active? ? "success" : "default" %>'><%= @user.active? ? "Activo" : "Inactivo" %></span>
+            <span class='pull-right label label-<%= @user.currently_enrolled? ? "success" : "default" %>'><%= @user.currently_enrolled? ? "Activo" : "Inactivo" %></span>
           </li>
         </ul>
         <% if ['admin', 'general_coordinator'].include? current_user.usertype %>
@@ -59,6 +59,23 @@
       <div class='tab-content'>
         <div class='tab-pane active' id='profile-activity'>
           <%= render 'main_webapp/timeline', notifications: @notifications %>
+        </div>
+        <div class='tab-pane' id='profile-assignments'>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <%= form_tag user_path( @user ), method: :get, class: 'form-inline pull-right' do %>
+                <%= select_tag :semester, options_from_collection_for_select( Semester.current_first, 'id', 'name', @semester.id ), class: 'form-control', onchange: 'this.form.submit();' %>
+              <% end %>
+              </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <% @groups.each do |gp| %>
+                <%= link_to gp.group.name, gp.group %>
+                <hr>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

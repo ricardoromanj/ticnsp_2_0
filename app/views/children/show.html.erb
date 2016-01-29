@@ -2,138 +2,104 @@
 <% content_for :page_title, 'Detalle de niño' %>
 <% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to 'Niños', children_path }</li>".html_safe %>
 
-<div class='box box-solid'>
-  <div class='box-header with-border'>
-    <h3 class='box-title'>Acciones</h3>
-  </div>
-  <div class='box-body'>
-    <%= link_to '<i class="fa fa-mail-reply"></i> Regresar'.html_safe, children_path, class: 'btn btn-app' %>
-    <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_child_path(@child), class: 'btn btn-app' %>      
-    <%= link_to '<i class="fa fa-times"></i> Borrar'.html_safe, @child, class: 'btn btn-app bg-maroon pull-right', method: :delete %>
-  </div>
-</div>
+
 
 <div class='row'>
-  <div class='col-md-4'>
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Imagen</h3>
-      </div>
-      <div class='box-body object-image no-padding'>
-        <%= image_tag attachment_url(@child, :image), class: 'img-responsive' %>
+  <div class='col-lg-3'>
+    <!-- Mainbox -->
+    <div class='box box-primary'>
+      <div class='box-body'>
+        <%= image_tag attachment_url(@child, :image), class: 'profile-user-img img-responsive img-circle' %>
+        <h3 class='profile-childname text-center'><%= @child.full_name %></h3>
+        <ul class='list-group list-group-unbordered'>
+          <li class='list-group-item'>
+            <b>Status</b>
+            <span class='pull-right label label-<%= @child.currently_enrolled? ? "success" : "default" %>'><%= @child.currently_enrolled? ? "Activo" : "Inactivo" %></span>
+          </li>
+        </ul>
+        <% if ['admin', 'general_coordinator'].include? current_user.usertype %>
+          <%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_child_path( @child ), class: 'btn btn-default' %>
+        <% end %>
+        <% if current_user.usertype =~ /admin/ %>
+          <%= link_to '<i class="fa fa-times"></i> Eliminar'.html_safe, @child, class: 'btn bg-maroon pull-right', method: :delete, 'data-confirm' => 'Are you sure?' %>
+        <% end %>
       </div>
     </div>
-  </div>
-  <div class='col-md-8'>
-    <div class='box box-solid'>
+
+    <!-- About box -->
+    <div class='box box-primary'>
       <div class='box-header with-border'>
         <h3 class='box-title'>Información</h3>
       </div>
       <div class='box-body'>
-        <div class='row'>
-          <div class='col-sm-4'>
-            <p class='lead'><%= @child.full_name %></p>
-            <p>
-              <strong>Gender:</strong>
-              <%= @child.gender_text %>
-            </p>
-            <p>
-              <strong>Birthdate:</strong>
-              <%= @child.birthdate %>
-            </p>
+        <strong><i class='fa fa-envelope'></i> Género</strong>
+        <p class='text-muted'><%= @child.gender_text %></p>
+        <hr>
+        <strong><i class='fa fa-calendar'></i> Fecha de nacimiento</strong>
+        <p class='text-muted'><%= @child.birthdate %></p>
+        <hr>
+        <strong><i class='fa fa-file-text'></i> Notas</strong>
+        <div class='well'><%= @child.notes %></div>
+        <hr>
+        <strong><i class='fa fa-file-text'></i> Alergias</strong>
+        <div class='well'><%= @child.allergies %></div>
+      </div>
+    </div>
+
+  </div>
+  <div class='col-lg-9'>
+    <div class='nav-tabs-custom'>
+      <ul class='nav nav-tabs'>
+        <li class='active'><a href='#profile-activity' data-toggle='tab'>Actividad</a></li>
+        <li><a href='#profile-assignments' data-toggle='tab'>Grupos</a></li>
+        <li><a href='#profile-tutors' data-toggle='tab'>Tutores</a></li>
+      </ul>
+      <div class='tab-content'>
+        <div class='tab-pane active' id='profile-activity'>
+          <%= render 'main_webapp/timeline', notifications: @notifications %>
+        </div>
+        <div class='tab-pane' id='profile-assignments'>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <%= form_tag child_path( @child ), method: :get, class: 'form-inline pull-right' do %>
+                <%= select_tag :semester, options_from_collection_for_select( Semester.current_first, 'id', 'name', @semester.id ), class: 'form-control', onchange: 'this.form.submit();' %>
+              <% end %>
+              </div>
           </div>
-          <div class='col-sm-8'>
-            <p>
-              <strong>Allergies:</strong>
-              <div class='well well-sm'><%= @child.allergies %></div>
-            </p>
-            <p>
-              <strong>Notes:</strong>
-              <div class='well well-sm'><%= @child.notes %></div>
-            </p>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <% @groups.each do |gp| %>
+                <%= link_to gp.group.name, gp.group %>
+                <hr>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+        <div class='tab-pane' id='profile-tutors'>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <%= render 'assign_tutor_form' %>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <table class='table table-condensed'>
+                <tbody>
+                  <% @child.users_have_marked_as(:responsability).each do |user| %>
+                    <tr>
+                      <td><%= user.id %></td>
+                      <td><%= link_to user.full_name, user %></td>
+                      <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unassign_from_tutor_child_path(tutor_id: user.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Tutores responsables</h3>
       </div>
-      <div class='box-body'>
-        <%= render 'children/assign_tutor_form' %>
-      </div>
-      <table class='table table-condensed'>
-        <tbody>
-          <% @child.users_have_marked_as(:responsability).each do |user| %>
-            <tr>
-              <td><%= user.id %></td>
-              <td><%= link_to user.full_name, user %></td>
-              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unassign_from_tutor_child_path(tutor_id: user.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Taller</h3>
-      </div>
-      <div class='box-body'>
-        <%= render 'children/assign_workshop_form' %>
-      </div>
-      <table class='table table-condensed'>
-        <tbody>
-          <% @child.workshops_have_marked_as(:enrolled_workshop).each do |workshop| %>
-            <tr>
-              <td><%= workshop.id %></td>
-              <td><%= link_to workshop.name, workshop %></td>
-              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unenroll_from_workshop_child_path(workshop_id: workshop.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Catequesis</h3>
-      </div>
-      <div class='box-body'>
-        <%= render 'children/assign_lecture_form' %>
-      </div>
-      <table class='table table-condensed'>
-        <tbody>
-          <% @child.lectures_have_marked_as(:enrolled_lecture).each do |lecture| %>
-            <tr>
-              <td><%= lecture.id %></td>
-              <td><%= link_to lecture.name, lecture %></td>
-              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unenroll_from_lecture_child_path(lecture_id: lecture.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class='box box-solid'>
-      <div class='box-header with-border'>
-        <h3 class='box-title'>Acompañamientos</h3>
-      </div>
-      <div class='box-body'>
-        <%= render 'children/assign_shepperding_form' %>
-      </div>
-      <table class='table table-condensed'>
-        <tbody>
-          <% @child.shepperdings_have_marked_as(:enrolled_shepperding).each do |shepperding| %>
-            <tr>
-              <td><%= shepperding.id %></td>
-              <td><%= link_to shepperding.name, shepperding %></td>
-              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, unenroll_from_shepperding_child_path(shepperding_id: shepperding.id), class: 'btn btn-xs bg-maroon pull-right', method: :delete %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>
+

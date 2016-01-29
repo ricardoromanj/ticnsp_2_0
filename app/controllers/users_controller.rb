@@ -38,7 +38,9 @@ class UsersController < WebApplicationController
   # GET /users/1.json
   def show
     RecentItem.create( visitor: current_user, recentable: @user )
+    @semester = ( params['semester'] == nil ? @current_semester : Semester.find( params['semester'] ) )
     @notifications = Notification.where( recipient: @user )
+    @groups = GroupOffering.where( id: @user.group_enrollments.pluck( :group_offering_id ) ).where( semester: @semester )
   end
 
   # POST /users/1/assign_to_workshop

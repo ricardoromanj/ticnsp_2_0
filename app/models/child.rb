@@ -9,6 +9,7 @@ class Child < ActiveRecord::Base
 	markable_as :enrolled_shepperding, by: :shepperding
 
   has_many :child_semesters
+  has_many :group_enrollments, as: :enrolled
 
 	def full_name
 		"#{name} #{lastname}"
@@ -17,4 +18,8 @@ class Child < ActiveRecord::Base
 	def gender_text
 		gender == 'h' ? 'Niño' : 'Niña'
 	end
+
+  def currently_enrolled?
+    child_semesters.count > 0 ? true : false
+  end
 end

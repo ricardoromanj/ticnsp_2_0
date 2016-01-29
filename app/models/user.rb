@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  validates :usertype, inclusion: { in: ['admin', 'general_coordinator', 'coordinator'] }
+  validates :usertype, inclusion: { in: ['admin', 'general_coordinator', 'coordinator','tutor'] }
   # Set default values for settings
   before_create :set_defaults
   before_destroy :remove_recents_and_notifs
@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 
   # Enrollments relation
   has_many :group_enrollments, as: :enrolled
+  has_many :coordinator_semesters, foreign_key: :coordinator_id
 
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: (lambda {|attributes| attributes['number'].blank?})
   accepts_nested_attributes_for :emails, allow_destroy: true, reject_if: lambda {|attributes| attributes['email'].blank?}
@@ -52,7 +53,7 @@ class User < ActiveRecord::Base
 
   # Scopes
   scope :coordinators, -> { where( "usertype in ('coordinator', 'general_coordinator' )" ) }
-  scope :active_coordinators, -> { where( "usertype in ('coordinator', 'general_coordinator')" ).where( active: true ) }
+  # scope :active_coordinators, -> { where( "usertype in ('coordinator', 'general_coordinator')" ).where( active: true ) }
   scope :not_tutors, -> { where( "usertype <> 'tutor'" ).where( active: true ) }
   scope :general_coordinators, -> { where( usertype: 'general_coordinator' ).where( active: true ) }
 
@@ -95,6 +96,14 @@ class User < ActiveRecord::Base
   def set_setting(key, value)
     self.settings[key] = value
     self.save
+  end
+
+  def currently_enrolled?
+    ( coordinator_semesters.count > 0 && usertype =~ /coordinator/ ) ? true : false
+  end
+
+  def self.active_coordinators
+    self.where( id: CoordinatorSemester.where( semester: Semester.where( current: true ).first ).pluck( :coordinator_id ) )
   end
 
   private

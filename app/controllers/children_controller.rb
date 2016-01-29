@@ -20,6 +20,9 @@ class ChildrenController < WebApplicationController
   # GET /children/1.json
   def show
     RecentItem.create( visitor: current_user, recentable: @child )
+    @semester = ( params['semester'] == nil ? @current_semester : Semester.find( params['semester'] ) )
+    @notifications = Notification.where( notifiable: @child )
+    @groups = GroupOffering.where( id: @child.group_enrollments.pluck( :group_offering_id ) ).where( semester: @semester )
   end
 
   # POST /children/1/assign_to_tutor

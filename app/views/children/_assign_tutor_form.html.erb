@@ -1,4 +1,4 @@
-<%= form_tag assign_to_tutor_child_path, method: :post do %>
+<%= form_tag assign_to_tutor_child_path, method: :post, class: 'form-horizontal' do %>
   <%= hidden_field_tag :tutor_id %>
   <div class='input-group'>
     <%= text_field_tag :tutor, nil, placeholder: 'Tutor', class: 'form-control ticnsp-form-control', id: 'tutor-typeahead', autocomplete: 'off' %>
