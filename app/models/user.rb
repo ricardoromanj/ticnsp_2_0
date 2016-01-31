@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   # Scopes
   scope :coordinators, -> { where( "usertype in ('coordinator', 'general_coordinator' )" ) }
   # scope :active_coordinators, -> { where( "usertype in ('coordinator', 'general_coordinator')" ).where( active: true ) }
-  scope :not_tutors, -> { where( "usertype <> 'tutor'" ).where( active: true ) }
+  scope :not_tutors, -> { where( "usertype not like 'tutor'" ).where( active: true ) }
   scope :general_coordinators, -> { where( usertype: 'general_coordinator' ).where( active: true ) }
 
   def full_name
