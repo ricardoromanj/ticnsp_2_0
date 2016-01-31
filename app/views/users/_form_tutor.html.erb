@@ -12,6 +12,13 @@
   <% end %>
 
   <%= hidden_field_tag 'user[usertype]', 'tutor'  %>
+ <div class="form-group">
+    <%= f.label 'Activo', class: 'control-label col-sm-2' %>
+    <div class='col-sm-3'>
+      <%= f.check_box :active, 'data-toggle' => 'toggle', 'data-onstyle' => 'success', 'data-style' => 'android' %>
+    </div>
+  </div>
+
   <hr>
   <div class="form-group">
     <%= f.label 'Nombre', class: 'control-label col-sm-2' %>
@@ -48,6 +55,13 @@
     </div>
   </div>
   <hr>
+  <hr>
+  <div class='form-group'>
+    <%= label_tag 'user[image_source]', 'Usar imagen', class: 'col-sm-2 control-label' %>
+    <div class='col-sm-3'>
+      <%= select_tag 'user[image_source]', options_for_select([['Gravatar','gravatar'],['Imagen propia','image']], (@user.use_gravatar? ? 'gravatar' : 'image')), class: 'form-control' %>
+    </div>
+  </div>
   <div class="form-group">
     <%= f.label 'Imagen', class: 'col-sm-2 control-label' %>
     <div class='col-sm-9'>
@@ -57,6 +71,28 @@
       <span class="filename"></span>
     </div>
   </div>
+  <hr>
+  <div class='form-group'>
+    <%= f.label 'Teléfonos', class: 'control-label col-sm-2' %>
+  </div>
+  <%= f.fields_for :phones do |phones_form| %>
+
+    <div class='form-group'>
+      <label>
+        <%= phones_form.check_box :_destroy %>
+        Borrar
+      </label>
+      <%= phones_form.label :number, class: 'control-label col-sm-3' %>
+      <div class='col-sm-3'>
+        <%= phones_form.text_field :number, class: 'form-control' %>
+      </div>
+      <%= phones_form.label :phone_type, class: 'control-label col-sm-1' %>
+      <div class='col-sm-3'>
+        <%= phones_form.select :phone_type, options_for_select([['Casa','home'],['Móvil','mobile'],['Oficina','office'],['Otro','other']], phones_form.object.phone_type), {}, { class: 'form-control' } %>
+      </div>
+    </div>
+    
+  <% end %>
   <hr>
   <div class='form-group'>
     <%= f.label :notes, class: 'control-label col-sm-2' %>
@@ -75,5 +111,21 @@
 <script>
   $('.datepicker').datepicker({
       format: 'mm/dd/yyyy'
-  })
+  });
+
+  function imageSelectionHide() {
+    if( (/^(gravatar)$/).test( $('#user_image_source').val() ) ) {
+      $('#image-form-group').addClass('hide');
+    } else {
+      $('#image-form-group').removeClass('hide');
+    }
+  }
+
+  $('#user_image_source').click(function () {
+    imageSelectionHide();
+  });
+
+  $(function () {
+    imageSelectionHide();
+  });
 </script>

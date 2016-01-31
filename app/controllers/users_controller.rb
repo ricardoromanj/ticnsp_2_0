@@ -1,7 +1,7 @@
 class UsersController < WebApplicationController
   MAX_PHONE_FIELD_COUNT = 5
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_sidebar, :edit_tutor, :edit_coordinator, :assign_to_workshop, :unassign_from_workshop, :assign_to_lecture, :unassign_from_lecture, :assign_to_shepperding, :unassign_from_shepperding, :assign_to_commission, :unassign_from_commission]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_sidebar, :edit_tutor, :edit_coordinator, :assign_to_workshop, :unassign_from_workshop, :assign_to_lecture, :unassign_from_lecture, :assign_to_shepperding, :unassign_from_shepperding, :assign_to_commission, :unassign_from_commission, :assign_child, :unassign_child]
 
   # GET /users
   # GET /users.json
@@ -97,6 +97,20 @@ class UsersController < WebApplicationController
     commission = Commission.find(params[:commission_id])
     commission.remove_mark :coordinator_commission, @user
     redirect_to @user, alert: 'Coordinador ya no está asignado a la comisión seleccionada'
+  end
+
+  # POST /users/1/assign_child
+  def assign_child
+    child = Child.find( params[:child_id] )
+    @user.mark_as_responsability child
+    redirect_to @user, notice: 'El niño ha sido asignado al tutor'
+  end
+
+  # DELETE /users/1/unassign_child
+  def unassign_child
+    child = Child.find( params[:child_id] )
+    @user.remove_mark :responsability, child
+    redirect_to @user, alert: 'El niño ya no es responsabilidad de este tutor'
   end
 
   # POST /users/1/toggle_sidebar

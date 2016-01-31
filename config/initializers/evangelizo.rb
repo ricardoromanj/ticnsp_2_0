@@ -141,13 +141,21 @@ module Evangelizo
   class Reading
 
     def self.title( date, lang, content, short=false )
-      http = Curl.get("http://feed.evangelizo.org/v2/reader.php?date=#{ date }&type=reading_#{ ( short ? 'st' : 'lt' ) }&lang=#{ lang }&content=#{ content }")
-      return http.body_str.force_encoding( 'UTF-8' ).split( "<br /><br />" ).first
+      begin
+        http = Curl.get("http://feed.evangelizo.org/v2/reader.php?date=#{ date }&type=reading_#{ ( short ? 'st' : 'lt' ) }&lang=#{ lang }&content=#{ content }")
+        return http.body_str.force_encoding( 'UTF-8' ).split( "<br /><br />" ).first
+      rescue Curl::Err::HostResolutionError
+        return "No disponible"
+      end
     end
 
     def self.reading( date, lang, content )
-      http = Curl.get("http://feed.evangelizo.org/v2/reader.php?date=#{ date }&type=reading&lang=#{ lang }&content=#{ content }")
-      return http.body_str.force_encoding( 'UTF-8' ).split( "<br /><br />" ).first
+      begin
+        http = Curl.get("http://feed.evangelizo.org/v2/reader.php?date=#{ date }&type=reading&lang=#{ lang }&content=#{ content }")
+        return http.body_str.force_encoding( 'UTF-8' ).split( "<br /><br />" ).first
+      rescue Curl::Err::HostResolutionError
+        return "No se pudo recuperar esta lectura"
+      end
     end
 
     def self.daypack( date, lang )
@@ -175,7 +183,6 @@ module Evangelizo
 
         daypack
       end
-      
       return daypack_result
     end
 
@@ -184,8 +191,12 @@ module Evangelizo
   class Feast
 
     def self.get( date, lang )
-      http = Curl.get("http://feed.evangelizo.org/v2/reader.php?date=#{ date }&type=feast&lang=#{ lang }")
-      return http.body_str.force_encoding( 'UTF-8' ).split( "<br /><br />" ).first
+      begin
+        http = Curl.get("http://feed.evangelizo.org/v2/reader.php?date=#{ date }&type=feast&lang=#{ lang }")
+        return http.body_str.force_encoding( 'UTF-8' ).split( "<br /><br />" ).first
+      rescue Curl::Err::HostResolutionError
+        return "No disponible"
+      end
     end
 
   end
@@ -193,8 +204,12 @@ module Evangelizo
   class Saint
 
     def self.get( date, lang )
-      http = Curl.get("http://feed.evangelizo.org/v2/reader.php?date=#{ date }&type=saint&lang=#{ lang }")
-      return http.body_str.force_encoding( 'UTF-8' ).split( "<br /><br />" ).first
+      begin
+        http = Curl.get("http://feed.evangelizo.org/v2/reader.php?date=#{ date }&type=saint&lang=#{ lang }")
+        return http.body_str.force_encoding( 'UTF-8' ).split( "<br /><br />" ).first
+      rescue Curl::Err::HostResolutionError
+        return "No disponible"
+      end
     end
 
   end

@@ -5,7 +5,7 @@ class ChildSemestersController < WebApplicationController
   # GET /child_semesters.json
   def index
     @semester = ( params[:semester] == nil ? @current_semester : Semester.find( params[:semester] ) )
-    @child_semesters = ChildSemester.where( semester: @semester ).order( created_at: :desc )
+    @child_semesters = ChildSemester.where( semester: @semester ).where( "paid_at is #{ params['paid'] == nil ? 'not' : params['paid'] } null " ).order( created_at: :desc )
   end
 
   # get /child_semesters/current
