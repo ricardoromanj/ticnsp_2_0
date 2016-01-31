@@ -37,7 +37,7 @@ class NoticesController < WebApplicationController
 
         # Create a notifition when a notice is created
         users_to_notify = []
-        case @notie.audience
+        case @notice.audience
         when 'coordinators'
           users_to_notify = User.not_tutors
         when 'tutors'

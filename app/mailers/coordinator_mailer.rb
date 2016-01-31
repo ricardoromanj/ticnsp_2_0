@@ -7,7 +7,7 @@ class CoordinatorMailer < ApplicationMailer
 		mail(to: ["#{@coordinator.email}","admin@ticnsp.org"], subject: 'Bienvenido al portal de TIC')
 	end
 
-	def notice_coordinator(coordinator, notice)
+	def notify_coordinator(coordinator, notice)
 
 	end
 end
