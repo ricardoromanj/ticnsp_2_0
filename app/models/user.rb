@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :emails, allow_destroy: true, reject_if: lambda {|attributes| attributes['email'].blank?}
 
   # Scopes
-  scope :coordinators, -> { where( "usertype <> 'tutor'" ) }
+  scope :coordinators, -> { where( "usertype not like 'tutor'" ) }
   scope :tutors, -> { where( usertype: 'tutor' ) }
 
   # Include default devise modules. Others available are:
