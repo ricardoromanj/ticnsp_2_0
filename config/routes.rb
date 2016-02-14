@@ -92,7 +92,11 @@ Rails.application.routes.draw do
   end
   resources :emails
   resources :phones
-  resources :events
+  resources :events do
+    collection do
+      get 'edit_all'
+    end
+  end
   resources :workshops do
     member do
       post 'assign_coordinator'

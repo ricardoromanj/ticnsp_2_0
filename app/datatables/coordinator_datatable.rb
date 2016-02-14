@@ -2,7 +2,7 @@ class CoordinatorDatatable < AjaxDatatablesRails::Base
   def_delegators :@view, :link_to, :h, :mailto, :edit_resource_path
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= %w(User.active User.name User.lastname User.gender User.email User.birthdate)
+    @sortable_columns ||= %w(User.id User.active User.name User.lastname User.usertype User.gender User.email User.birthdate)
   end
 
   def searchable_columns
