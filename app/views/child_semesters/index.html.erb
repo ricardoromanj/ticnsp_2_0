@@ -53,12 +53,13 @@
 <script>
       function sweetDestroy(n) {
         swal({
-          title: "Are you sure?",
-          text: "This will stop scrubbing traffic to this IP. Use this option if you are done scrubbing this IP.",
+          title: "¿Deseas borrar este registro?",
+          text: "El niño ya no estará inscrito en el semestre seleccionado.",
           type: "info",
           showCancelButton: true,
+          cancelButtonText: "Cancelar",
           confirmButtonClass: "btn-info",
-          confirmButtonText: "Yes, remove it!",
+          confirmButtonText: "Sí, borrar",
           closeOnConfirm: false
         },
         function(){
@@ -69,8 +70,8 @@
               if (data.success) {
                 // swal("Done!", "Scrubs have been cleared!", "success");
                 swal({
-                  title: 'Done!',
-                  text: 'Scrub has been cleared!',
+                  title: '¡Listo!',
+                  text: 'Registro borrado',
                   type: 'success'
                 }, function () {
                   window.location = '/child_semesters';

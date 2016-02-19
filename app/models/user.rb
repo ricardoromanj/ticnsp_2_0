@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   validates :usertype, inclusion: { in: ['admin', 'general_coordinator', 'coordinator','tutor'] }
   validates :email, presence: true, unless: "usertype =~ /tutor/"
+  validates :email, uniqueness: true, allow_nil: true, allow_blank: true
+
   # Set default values for settings
   before_create :set_defaults
   before_destroy :remove_recents_and_notifs
