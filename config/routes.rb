@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     end
   end
   resources :child_semesters do
+    member do
+      delete 'sweet_destroy'
+    end
     collection do
       get 'current'
     end

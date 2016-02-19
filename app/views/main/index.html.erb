@@ -41,6 +41,7 @@
 		</div>
 	</div>
 </section>
+<% if false %>
 <section class='section-mainbanner' id='mainbanner'>
   <div class='container'>
     <div class='row'>
@@ -49,6 +50,7 @@
       </div>
       <div class='col-sm-6'>
 		    <h1 class=''>¡Ven a conocer más a <strong>Jesús</strong> divirtiéndote con nosotros!</h1>
+        <% if false %>
         <div id='countdown' data-date="2016-02-13 11:00:00"></div>
         <script>
           $('#countdown').TimeCircles({
@@ -80,10 +82,11 @@
             }
           });
         </script>
+        <% end %>
         <div class='panel panel-body mainbanner-banner'>
           <p class='lead'>
-            Inscripciones el primer día<br />
-            <strong>13 de febrero</strong> 11:00 a.m.<br />
+            Inscripciones<br />
+            <strong>Sábados</strong> 11:00 a.m.<br />
             Parroquia <strong>Nuestra Señora de la Paz</strong>
           </p>
         </div>
@@ -91,8 +94,9 @@
     </div>
 	</div>
 </section>
+<% end %>
 <section class='section-aboutus' id='aboutus'>
-	<div class='container'>
+  <div class='container'>
 		<div class='row'>
 			<div class='col-sm-6 col-md-3 text-center'>
 				<%= image_tag "talleres.jpg", class: 'ticnsp-activity-image' %>
@@ -113,6 +117,23 @@
 		</div>
 	</div>
 </section>
+<section class='section-information'>
+	<div class='container'>
+    <div class='row'>
+      <%= image_tag "infoblue.png", height: 500 %>
+
+      <div class='col-xs-8 col-xs-offset-4 col-sm-6 col-sm-offset-6'>
+		    <h1 class=''>¡Ven a conocer más a <strong>Jesús</strong> divirtiéndote con nosotros!</h1>
+        <div class='panel panel-body mainbanner-banner'>
+          <p class='lead'>
+            Inscripciones<br />
+            <strong>Sábados</strong> 11:00 a.m.<br />
+            Parroquia <strong>Nuestra Señora de la Paz</strong>
+          </p>
+        </div>
+    </div>
+  </div>
+</section>
 <section class='section-team' id='team'>
 	<div class='container'>
 		<h1 class='ticnsp-section-title'>Conoce a nuestra <strong>comunidad</strong> de coordinadores</h1>
@@ -131,37 +152,37 @@
 		<% end %>
 	</div>
 </section>
-<section class='section-contact' id='contact'>
-  <div class="bg-overlay"></div>
+<section class='section-contact_v2' id='contact'>
 	<div class='container'>
 		<div class='row'>
-			<div class='col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2'>
+      <%= image_tag "infoyellow.png", height: 500 %>
+      <div class='col-xs-12 col-sm-8 col-md-6'>
 		    <h1 class='ticnsp-section-title'>Si necesitas información, déjanos tus datos:</h1>
 				<%= render 'layouts/partials/alerts' %>
-			</div>
-		</div>
-		<%= form_tag leave_message_path, class: 'form-horizontal ticnsp-form', method: :post do %>
-			<div class='form-group'>
-				<div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6'>
-					<%= text_field_tag :name, nil, placeholder: 'Nombre', class: 'form-control ticnsp-form-control', required: true%>
-				</div>
-			</div>
-			<div class='form-group'>
-				<div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6'>
-					<%= email_field_tag :email, nil, placeholder: 'E - mail', class: 'form-control ticnsp-form-control', required: true%>
-				</div>
-			</div>
-			<div class='form-group'>
-				<div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6'>
-					<%= text_area_tag :message_text, nil, placeholder: 'Mensaje', class: 'form-control ticnsp-form-control', style: 'resize: none;', required: true%>
-				</div>
-			</div>
-			<div class='form-group'>
-				<div class='col-xs-offset-1 col-sm-offset-3 col-xs-10 col-sm-6'>
-					<%= submit_tag 'Enviar', class: 'btn btn-ticnsp-form-btn btn-block' %>
-				</div>
-			</div>
-		<% end %>
+        <%= form_tag leave_message_path, class: 'form-horizontal ticnsp-form', method: :post do %>
+          <div class='form-group'>
+            <div class='col-sm-12'>
+              <%= text_field_tag :name, nil, placeholder: 'Nombre', class: 'form-control ticnsp-form-control', required: true%>
+            </div>
+          </div>
+          <div class='form-group'>
+            <div class='col-sm-12'>
+              <%= email_field_tag :email, nil, placeholder: 'E - mail', class: 'form-control ticnsp-form-control', required: true%>
+            </div>
+          </div>
+          <div class='form-group'>
+            <div class='col-sm-12'>
+              <%= text_area_tag :message_text, nil, placeholder: 'Mensaje', class: 'form-control ticnsp-form-control', style: 'resize: none;', required: true%>
+            </div>
+          </div>
+          <div class='form-group'>
+            <div class='col-sm-12'>
+              <%= submit_tag 'Enviar', class: 'btn btn-ticnsp-form-btn btn-block' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
 	</div>
 </section>
 
@@ -201,7 +222,7 @@
 				<h2>Conócenos</h2>
 				<%= link_to '<span class="fa fa-facebook"></span>'.html_safe, 'https://www.facebook.com/talleresinfantilescatolicos?fref=ts', class: 'btn btn-ticnsp-social', target: '_blank' %>
 				<%= link_to '<span class="fa fa-twitter"></span>'.html_safe, 'https://twitter.com/ticnsp', class: 'btn btn-ticnsp-social', target: '_blank' %>
-				
+
 			</div>
 			<div class='col-sm-4'>
 				<h2>Sitios de interés</h2>
@@ -229,7 +250,7 @@
 
 		// Maps setup
 		function initialize() {
-			var center = new google.maps.LatLng(31.696608, -106.417541); 
+			var center = new google.maps.LatLng(31.696608, -106.417541);
 			var mapOptions = {
 				center: center,
 				zoom: 15,
@@ -252,13 +273,13 @@
 			google.maps.event.addDomListener(window, 'resize', function() {
 			    map.setCenter(center);
 			});
-			
+
 			infowindow.open(map,marker);
 		}
 		initialize();
 	</script>
 	<div class='container-fluid footer-footer'>
-		2015 © Talleres Infantiles Católicos - El plagio es pecado
+    <%= Date.today.year %> © Talleres Infantiles Católicos - El plagio es pecado
 		<a href='#' class='btn btn-to-top pull-right'><i class='glyphicon glyphicon-menu-up'></i></a>
 	</div>
 </section>

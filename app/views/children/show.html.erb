@@ -14,7 +14,11 @@
         <ul class='list-group list-group-unbordered'>
           <li class='list-group-item'>
             <b>Status</b>
-            <span class='pull-right label label-<%= @child.currently_enrolled? ? "success" : "default" %>'><%= @child.currently_enrolled? ? "Activo" : "Inactivo" %></span>
+            <span class='pull-right label label-<%= @child.currently_enrolled? ? "success" : "default" %>'><%= @child.currently_enrolled? ? "Inscrito" : "No inscrito" %></span>
+          </li>
+          <li class='list-group-item'>
+            <b>Edad</b>
+            <span class='pull-right'><%= @child.age %> años</span>
           </li>
         </ul>
         <% if ['admin', 'general_coordinator'].include? current_user.usertype %>

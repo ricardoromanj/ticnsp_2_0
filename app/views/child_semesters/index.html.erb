@@ -9,7 +9,7 @@
   <div class='box-body'>
     <%= link_to 'Inscribir', new_child_semester_path, class: 'btn btn-flat btn-default bg-green' %>
     <%= form_tag child_semesters_path, method: :get, class: 'form-inline pull-right' do %>
-      <%= select_tag :paid, options_for_select( [['Todos','all'],['Pagado', 'paid'],['Sin pagar','unpaid']] ), class: 'form-control' %>
+      <%= select_tag :paid, options_for_select( [['Todos',0],['Pagado',1],['Sin pagar',2]], @paid ), class: 'form-control', onchange: 'this.form.submit();' %>
       <%= select_tag :semester, options_from_collection_for_select( Semester.current_first, 'id', 'name', @semester.id ), class: 'form-control', onchange: 'this.form.submit();' %>
     <% end %>
   </div>
@@ -39,9 +39,9 @@
               <td><%= child_semester.semester.name %></td>
               <td><%= ( child_semester.paid_at == nil ? ( render 'child_semesters/pay_form', child_semester: child_semester ) : "#{ link_to "<i class='fa fa-times'></i>".html_safe, unpay_child_semester_path( child_semester ), class: 'btn btn-xs btn-warning', method: :put } <strong>$#{ child_semester.paid_amt }</strong> - #{ child_semester.paid_at.strftime( '%b %d, %Y' ) }" ).html_safe %></td>
               <td><%= child_semester.notes %></td>
-              <td><%= link_to 'Mostrar', child_semester, class: 'btn btn-sm btn-flat btn-default' %></td>
+              <td><% link_to 'Mostrar', child_semester, class: 'btn btn-sm btn-flat btn-default' %></td>
               <td><%= link_to 'Modificar', edit_child_semester_path(child_semester), class: 'btn btn-sm btn-flat btn-default' %></td>
-              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, child_semester, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-flat btn-danger pull-right' %></td>
+              <td><%= link_to '<i class="fa fa-times"></i>'.html_safe, '#', class: 'btn btn-sm btn-flat btn-danger pull-right', onclick: "sweetDestroy(#{child_semester.id})" %></td>
             </tr>
           <% end %>
         </tbody>
@@ -49,3 +49,37 @@
     </div>
   </div>
 </div>
+
+<script>
+      function sweetDestroy(n) {
+        swal({
+          title: "Are you sure?",
+          text: "This will stop scrubbing traffic to this IP. Use this option if you are done scrubbing this IP.",
+          type: "info",
+          showCancelButton: true,
+          confirmButtonClass: "btn-info",
+          confirmButtonText: "Yes, remove it!",
+          closeOnConfirm: false
+        },
+        function(){
+          $.ajax({
+            url: '/child_semesters/' + n + '/sweet_destroy',
+            method: 'delete',
+            success: function (data) {
+              if (data.success) {
+                // swal("Done!", "Scrubs have been cleared!", "success");
+                swal({
+                  title: 'Done!',
+                  text: 'Scrub has been cleared!',
+                  type: 'success'
+                }, function () {
+                  window.location = '/child_semesters';
+                });
+              } else {
+                swal("Error!", "Could not clear scrubs!", "danger");
+              }
+            }
+          });
+        });
+      }
+</script>

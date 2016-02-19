@@ -1,11 +1,16 @@
 class ChildSemestersController < WebApplicationController
-  before_action :set_child_semester, only: [:show, :edit, :update, :pay, :unpay, :destroy]
+  before_action :set_child_semester, only: [:show, :edit, :update, :pay, :unpay, :destroy, :sweet_destroy]
 
   # GET /child_semesters
   # GET /child_semesters.json
   def index
     @semester = ( params[:semester] == nil ? @current_semester : Semester.find( params[:semester] ) )
-    @child_semesters = ChildSemester.where( semester: @semester ).where( "paid_at is #{ params['paid'] == nil ? 'not' : params['paid'] } null " ).order( created_at: :desc )
+    @paid = ( [0,1,2].include? params[:paid].to_i ) ? params[:paid].to_i : 0
+    @child_semesters = ChildSemester.where( semester: @semester )
+    if [1,2].include? @paid
+      @child_semesters = @child_semesters.where( "paid_at is #{ @paid == 1 ? 'not ' : ''}null" )
+    end
+    @child_semesters = @child_semesters.order( created_at: :desc )
   end
 
   # get /child_semesters/current
@@ -92,6 +97,12 @@ class ChildSemestersController < WebApplicationController
       format.html { redirect_to child_semesters_url, notice: 'Child semester was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # DELETE /child_semesters/1/sweet_destroy
+  def sweet_destroy
+    @child_semester.destroy
+    render json: { success: true }, status: 200
   end
 
   private

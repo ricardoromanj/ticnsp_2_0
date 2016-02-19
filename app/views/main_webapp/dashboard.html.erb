@@ -59,7 +59,7 @@
       <div class="info-box-content">
         <span class="info-box-text">Semestre</span>
         <span class="info-box-number">
-          <%= semester_progress @current_semester %>% de semestre completo
+          <%= (semester_progress @current_semester).round(2) %>% de semestre completo
         </span>
         <div class="progress">
           <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= semester_progress @current_semester %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= semester_progress @current_semester %>%"></div>
