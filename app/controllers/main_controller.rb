@@ -3,7 +3,7 @@ class MainController < ApplicationController
     if user_signed_in?
       redirect_to '/dashboard'
     end
-    @coordinators = User.active_coordinators
+    @coordinators = User.active_coordinators + User.where(usertype: 'general_coordinator')
   end
 
   def leave_message

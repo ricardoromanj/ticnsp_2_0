@@ -270,16 +270,15 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
         <tr>
           <td>
             
-            <h3>Bienvenid<%= @coordinator.gender == 'm' ? 'a' : 'o' %>, <%= @coordinator.full_name %></h3>
-            <p class="lead" style='font-size: 17px;'>¡Felicidades! Tu cuenta en TICNSP.org acaba de ser creada. Ahora tienes acceso al contenido para coordinadores del curso de TIC (Talleres Infantiles Católicos).</p>
+            <h3>Hola, <%= @coordinator.full_name %></h3>
+            <p class="lead" style='font-size: 17px;'><%= @notice.user.full_name %> ha publicado un aviso en el sistema. Inicia sesión para verlo a detalle.<p>
             
             <!-- A Real Hero (and a real human being) -->
             <p><img src="http://ticnsp.org/main2.png" height="300"/></p><!-- /hero -->
             
             <!-- Callout Panel -->
             <p class="callout" style='padding: 15px; background-color: #ECF8FF; margin-bottom: 15px;'>
-              Tu usuario es <strong><%= @coordinator.email %></strong><br />
-              Tu contraseña temporal es <strong><%= @init_password %></strong><br> Utilízala para iniciar sesión y procede inmediatamente a cambiarla. Te recomendamos hacer esto lo antes posible: <%= link_to "Iniciar sesión &raquo;".html_safe, @url %>
+              <%= @notice.text.html_safe  %>
             </p><!-- /Callout Panel -->
             
             <h3>TIC <small>Talleres Infantiles Católicos</small></h3>

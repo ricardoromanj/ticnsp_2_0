@@ -39,7 +39,7 @@ class NoticesController < WebApplicationController
         users_to_notify = []
         case @notice.audience
         when 'coordinators'
-          users_to_notify = User.not_tutors
+          users_to_notify = User.active_coordinators + User.where(usertype: 'general_coordinator')
         when 'tutors'
           users_to_notify = User.tutors + User.where( usertype: 'admin' )
         when 'all'
@@ -52,7 +52,7 @@ class NoticesController < WebApplicationController
           notification = Notification.create( recipient: user, actor: current_user, action: 'publicó', notifiable: @notice )
 
           # Create send notification by email background job
-          NotificationEmailJob.new.async.perform( user, notification )
+          NoticeEmailJob.new.async.perform( user, @notice )
         end
 
         # Send Twilio SMS (use the subject field)
