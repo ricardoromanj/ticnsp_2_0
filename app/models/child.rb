@@ -24,8 +24,12 @@ class Child < ActiveRecord::Base
   end
 
   def age
-    now = Date.today
-    birthday_date = Time.strptime(birthdate, "%m/%d/%Y")
-    now.year - birthday_date.year - (birthday_date.to_date.change(year: now.year) > now ? 1 : 0 )
+    unless birthdate.blank?
+      now = Date.today
+      birthday_date = Time.strptime(birthdate, "%m/%d/%Y")
+      now.year - birthday_date.year - (birthday_date.to_date.change(year: now.year) > now ? 1 : 0 )
+    else
+      0
+    end
   end
 end
