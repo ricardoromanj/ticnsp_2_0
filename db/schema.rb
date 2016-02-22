@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219021023) do
+ActiveRecord::Schema.define(version: 20160221225054) do
 
   create_table "child_semesters", force: :cascade do |t|
     t.integer  "child_id"
@@ -128,11 +128,11 @@ ActiveRecord::Schema.define(version: 20160219021023) do
 
   create_table "notices", force: :cascade do |t|
     t.string   "heading"
-    t.string   "text"
+    t.text     "text",        limit: 2147483647
     t.string   "audience"
     t.string   "notice_type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "user_id"
   end
 
