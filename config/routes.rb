@@ -137,7 +137,12 @@ Rails.application.routes.draw do
       get 'typeaheaddata'
     end
   end
-  resources :visitor_messages
+  resources :visitor_messages do
+    member do
+      put 'mark_as_replied'
+      put 'unmark_as_replied'
+    end
+  end
   resources :shepperdings do
     member do
       post 'assign_coordinator'

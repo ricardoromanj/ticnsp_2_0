@@ -1,5 +1,5 @@
 class VisitorMessagesController < WebApplicationController
-  before_action :set_visitor_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_visitor_message, only: [:show, :edit, :update, :destroy, :mark_as_replied, :unmark_as_replied]
 
   # GET /visitor_messages
   # GET /visitor_messages.json
@@ -14,6 +14,20 @@ class VisitorMessagesController < WebApplicationController
   # GET /visitor_messages/1
   # GET /visitor_messages/1.json
   def show
+  end
+
+  # PUT /visitor_messages/1/mark_as_replied
+  def mark_as_replied
+    @visitor_message.replied_at = Time.now
+    @visitor_message.save
+    redirect_to visitor_messages_url, notice: 'Mensaje marcado como respondido'
+  end
+
+  # PUT /visitor_messages/1/unmark_as_replied
+  def unmark_as_replied
+    @visitor_message.replied_at = nil
+    @visitor_message.save
+    redirect_to visitor_messages_url, notice: 'Mensaje marcado como no atendido'
   end
 
   # GET /visitor_messages/new
