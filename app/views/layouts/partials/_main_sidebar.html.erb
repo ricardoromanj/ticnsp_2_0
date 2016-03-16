@@ -90,7 +90,7 @@
         </li>
 
       <% elsif current_user.usertype =~ /tutor/ %>
-
+        <li class='<%= params['action'] =~ /staff/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-group'></i> <span>Coordinación</span>".html_safe, staff_path %></li>
       <% end %>
     </ul>
   </section>
