@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'main_webapp/index'
   get 'dashboard' => 'main_webapp#dashboard'
   get 'evangelio' => 'main_webapp#evangelio'
+  get 'staff'     => 'main_webapp#staff'
 
   # Devise configuration
   devise_for :users

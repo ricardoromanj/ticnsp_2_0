@@ -45,35 +45,35 @@ class ChildrenController < WebApplicationController
     workshop.mark_as_enrolled_workshop @child
     redirect_to @child, notice: 'Niño inscrito exitosamente.'
   end
-  
+
   # POST /children/1/enroll_in_lecture
   def enroll_in_lecture
     lecture = Lecture.find(params[:lecture_id])
     lecture.mark_as_enrolled_lecture @child
     redirect_to @child, notice: 'Niño inscrito exitosamente.'
   end
-  
+
   # POST /children/1/enroll_in_shepperding
   def enroll_in_shepperding
     shepperding = Shepperding.find(params[:shepperding_id])
     shepperding.mark_as_enrolled_shepperding @child
     redirect_to @child, notice: 'Niño inscrito exitosamente.'
   end
-  
+
   # DELETE /children/1/enroll_from_workshop
   def unenroll_from_workshop
     workshop = Workshop.find(params[:workshop_id])
     workshop.remove_mark :enrolled_workshop, @child
     redirect_to @child, alert: 'El niño ya no está inscrito en el taller.'
   end
-  
+
   # DELETE /children/1/enroll_from_lecture
   def unenroll_from_lecture
     lecture = Lecture.find(params[:lecture_id])
     lecture.remove_mark :enrolled_lecture, @child
     redirect_to @child, alert: 'El niño ya no está inscrito en la catequesis.'
   end
-  
+
   # DELETE /children/1/enroll_from_shepperding
   def unenroll_from_shepperding
     shepperding = Shepperding.find(params[:shepperding_id])
