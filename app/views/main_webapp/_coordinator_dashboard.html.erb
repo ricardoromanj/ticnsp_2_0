@@ -1,0 +1,104 @@
+<div class='row'>
+	<div class='col-sm-4 col-md-4'>
+    <div class="info-box bg-blue">
+      <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Semestre</span>
+        <span class="info-box-number">
+          <%= (semester_progress @current_semester).round(2) %>% de semestre completo
+        </span>
+        <div class="progress">
+          <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= semester_progress @current_semester %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= semester_progress @current_semester %>%"></div>
+        </div>
+        <span class="progress-description">
+        </span>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+		<div class='box box-danger'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Evangelio del día</h3>
+        <div class='box-tools pull-right'>
+          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+			</div>
+			<div class='box-body'>
+				<% @readings.each do |reading| %>
+					<p>
+						<strong><%= reading[:title].html_safe %></strong><br>
+						<%= reading[:reading].html_safe %>
+					</p>
+				<% end %>
+			</div>
+			<div class='box-footer'>
+        <%= link_to 'Calendario litúrgico <i class="fa fa-chevron-right"></i>'.html_safe, evangelio_path, class: 'pull-right btn btn-flat btn-danger' %>
+			</div>
+		</div>
+	</div>
+	<div class='col-sm-4 col-md-5'>
+		<div class='box box-purple'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Actividad grupal</h3>
+        <div class='box-tools pull-right'>
+          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+			</div>
+			<div class='box-body'>
+        <%= render 'main_webapp/timeline', notifications: @notifications %>
+			</div>
+			<div class='box-footer'>
+
+			</div>
+		</div>
+	</div>
+	<div class='col-sm-4 col-md-3'>
+		<div class='box box-primary'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Avisos</h3>
+			</div>
+			<div class='box-body'>
+        <div class='direct-chat-messages'>
+          <% Notice.all.order( created_at: :desc ).limit(5).each do |notice| %>
+            <div class='direct-chat-msg'>
+              <div class='direct-chat-info clearfix'>
+                <span class='direct-chat-name pull-left'><%= notice.user.full_name %></span>
+                <span class='direct-chat-timestamp pull-right'><%= notice.created_at %></span>
+              </div>
+              <%= image_tag notice.user.current_image( 128 ), class: 'direct-chat-img' %>
+              <div class='direct-chat-text'>
+                <%= text_shrinkinator notice.text_stripped, 140, "#{ link_to '...', notices_path( anchor: dom_id( notice ) ) }" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+			</div>
+			<div class='box-footer'>
+        <%= link_to 'Ver todos <i class="fa fa-chevron-right"></i>'.html_safe, notices_path, class: 'pull-right btn btn-flat btn-primary' %>
+			</div>
+		</div>
+		<div class='box box-success'>
+			<div class='box-header with-border'>
+				<h3 class='box-title'>Mensajes de visitas</h3>
+			</div>
+			<div class='box-body'>
+        <div class='direct-chat-messages'>
+          <% VisitorMessage.all.order( created_at: :desc ).limit(5).each do |vmessage| %>
+            <div class='direct-chat-msg'>
+              <div class='direct-chat-info clearfix'>
+                <span class='direct-chat-name pull-left'><%= vmessage.name %></span>
+                <span class='direct-chat-timestamp pull-right'><%= vmessage.created_at %></span>
+              </div>
+              <%= image_tag gravatar_url_from_email( vmessage.email ), class: 'direct-chat-img' %>
+              <div class='direct-chat-text'>
+                <%= text_shrinkinator vmessage.message_text.html_safe, 140, "#{ link_to '...', visitor_messages_path }" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+			</div>
+			<div class='box-footer'>
+        <%= link_to 'Ver todos <i class="fa fa-chevron-right"></i>'.html_safe, visitor_messages_path, class: 'pull-right btn btn-flat btn-success' %>
+			</div>
+		</div>
+	</div>
+</div>

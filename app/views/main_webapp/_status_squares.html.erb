@@ -1,0 +1,50 @@
+<div class='row'>
+	<div class='col-md-3 col-sm-6'>
+		<div class='small-box bg-aqua'>
+			<div class='inner'>
+				<h3><%= Child.count %></h3>
+				<p>Niños inscritos</p>
+			</div>
+			<div class='icon'>
+				<i class='ion ion-ios-body'></i>
+			</div>
+			<%= link_to 'Ver todos <i class="fa fa-arrow-circle-right"></i>'.html_safe, children_path, class: 'small-box-footer' %>
+		</div>
+	</div>
+	<div class='col-md-3 col-sm-6'>
+		<div class='small-box bg-yellow'>
+			<div class='inner'>
+				<h3><%= User.active_coordinators.count %></h3>
+				<p>Coordinadores activos</p>
+			</div>
+			<div class='icon'>
+				<i class='ion ion-person-stalker'></i>
+			</div>
+			<%= link_to 'Ver todos <i class="fa fa-arrow-circle-right"></i>'.html_safe, coordinators_users_path, class: 'small-box-footer' %>
+		</div>
+	</div>
+	<div class='col-md-3 col-sm-6'>
+		<div class='small-box bg-green'>
+			<div class='inner'>
+				<h3><%= Workshop.count %></h3>
+				<p>Talleres</p>
+			</div>
+			<div class='icon'>
+				<i class='ion ion-ios-americanfootball'></i>
+			</div>
+			<%= link_to 'Ver todos <i class="fa fa-arrow-circle-right"></i>'.html_safe, workshops_path, class: 'small-box-footer' %>
+		</div>
+	</div>
+	<div class='col-md-3 col-sm-6'>
+		<div class='small-box bg-red'>
+			<div class='inner'>
+				<h3><%= Lecture.count %></h3>
+				<p>Catequesis</p>
+			</div>
+			<div class='icon'>
+				<i class='ion ion-ios-bookmarks'></i>
+			</div>
+			<%= link_to 'Ver todos <i class="fa fa-arrow-circle-right"></i>'.html_safe, lectures_path, class: 'small-box-footer' %>
+		</div>
+	</div>
+</div>
