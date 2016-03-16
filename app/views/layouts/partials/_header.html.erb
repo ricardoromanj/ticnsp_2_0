@@ -87,9 +87,11 @@
 				<%
 					# Control sidebar toggle
 				%>
-				<li>
-		      <a href="#" data-toggle="control-sidebar"><i class="fa fa-send-o"></i></a>
-		    </li>
+        <% if current_user.usertype =~ /admin|coordinator$/ %>
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-send-o"></i></a>
+          </li>
+        <% end %>
 			</ul>
 		</div>
 	</nav>

@@ -13,4 +13,8 @@ class MainWebappController < WebApplicationController
   	end
   	@readings = Evangelizo::Reading.daypack( @date.strftime( '%Y%m%d' ), 'SP' )
   end
+
+  def staff
+    @staff = User.coordinators
+  end
 end

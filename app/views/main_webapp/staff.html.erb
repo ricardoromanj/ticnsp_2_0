@@ -1,0 +1,28 @@
+<% content_for :title, 'Coordinación - TIC' %>
+<% content_for :page_title, 'Coordinación' %>
+
+<div class='box box-solid'>
+  <div class='box-header with-border'>
+    <h3 class='box-title'>Información de contacto</h3>
+  </div>
+  <div class='box-body'>
+
+    <table class='table table-striped table-hover'>
+      <thead>
+        <th></th>
+        <th>Nombre</th>
+        <th>Correo electrónico</th>
+      </thead>
+      <tbody>
+        <% @staff.each do |user| %>
+          <tr>
+            <td><%= image_tag user.current_image(50), class: 'img-circle' %></td>
+            <td><%= user.full_name %></td>
+            <td><%= user.email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

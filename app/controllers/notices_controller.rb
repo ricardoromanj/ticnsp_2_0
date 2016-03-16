@@ -4,7 +4,14 @@ class NoticesController < WebApplicationController
   # GET /notices
   # GET /notices.json
   def index
-    @notices = Notice.includes( :user ).order( created_at: :desc ).paginate(page: params[:page], per_page: 5)
+    # Select the notices depending on audience and usertype
+    if current_user.usertype =~ /admin/
+      @notices = Notice.includes( :user ).order( created_at: :desc ).paginate(page: params[:page], per_page: 5)
+    elsif current_user.usertype =~ /coordinator$/
+      @notices = Notice.includes( :user ).where( audicence: 'coordinators' ).order( created_at: :desc ).paginate( page: params[:page], per_page: 5 )
+    elsif current_user.usertype =~ /^tutor$/
+      @notices = Notice.includes( :user ).where( audience: 'tutors' ).order( created_at: :desc ).paginate( page: params[:page], per_page: 5 )
+    end
   end
 
   # GET /notices/view
