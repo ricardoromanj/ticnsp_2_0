@@ -1,22 +1,179 @@
-<h2>Change your password</h2>
+<% content_for :title, 'Cambiar contraseña' %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<style>
+#recover-password-form {
+  margin-top: 200px;
+}
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #3498db;
+  background-image: url("<%= asset_path("login_bg.jpg") %>");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+</style>
+
+<!-- particles.js container -->
+<div id="particles-js"></div>
+
+<div class='container-fluid'>
+  <div class='row'>
+    <div class='col-xs-12 col-sm-offset-1 col-md-offset-4 col-md-4 col-sm-10'>
+      <div class='panel' id='recover-password-form'>
+        <div class='panel-body'>
+          <p class='lead'><%= image_tag 'tic_logo_nobg_flat.png', height: 70, class: 'text-center' %>Cambiar contraseña</p>
+
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: 'form-horizontal', method: :put }) do |f| %>
+            <%= devise_error_messages! %>
+            <%= f.hidden_field :reset_password_token %>
+
+            <div class="form-group">
+              <div class='col-sm-12'>
+                <%= f.password_field :password, autofocus: true, autocomplete: "off", placeholder: 'New password', class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class='col-sm-12'>
+                <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password confirmation", class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class='col-sm-12'>
+                <%= f.submit "Cambiar contraseña", class: 'btn btn-flat btn-primary btn-block' %>
+              </div>
+            </div>
+          <% end %>
+
+          <div class='text-center'>
+            <%= render "devise/shared/links" %>
+          </div>
+          <div class='text-center'>
+            <p class='small text-muted'>2015 © Talleres Infantiles Católicos - El plagio es pecado</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+<script>
+particlesJS("particles-js", {
+  "particles": {
+    "number": {
+      "value": 7,
+      "density": {
+        "enable": true,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": "#07507F"
+    },
+    "shape": {
+      "type": "polygon",
+      "stroke": {
+        "width": 0,
+        "color": "#000"
+      },
+      "polygon": {
+        "nb_sides": 6
+      },
+      "image": {
+        "src": "img/github.svg",
+        "width": 100,
+        "height": 100
+      }
+    },
+    "opacity": {
+      "value": 0.3,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 1,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 160,
+      "random": false,
+      "anim": {
+        "enable": true,
+        "speed": 10,
+        "size_min": 40,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": false,
+      "distance": 200,
+      "color": "#ffffff",
+      "opacity": 1,
+      "width": 2
+    },
+    "move": {
+      "enable": true,
+      "speed": 8,
+      "direction": "none",
+      "random": false,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": false,
+        "mode": "grab"
+      },
+      "onclick": {
+        "enable": false,
+        "mode": "push"
+      },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 400,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 400,
+        "size": 40,
+        "duration": 2,
+        "opacity": 8,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": {
+        "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
+      }
+    }
+  },
+  "retina_detect": true
+});
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+</script>
 
-<%= render "devise/shared/links" %>
