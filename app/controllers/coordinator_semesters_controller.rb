@@ -11,7 +11,7 @@ class CoordinatorSemestersController < WebApplicationController
   # GET /coordinator_semesteres/current
   def current
     @semester = ( params[:semester] == nil ? @current_semester : Semester.find( params[:semester] ) )
-    render json: User.where( id: CoordinatorSemester.where( semester: Semester.first ).pluck( :coordinator_id ) ).select(:id, :name, :lastname).map { |c| { id: c.id, name: "#{c.name} #{c.lastname}"} }, status: 200
+    render json: User.where( id: CoordinatorSemester.where( semester: @semester ).pluck( :coordinator_id ) ).select(:id, :name, :lastname).map { |c| { id: c.id, name: "#{c.name} #{c.lastname}"} }, status: 200
   end
 
   # GET /coordinator_semesters/1
