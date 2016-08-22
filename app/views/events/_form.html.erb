@@ -40,6 +40,7 @@
 
         markers.push(marker);
 
+
         // This event listener will call addMarker() when the map is clicked.
         map.addListener('click', function(event) {
           addMarker(event.latLng);
@@ -78,13 +79,13 @@
       <div class="form-group">
         <%= f.label 'Evento', class: 'col-sm-2 control-label' %>
         <div class='col-sm-9'>
-          <%= text_field_tag 'event[name]', @event.name.blank? ? 'Parroquia NSP' : @event.name, class: 'form-control form-control-ticnsp' %>
+          <%= f.text_field :name, class: 'form-control form-control-ticnsp' %>
         </div>
       </div>
       <div class="form-group">
         <%= f.label 'Lugar', class: 'col-sm-2 control-label' %>
         <div class='col-sm-9'>
-          <%= f.text_field :location, class: 'form-control form-control-ticnsp' %>
+          <%= text_field_tag 'event[location]', @event.location.blank? ? 'Parroquia NSP' : @event.name, class: 'form-control form-control-ticnsp' %>
         </div>
       </div>
       <div class="form-group">
@@ -105,8 +106,8 @@
           <%= f.text_area :description, class: 'form-control form-control-ticnsp', style: 'resize: none;height: 300px;' %>
         </div>
       </div>
-      <%= f.hidden_field :latitude %>
-      <%= f.hidden_field :longitude %>
+      <%= hidden_field_tag 'event[latitude]', @event.latitude.blank? ? 31.696423 : @event.latitude %>
+      <%= hidden_field_tag 'event[longitude]', @event.longitude.blank? ? -106.417474 : @event.longitude %>
      <div class="form-group">
         <%= f.label 'Público', class: 'col-sm-2 control-label' %>
         <div class='col-sm-9'>
