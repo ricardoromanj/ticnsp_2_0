@@ -1,44 +1,83 @@
-<p id="notice"><%= notice %></p>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9MOcTCLm8iLB5zi6YH7MtVgnNoBc5rw"></script>
+<% content_for :title, 'Calendario - TIC' %>
+<% content_for :page_title, @event.name %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>Calendario</li>".html_safe %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to 'Regresar', events_path, class: 'btn btn-default' %>
+    <%= link_to 'Editar', edit_event_path(@event), class: 'btn btn-success' %>
+  </div>
+</div>
 
-<p>
-  <strong>Date start:</strong>
-  <%= @event.date_start %>
-</p>
+<br />
 
-<p>
-  <strong>Date end:</strong>
-  <%= @event.date_end %>
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-solid">
+      <div class="box-body no-padding">
+        <div style="height: 300px;" id='map-location'></div>
+        <script>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+var map;
+var markers = [];
+// Maps setup
+function initialize() {
+  var center = new google.maps.LatLng(<%= @event.latitude %>,<%= @event.longitude %>);
+  var mapOptions = {
+    center: center,
+    zoom: 15,
+    scrollwheel: false,
+    zoomControl: true,
+    disableDefaultUI: true
+  };
+  map = new google.maps.Map(document.getElementById("map-location"),mapOptions);
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @event.latitude %>
-</p>
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(<%= @event.latitude %>,<%= @event.longitude %>),
+    map: map,
+    title: '<%= @event.name %>'
+  });
+}
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @event.longitude %>
-</p>
+initialize();
+        </script>
 
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+    <div class="box box-solid">
+      <div class='box-header with-border'>
+        <h3 class='box-title'><%= @event.name %> - <%= @event.location %></h3>
+      <div class="box-body">
+        <div class='row'>
+          <div class='col-sm-6'>
+            <p>
+            <strong>Inicio:</strong>
+            <%= @event.date_start.strftime("%d/%m/%Y %H:%M") %>
+            </p>
 
-<p>
-  <strong>Audience:</strong>
-  <%= @event.audience %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+            <p>
+            <strong>Fin:</strong>
+            <%= @event.date_end.strftime("%d/%m/%Y %H:%M") %>
+            </p>
+            <p>
+            <strong>Para:</strong>
+            <%= audience_display @event.audience %>
+            </p>
+          </div>
+          <div class='col-sm-6'>
+            <p>
+            <strong>Descripción:</strong><br />
+            <%= @event.description %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+      </div>
+    <!-- /. box -->
+   </div>
+  <!-- /.col -->
+</div>
