@@ -15,6 +15,8 @@ class EventsController < WebApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @event.date_start = Time.now
+    @event.date_end   = Time.now + 1.day
   end
 
   # GET /events/1/edit
@@ -25,6 +27,9 @@ class EventsController < WebApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+
+    @event.date_start = DateTime.strptime(event_params[:date_start],"%d/%m/%Y %H:%M")
+    @event.date_end   = DateTime.strptime(event_params[:date_end],"%d/%m/%Y %H:%M")
 
     respond_to do |format|
       if @event.save

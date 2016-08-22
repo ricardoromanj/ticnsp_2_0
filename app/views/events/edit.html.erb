@@ -1,6 +1,24 @@
-<h1>Editing Event</h1>
+<% content_for :title, 'Calendario - TIC' %>
+<% content_for :page_title, 'Editar evento'  %>
+<% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>#{ link_to '<span class="fa fa-calendar"></span> Calendario'.html_safe, events_path }</li><li>Editar evento</li>".html_safe %>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="col-xs-12">
 
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+    <%= link_to 'Regresar', events_path, class: 'btn btn-default' %>
+    <%= link_to 'Mostrar', @event, class: 'btn btn-primary' %>
+    <hr>
+    <div class='box box-solid'>
+      <div class='box-header with-border'>
+        <h3 class='box-title'>Editar evento</h3>
+      </div>
+      <div class='box-body'>
+
+        <%= render 'form' %>
+
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>

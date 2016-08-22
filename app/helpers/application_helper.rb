@@ -24,6 +24,16 @@ module ApplicationHelper
     end
   end
 
+  def audience_display( audience_type )
+    if audience_type =~ /coord/
+      return 'Coordinadores'
+    elsif audience_type =~ /tutor/
+      return 'Tutores'
+    else
+      return 'Todos'
+    end
+  end
+
   def human_date( date )
     date.strftime('%b %d, %Y')
   end
