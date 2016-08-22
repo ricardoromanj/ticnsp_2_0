@@ -1,7 +1,8 @@
-<%= form_for(@event) do |f| %>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9MOcTCLm8iLB5zi6YH7MtVgnNoBc5rw"></script>
+<%= form_for(@event, html: { class: 'form-horizontal' } ) do |f| %>
   <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+    <div id="error_explanation" class='alert alert-danger'>
+      <strong><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</strong>
 
       <ul>
       <% @event.errors.full_messages.each do |message| %>
@@ -11,39 +12,118 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :date_start %><br>
-    <%= f.datetime_select :date_start %>
-  </div>
-  <div class="field">
-    <%= f.label :date_end %><br>
-    <%= f.datetime_select :date_end %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :latitude %><br>
-    <%= f.text_field :latitude %>
-  </div>
-  <div class="field">
-    <%= f.label :longitude %><br>
-    <%= f.text_field :longitude %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :audience %><br>
-    <%= f.text_field :audience %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class='row'>
+    <div class='col-md-6'>
+      <div style="height: 300px" id='map-location'></div>
+      <br />
+      <script>
+
+      var map;
+      var markers = [];
+      // Maps setup
+      function initialize() {
+        var center = new google.maps.LatLng(<%= @event.latitude.blank? ? 31.696423 : @event.latitude %>, <%= @event.longitude.blank? ? -106.417474 : @event.longitude %>);
+        var mapOptions = {
+          center: center,
+          zoom: 15,
+          scrollwheel: false,
+          zoomControl: true,
+          disableDefaultUI: true
+        };
+        map = new google.maps.Map(document.getElementById("map-location"),mapOptions);
+
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(<%= @event.latitude.blank? ? 31.696423 : @event.latitude %>, <%= @event.longitude.blank? ? -106.417474 : @event.longitude %>),
+          map: map,
+          title: 'Parroquia Nuestra Señora de la Paz'
+        });
+
+        markers.push(marker);
+
+        // This event listener will call addMarker() when the map is clicked.
+        map.addListener('click', function(event) {
+          addMarker(event.latLng);
+        });
+
+        google.maps.event.addDomListener(window, 'resize', function() {
+          map.setCenter(center);
+        });
+      }
+
+      initialize();
+
+      function addMarker(location) {
+        setMapOnAll(null);
+        markers = [];
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+        $('#event_latitude').val(location.lat());
+        $('#event_longitude').val(location.lng());
+        markers.push(marker);
+      }
+
+      // Sets the map on all markers in the array.
+      function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }
+
+    </script>
+    </div>
+    <div class='col-md-6'>
+
+      <div class="form-group">
+        <%= f.label 'Evento', class: 'col-sm-2 control-label' %>
+        <div class='col-sm-9'>
+          <%= text_field_tag 'event[name]', @event.name.blank? ? 'Parroquia NSP' : @event.name, class: 'form-control form-control-ticnsp' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label 'Lugar', class: 'col-sm-2 control-label' %>
+        <div class='col-sm-9'>
+          <%= f.text_field :location, class: 'form-control form-control-ticnsp' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label 'Inicio', class: 'col-sm-2 control-label' %>
+        <div class='col-sm-9'>
+          <%= text_field_tag 'event[date_start]', @event.date_start.strftime("%d/%m/%Y %H:%M"), class: 'form-control form-control-ticnsp datepicker' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label 'Fin', class: 'col-sm-2 control-label' %>
+        <div class='col-sm-9'>
+          <%= text_field_tag 'event[date_end]', @event.date_end.strftime("%d/%m/%Y %H:%M"), class: 'form-control form-control-ticnsp datepicker' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label 'Descripción', class: 'col-sm-2 control-label' %>
+        <div class='col-sm-9'>
+          <%= f.text_area :description, class: 'form-control form-control-ticnsp', style: 'resize: none;height: 300px;' %>
+        </div>
+      </div>
+      <%= f.hidden_field :latitude %>
+      <%= f.hidden_field :longitude %>
+     <div class="form-group">
+        <%= f.label 'Público', class: 'col-sm-2 control-label' %>
+        <div class='col-sm-9'>
+          <%= f.select :audience, options_for_select([['Coordinadores','coordinators'],['Tutores','tutors'],['Todos','all']], selected: @event.audience), {}, {class: "form-control"} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class='col-sm-offset-2 col-sm-9'>
+          <%= f.submit 'Guardar', class: 'btn btn-primary btn-flat' %>
+        </div>
+      </div>
+
+    </div>
   </div>
 <% end %>
+<script>
+  $('.datepicker').bootstrapMaterialDatePicker({
+    format: 'DD/MM/YYYY HH:mm'
+  })
+</script>
