@@ -2,9 +2,11 @@
 <% content_for :page_title, 'Calendario de curso' %>
 <% content_for :page_breadcrumb, "<li>#{ link_to '<span class="fa fa-dashboard"></span> Dashboard'.html_safe, root_path }</li><li>Calendario</li>".html_safe %>
 
+
 <div class="row">
   <div class="col-xs-12">
     <div class="box box-primary">
+      <%= link_to 'Nuevo evento', new_event_path, class: 'btn-block btn btn-primary' %>
       <div class="box-body no-padding">
         <!-- THE CALENDAR -->
         <div id="calendar" class="fc fc-ltr fc-unthemed">
@@ -32,6 +34,7 @@
     $.getJSON('/events', function ( data ) {
       $.each( data, function ( index, value ) {
         events.push({
+          id: value.id,
           title: value.name,
           start: new Date( value.start_date.year, value.start_date.month - 1, value.start_date.day, value.start_date.hour, value.start_date.minute ),
           end: new Date( value.end_date.year, value.end_date.month - 1, value.end_date.day, value.end_date.hour, value.end_date.minute ),
@@ -54,9 +57,11 @@
         events: events,
         eventClick: function(calEvent, jsEvent, view) {
 
-            alert('Event: ' + calEvent.title);
-            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-            alert('View: ' + view.name);
+          window.location = "/events/" + calEvent.id;
+
+           // alert('Event: ' + calEvent.title);
+           // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+           //  alert('View: ' + view.name);
 
             // change the border color just for fun
             $(this).css('border-color', 'red');
@@ -69,7 +74,7 @@
   });
 </script>
 
-
+<% if false %>
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Events</h1>
@@ -109,5 +114,5 @@
 </table>
 
 <br>
+<% end %>
 
-<%= link_to 'New Event', new_event_path %>

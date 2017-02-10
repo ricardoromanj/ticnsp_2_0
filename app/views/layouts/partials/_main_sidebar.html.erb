@@ -47,8 +47,8 @@
         <% if false %>
         <li class='<%= params['controller'] =~ /tasks/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-tasks'></i> <span>Actividades</span>".html_safe, '#' %></li>
 
-        <li class='<%= params['controller'] =~ /events/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-calendar'></i> <span>Eventos</span>".html_safe, events_path %></li>
         <% end %>
+        <li class='<%= params['controller'] =~ /events/ ? 'active' : '' %>'><%= link_to "<i class='fa fa-calendar'></i> <span>Calendario</span>".html_safe, events_path %></li>
 
         <li class="header">ADMINISTRACIÓN DE CURSO</li>
 
