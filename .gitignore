@@ -26,3 +26,5 @@
 /tmp
 
 start_dev_server.sh
+*.env
+/data/

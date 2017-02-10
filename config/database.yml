@@ -24,6 +24,7 @@ production:
   adapter: mysql2
   encoding: utf8
   pool: 15
-  username: root
+  username: <%= ENV['PRODUCTION_DATABASE_USERNAME'] %>
   password: <%= ENV['PRODUCTION_DATABASE_PASSWORD'] %>
-  database: ticnsp_production
+  database: <%= ENV['PRODUCTION_DATABASE_DATABASE'] %>
+  hostname: <%= ENV['PRODUCTION_DATABASE_HOSTNAME'] %>

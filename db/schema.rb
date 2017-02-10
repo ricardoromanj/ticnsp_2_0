@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20160221225054) do
   create_table "child_semesters", force: :cascade do |t|
     t.integer  "child_id"
     t.integer  "semester_id"
-    t.boolean  "paid"
     t.datetime "paid_at"
     t.float    "paid_amt"
     t.text     "notes"

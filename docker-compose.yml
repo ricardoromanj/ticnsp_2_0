@@ -1,0 +1,18 @@
+ticnsp_app:
+  build: .
+  env_file:
+    - twilio.env
+    - smtp.env
+    - webapp.env
+  links:
+    - ticnsp_db
+  ports:
+    - "4000:3000"
+  volumes:
+    - "./log/:/usr/src/app/log/"
+ticnsp_db:
+  image: mysql
+  volumes:
+    - "./data/:/var/lib/mysql/"
+  env_file:
+    - mysql.env
