@@ -26,3 +26,4 @@
 /tmp
 
 start_dev_server.sh
+*.DS_store
